@@ -19,22 +19,22 @@
                 <div class="row col-sm-10" id="us">
 
                     <%
-                        
+
                         String error = (String) session.getAttribute("error");
                         session.setAttribute("error", null);
                         String success = (String) session.getAttribute("success");
                         session.setAttribute("success", null);
-                        
+
 
                     %>
                     <%if (error != null) {%>
                         <div class="alert alert-danger"><%=error%></div>
-                    <%} else if(success!=null){%>
+                    <%} else if (success != null) {%>
                         <div class="alert alert-success"><%=success%></div>
                     <%}%>
-                    
+
                     <h3>Alta de Usuario</h3>
-                    <form role="form" id="formUsuario" action="<%=request.getContextPath()%>/usuario" method="POST">
+                    <form role="form" id="formUsuario" action="<%=request.getContextPath()%>/usuario" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="tipo">Tipo de Usuario</label>
                             <select id="tipo" class="form-control" name="tipo" autofocus>
@@ -42,9 +42,11 @@
                                 <option value="Proveedor">Proveedor</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="nickname">Nickname</label>
-                            <input type="text" class="form-control" name="nickname" id="nickname" placeholder="Ingrese Nickname" required>
+                        <div class="form-group" id="divNick">
+                            <label class="control-label" id="Lblnickname" for="nickname">Nickname</label>
+                            <input type="text" class=" form-control" name="nickname" id="nickname" onblur="existeUser();" placeholder="Ingrese Nickname" required>
+                            <span id="SpNick" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                            <label id="LblNickError" class="control-label small">Este Nickname ya se encuentra en uso.</label>
                         </div>
                         <div class="form-group">
                             <label for="pass">Password</label>
@@ -62,13 +64,15 @@
                             <label for="ape">Apellido</label>
                             <input type="text" class="form-control" name="ape" id="ape" placeholder="Ingrese Apellido" required>
                         </div>
-                        <div class="form-group">
-                            <label for="mail">e-Mail</label>
-                            <input type="email" class="form-control" name="mail" id="mail" placeholder="Ingrese e-Mail" required>
+                        <div class="form-group" id="divMail">
+                            <label class="control-label"id="LblMail" for="mail">e-Mail</label>
+                            <input type="email" class="form-control" name="mail" id="mail" onblur="existeMail();" placeholder="Ingrese e-Mail" required>
+                            <span id="SpMail" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                            <label id="LblMailError" class="control-label small">Este e-Mail ya se encuentra en uso.</label>
                         </div>
                         <div class="form-group">
                             <label for="fec-nac">Fecha Nacimiento</label>
-                            <input type="date" class="form-control" name="fec-nac" id="fec-nac">
+                            <input type="date" class="form-control" name="fecNac" id="fecNac" required>
                         </div>
                         <div class="form-group" id="divNom-comp">
                             <label for="nom-comp">Empresa</label>
@@ -78,12 +82,13 @@
                             <label for="url">Dirección Web</label>
                             <input type="url" class="form-control" name="url" id="url" placeholder="Ingrese Direccion Web" required>
                         </div>
-                                             
-                        <div class="form-group" id="img">
-                            <label for="img"Imagen>Imagen</label>
-                            <input type="file" class="form-control" name="img" id="img">
+                        <div class="form-group" id="divImgUser">
+                            <label class="control-label"id="LblImgUser" for="img">Imagen</label>
+                            <input type="file" class="form-control" name="imgUser" id="imgUser" onchange="checkFile();">
+                            <span id="SpImg" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                            <label id="LblImgUserError" class="control-label small">Archivo incorrecto, los tipos permitidos son: jpg, jpeg, png.</label>
                         </div>
-                        <button type="submit" class="btn btn-success">Guardar</button>
+                        <button type="submit" id="btnGuardar" class="btn btn-success">Guardar</button>
                     </form>
                 </div>
             </div>

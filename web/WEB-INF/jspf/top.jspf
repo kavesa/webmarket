@@ -1,5 +1,6 @@
 <%-- any content can be specified here e.g.: --%>
 <%@ page pageEncoding="UTF-8" %>
+<%@page import="javax.servlet.http.HttpSession" %>
 <!--<div class="header">-->
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
@@ -13,13 +14,68 @@
             <a class="navbar-brand" href="index">Direct Market</a>
         </div>
         <div class="navbar-collapse collapse">
-            
-            <a class="fa fa-users navbar-brand" title="Perfil" href="<%= request.getContextPath()%>/perfil" id="adduser"> Perfil</a>
-            <a class="fa fa-users navbar-brand" title="Registrarse" href="<%= request.getContextPath()%>/usuario?op=create" id="adduser"> Registrarse</a>
-            <a class="fa fa-sign-in navbar-brand" title="Ingresar" href="#" id="adduser"> Ingresar</a>
-            
+            <ul class=" nav navbar-nav navbar-right">
+                <% HttpSession sesion = null;
+                    sesion = request.getSession();
+
+                    if (sesion.getAttribute("usuario") == null) {
+
+
+                %>
+                <li>
+                    <a class="fa fa-sign-in navbar-brand" data-toggle="modal" data-target="#myModalLogin" title="Ingresar" href="" id="login"> Ingresar</a>
+                </li>
+                <li>
+                    <a class="fa fa-users navbar-brand" title="Registrarse" href="<%= request.getContextPath()%>/usuario?op=create" id="adduser"> Registrarse</a>
+                </li>
+                <%} else {%>
+                <li>
+                    <a class="fa fa-user navbar-brand" title="Perfil" href="<%= request.getContextPath()%>/Perfil" id="perfil"> ${sessionScope.usuario}</a>
+
+                </li>
+
+
+                <li>
+                    <a class="fa fa-sign-out navbar-brand" title="Salir" href="<%= request.getContextPath()%>/login?op=out" id="logout"> Salir</a>
+                </li>
+
+                <li>
+                <a class="fa fa-shopping-cart navbar-brand" href="<%= request.getContextPath()%>/addToShoppingCart" id="adduser"> </a>
+                </li>
+
+                <%}%>
+            </ul>
         </div><!--/.navbar-collapse -->
-        
     </div>
 </div>
 
+
+<!-- Modal -->
+<div class="modal fade" id="myModalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Iniciar Sesi&oacute;n</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" id="formLogin" action="<%=request.getContextPath()%>/login" method="POST">
+                    <div class="form-group">
+                        <label for="nickLogin">Nickname / E-mail</label>
+                        <input type="text" class="form-control" name="nickLogin" id="nickLogin" placeholder="Ingrese Nickname o e-mail" required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label for="passLogin">Password</label>
+                        <input type="password" class="form-control" name="passLogin" id="passLogin" placeholder="Ingrese Password" required>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" id="cancel"class="btn btn-default " data-dismiss="modal">Cancelar</button>
+                        <button type="submit" id="aceptar" class="btn btn-success ">Aceptar</button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

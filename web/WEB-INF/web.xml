@@ -9,6 +9,10 @@
         <servlet-class>controller.usuario</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>producto</servlet-name>
+        <servlet-class>controller.producto</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>Perfil</servlet-name>
         <servlet-class>controller.Perfil</servlet-class>
     </servlet>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>usuario</servlet-name>
         <url-pattern>/usuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>producto</servlet-name>
+        <url-pattern>/producto</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Perfil</servlet-name>

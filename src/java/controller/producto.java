@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,8 +28,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author kavesa
  */
-@WebServlet(description = "Alta Producto", urlPatterns = { "/altaprod" })
-public class altaprod extends HttpServlet {
+
+public class producto extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
@@ -47,6 +48,7 @@ public class altaprod extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             /* TODO output your page here. You may use following sample code. */
+            //lo que sigue son pruebas para verificar que los datos lleguen como se enviaron
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -110,16 +112,18 @@ public class altaprod extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (CategoryException ex) {
-            Logger.getLogger(altaprod.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ProductoException ex) {
-            Logger.getLogger(altaprod.class.getName()).log(Level.SEVERE, null, ex);
+        String op = request.getParameter("op");
+        String pagina = "";
+        if (op.equals("create")) {
+            pagina = "/vistas/producto/altaprod.jsp";
         }
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);
+        dispatcher.forward(request, response);
     }
 
     /**
@@ -137,9 +141,9 @@ public class altaprod extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (CategoryException ex) {
-            Logger.getLogger(altaprod.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(producto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ProductoException ex) {
-            Logger.getLogger(altaprod.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(producto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
