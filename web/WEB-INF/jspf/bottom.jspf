@@ -1,0 +1,10 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+<div class="container" id="bottom">
+                <hr>
+
+                <footer>
+                    <p>&copy; Direct Market 2014</p>
+                </footer>
+            </div>
+        </div> <!-- /container -->

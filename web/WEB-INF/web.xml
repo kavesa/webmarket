@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <servlet>
+        <servlet-name>index</servlet-name>
+        <servlet-class>controller.index</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>usuario</servlet-name>
+        <servlet-class>controller.usuario</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Perfil</servlet-name>
+        <servlet-class>controller.Perfil</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InfoCompra</servlet-name>
+        <servlet-class>controller.InfoCompra</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>index</servlet-name>
+        <url-pattern>/index</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>usuario</servlet-name>
+        <url-pattern>/usuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Perfil</servlet-name>
+        <url-pattern>/perfil</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InfoCompra</servlet-name>
+        <url-pattern>/InfoCompra</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>

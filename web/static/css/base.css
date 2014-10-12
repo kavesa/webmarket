@@ -1,0 +1,53 @@
+html, body{
+    height:100%;
+}          
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+.fill{
+    height:100%;
+    width: 100%;
+    background-position:center;
+    background-size:cover;
+}
+.img-home-portfolio{
+    margin-bottom: 30px;
+}
+#adduser{
+    float: right;
+}
+#bottom{
+  width: 100%;
+}
+
+.listTitle
+{
+    color: #CEECF5;
+  background-color: #0B4C5F;
+}
+
+.listItem
+{
+    color: #0B4C5F;
+  background-color: white;
+}
+
+.imgMarco {
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+  padding: 4px;
+  line-height: 1.42857143;
+  background-color: #0B4C5F;
+  border: 1px solid #CEECF5;
+  border-radius: 4px;
+  -webkit-transition: all .2s ease-in-out;
+          transition: all .2s ease-in-out;
+}
+
+.perfDiv
+{
+    margin-top: 1em;
+    background-color: #CEECF5;
+}
