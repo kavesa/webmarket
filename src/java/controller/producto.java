@@ -19,7 +19,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -92,6 +91,8 @@ public class producto extends HttpServlet {
             List<String> imagenes = new ArrayList<String>();
             imagenes.add("/fotos/IM1-topic_iphone_5.png");
             dataEsp.setImagenes(imagenes);
+            //TODO:
+            //cambiar para enviar imagenes como byte[]
 
             dp.setDataEspecificacion(dataEsp);
             Factory.getInstance().getProductoController().altaProducto(dp);
