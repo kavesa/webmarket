@@ -34,9 +34,11 @@
             </tr>
         </thead>
         <tbody>
-            <%for (DataLineaOC dlo : doc.getLineas()) {%>
+            <% String prodRef;
+            for (DataLineaOC dlo : doc.getLineas()) {
+            prodRef = dlo.getProducto().getReferencia();%>
             <tr class="listItem">
-                <td><%=dlo.getProducto().getNombre()%></td>
+                <td><a href="InfoCompra?nocid=<%=prodRef%>"><%=dlo.getProducto().getNombre()%></a></td>
                 <td><%=dlo.getProducto().getDataEspecificacion().getPrecio()%></td>
                 <td><%=dlo.getCantidad()%></td>
                 <td><%=dlo.getTotalLinea()%></td>
@@ -51,7 +53,7 @@
         </tbody>
     </table>
             </div>
+            </div>
             <%@include file="../../WEB-INF/jspf/bottom.jspf" %>
-        </div>
     </body>
 </html>

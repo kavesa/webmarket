@@ -30,7 +30,7 @@
         <div class="row">
             <!--IMG PERFIL -->
             <div class="col-sm-3 col-sm-push-4 perfDiv">
-                <img style="margin-top: 1em" class="img-responsive imgMarco" src="http://2.bp.blogspot.com/-i0cK3LDs0nU/UKvOGycD7dI/AAAAAAAAI4c/yxruCLEAsX4/s400/un-viejo-tonto-.jpeg" alt="Imagen de Perfil" width="350px">
+                <img style="margin-top: 1em" class="img-responsive imgMarco" src="data:image/png;base64,<%=usu.getImagen()%>" alt="Imagen de Perfil" width="350px">
                 <ul style="margin-top: 1em" class="list-group">                    
                     <li class="list-group-item listTitle"><strong>Informacion Personal</strong></li>
                     <li class="list-group-item listItem">Nickname: <%= usu.getNickname()%></li>

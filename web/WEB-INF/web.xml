@@ -29,6 +29,10 @@
         <servlet-class>controller.InfoCompra</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>InfoProducto</servlet-name>
+        <servlet-class>controller.InfoProducto</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>GetJSON</servlet-name>
         <servlet-class>controller.GetJSON</servlet-class>
     </servlet>
