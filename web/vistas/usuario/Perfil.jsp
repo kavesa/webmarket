@@ -23,7 +23,7 @@
         <%@include file="../../WEB-INF/jspf/top.jspf" %>
 
         <%
-            DataUsuario usu = (DataUsuario) request.getAttribute("usuario");
+            DataUsuario usu = (DataUsuario)  request.getAttribute("usuario");
             List<DataProducto> dpList = (List<DataProducto>) request.getAttribute("listaPr");
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         %>
