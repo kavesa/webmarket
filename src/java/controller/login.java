@@ -96,6 +96,7 @@ public class login extends HttpServlet {
             try {
                 DataUsuario us = Factory.getInstance().getUsuarioController().login(usu, pass);
                 sesion.setAttribute("usuario", us.getNickname());
+                request.getSession().setAttribute("tipoUsuario", us.getTipoUsu());
                 //request.getSession().setAttribute("success", "Usuario Logueado Correctamente.");
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
                 dispatcher.forward(request, response);

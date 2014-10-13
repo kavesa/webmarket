@@ -185,7 +185,8 @@ public class usuario extends HttpServlet {
                         tipo = UsuarioType.PROVEEDOR.name();
                     }
                     //impacta en bd
-                    Factory.getInstance().getUsuarioController().altaUsuario(nickForm, passForm, nomForm, apeForm, fechaDate, mailForm, ubicacionBd, tipo, nomCompForm, urlForm);
+                    //Factory.getInstance().getUsuarioController().altaUsuario(nickForm, passForm, nomForm, apeForm, fechaDate, mailForm, ubicacionBd, tipo, nomCompForm, urlForm);
+                    Factory.getInstance().getUsuarioController().altaUsuario(nickForm, passForm, nomForm, apeForm, fechaDate, mailForm, null, tipo, nomCompForm, urlForm);
                     //mensaje de success y redirige a usuario
                     request.getSession().setAttribute("success", "Usuario Creado Correctamente.");
                     RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/vistas/usuario/usuario.jsp");

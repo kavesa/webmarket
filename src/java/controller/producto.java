@@ -90,7 +90,8 @@ public class producto extends HttpServlet {
 //Producto Especificacion Imagenes
             List<String> imagenes = new ArrayList<String>();
             imagenes.add("/fotos/IM1-topic_iphone_5.png");
-            dataEsp.setImagenes(imagenes);
+            //dataEsp.setImagenes(imagenes);
+            dataEsp.setImagenes(null);
             //TODO:
             //cambiar para enviar imagenes como byte[]
 
