@@ -21,6 +21,10 @@ body {
   width: 100%;
 }
 
+#perfil{
+    float: right;
+}
+
 .listTitle
 {
     color: #CEECF5;
@@ -57,4 +61,9 @@ body {
     height: 42px;
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
 }

@@ -4,11 +4,15 @@
  */
 package controller;
 
+import direct.market.datatype.DataCategoria;
 import direct.market.datatype.DataProducto;
+import direct.market.exceptions.CategoryException;
 import direct.market.exceptions.ProductoException;
 import direct.market.factory.Factory;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -35,6 +39,15 @@ public class InfoProducto extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             String refProd = request.getParameter("nocid");
             DataProducto prod = Factory.getInstance().getProductoController().buscarProductoPorRef(refProd);
+            
+            List<DataCategoria> catList = new ArrayList<DataCategoria>();
+        try {
+            catList = Factory.getInstance().getCategoriaController().getCategoriasDeProducto(prod.getReferencia());
+        } catch (CategoryException ex) {
+            Logger.getLogger(InfoProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+        request.setAttribute("pCat", catList);
             request.setAttribute("datosProd", prod);
             request.getRequestDispatcher("/vistas/producto/InfoProducto.jsp").forward(request, response);
     }
