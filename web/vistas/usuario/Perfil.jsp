@@ -26,11 +26,12 @@
             DataUsuario usu = (DataUsuario) request.getAttribute("usuario");
             List<DataProducto> dpList = (List<DataProducto>) request.getAttribute("listaPr");
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            String imgBase64 = (String) request.getAttribute("img64");
         %>
         <div class="row">
             <!--IMG PERFIL -->
             <div class="col-sm-3 col-sm-push-4 perfDiv">
-                <img style="margin-top: 1em" class="img-responsive imgMarco" src="data:image/png;base64,<%=usu.getImagen()%>" alt="Imagen de Perfil" width="350px">
+                <img style="margin-top: 1em" class="img-responsive imgMarco" src="<%=imgBase64%>" alt="Imagen de Perfil" width="350px">
                 <ul style="margin-top: 1em" class="list-group">                    
                     <li class="list-group-item listTitle"><strong>Informacion Personal</strong></li>
                     <li class="list-group-item listItem">Nickname: <%= usu.getNickname()%></li>
@@ -57,7 +58,7 @@
                             lc = dpList.size();
                             for (int i = 0; i < lc; i++) {
                         %>
-                    <li class="list-group-item listItem"><%= dpList.get(i).getNombre()%></li>
+                    <li class="list-group-item listItem"><a href="InfoProducto?nocid=<%=dpList.get(i).getReferencia()%>"><%= dpList.get(i).getNombre()%></a></li>
                         <%}%>
                 </ul>
                 <% } else {%>

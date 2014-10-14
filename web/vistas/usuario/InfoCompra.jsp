@@ -35,10 +35,9 @@
         </thead>
         <tbody>
             <% String prodRef;
-            for (DataLineaOC dlo : doc.getLineas()) {
-            prodRef = dlo.getProducto().getReferencia();%>
+            for (DataLineaOC dlo : doc.getLineas()) {%>
             <tr class="listItem">
-                <td><a href="InfoCompra?nocid=<%=prodRef%>"><%=dlo.getProducto().getNombre()%></a></td>
+                <td><a href="InfoProducto?nocid=<%=dlo.getProducto().getReferencia()%>"><%=dlo.getProducto().getNombre()%></a></td>
                 <td><%=dlo.getProducto().getDataEspecificacion().getPrecio()%></td>
                 <td><%=dlo.getCantidad()%></td>
                 <td><%=dlo.getTotalLinea()%></td>

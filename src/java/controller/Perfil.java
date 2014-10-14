@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.tomcat.util.codec.binary.Base64;
+import org.apache.tomcat.util.codec.binary.StringUtils;
 
 /**
  *
@@ -37,7 +39,7 @@ public class Perfil extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             HttpSession sesion=request.getSession();
-            sesion.setAttribute("usuario", "dan");
+            //sesion.setAttribute("usuario", "dan");
             String loUsNick=(String)sesion.getAttribute("usuario");
             DataUsuario du2;
             du2 = Factory.getInstance().getUsuarioController().getDataProveedor(loUsNick);
@@ -47,6 +49,14 @@ public class Perfil extends HttpServlet {
             } else {
                 du2 = Factory.getInstance().getUsuarioController().getDataCliente(loUsNick);
             }
+            
+//            StringBuilder sb = new StringBuilder();
+//            sb.append("data:image/png;base64,");
+//            sb.append(StringUtils.newStringUtf8(Base64.encodeBase64(du2.getImagen(), false)));
+//            String contourChart = sb.toString();
+            String ima64b = util.byteImgToBase64(du2.getImagen());
+            request.setAttribute("img64", ima64b);
+            
             request.setAttribute("usuario", du2);
             request.getRequestDispatcher("/vistas/usuario/Perfil.jsp").forward(request, response);
         } catch (UsuarioException ex) {

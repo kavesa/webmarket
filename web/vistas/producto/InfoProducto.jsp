@@ -4,6 +4,8 @@
     Author     : nightmare
 --%>
 
+<%@page import="direct.market.datatype.DataCategoria"%>
+<%@page import="controller.util"%>
 <%@page import="direct.market.datatype.DataComentario"%>
 <%@page import="java.util.List"%>
 <%@page import="direct.market.datatype.DataEspecificacionProducto"%>
@@ -24,57 +26,70 @@
 
         <%
             DataProducto dProd = (DataProducto) request.getAttribute("datosProd");
+            List<DataCategoria> catList = (List<DataCategoria>) request.getAttribute("pCat");
             DataEspecificacionProducto dEsp = dProd.getDataEspecificacion();
         %>
-        <div class="row">
-            <%
-                //QUE PASA SI LA LISTA ES VACIA???
-                for (byte[] ima : dEsp.getImagenes()) {
-            %>
-            <div class="col-sm-5 col-sm-push-4 col-xs-3">
-                <a href="#" class="thumbnail">
-                    <img src="data:image/png;base64,<%=ima%> class="img-responsive">
-                </a>
-            </div>
-            <%}%>
-        </div>
-
-        <div class="row">
-            <div class="col-sm-5 col-sm-push-4 perfDiv">
-                <ul style="margin-top: 1em" class="list-group">
-                    <li class="list-group-item listTitle"><strong>Informacion de Producto</strong></li>
-                    <li class="list-group-item listItem">Numero de referencia: <%=dProd.getReferencia()%></li>
-                    <li class="list-group-item listItem">Nombre: <%=dProd.getNombre()%></li>
-                    <li class="list-group-item listItem">Proveedor: <%=dProd.getDataProveedor().getNickname()%></li>
-                    <li class="list-group-item listItem">Precio: <%=dProd.getDataEspecificacion().getPrecio()%></li>
-                    <li class="list-group-item listItem">Categorias: 
-                        <%
-                            int tama = dProd.getDataCategorias().size();
-                            for(int i = 0; i<tama; i++){
-                        %>
-                        <%=dProd.getDataCategorias().get(i).getNombre()%>
-                        <%if(i+1!=tama){%>, <%}%><%}%>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="row">
-            <ul style="margin-top: 1em" class="list-group">
-                <li class="list-group-item listTitle"><strong>Descripcion</strong></li>
-                <li class="list-group-item listItem"><%=dEsp.getDescripcion()%></li>
-                <li class="list-group-item listTitle"><strong>Especificacion</strong></li>
-                <li class="list-group-item listItem"><%=dEsp.getEspecificacion()%></li>
-            </ul>
-        </div>
-
-            <div class="row">
-                <div class="col-sm-5 col-sm-push-4 perfDiv">
-                    <%for( DataComentario dComen : dProd.getListDataComentarios()){%>
-                        
+        <div style="margin-bottom: 1em" class="col-sm-5 col-centered perfDiv">
+            <div style="margin-top: 1em" class="row">
+                
+                <div style="margin-top: 1em" class="row">
+                    <div class="col-sm-12 col-centered">                        
+                        <form action="<%= request.getContextPath()%>/myservlet" method="post">
+                            <input style="float: right; margin-right: 1em"type="submit" name="add" value="Agregar al carro"/>
+</form>
+                    </div>
+                </div>
+                
+                <div class="col-sm-12 col-centered">
+                    <%
+                        for (byte[] ima : dEsp.getImagenes()) {
+                    %>
+                    <img style="margin-bottom: 1em; margin-top: 1em" class="img-responsive imgMarco" src="<%=util.byteImgToBase64(ima)%>" alt="Imagen de Producto" width="365px">
                     <%}%>
                 </div>
             </div>
+
+            <div class="row">
+                <div style="margin-top: 1em" class="col-sm-12 col-centered">
+                    <ul class="list-group">
+                        <li style="text-align: center" class="list-group-item listTitle"><strong>Informacion de Producto</strong></li>
+                        <li class="list-group-item listItem">Numero de referencia: <%=dProd.getReferencia()%></li>
+                        <li class="list-group-item listItem">Nombre: <%=dProd.getNombre()%></li>
+                        <li class="list-group-item listItem">Proveedor: <%=dProd.getDataProveedor().getNickname()%></li>
+                        <li class="list-group-item listItem">Precio: <%=dProd.getDataEspecificacion().getPrecio()%></li>
+                        <li class="list-group-item listItem">Categorias: 
+                            <%
+                                int tama = catList.size();
+                                for (int i = 0; i < tama; i++) {
+                            %>
+                            <%=catList.get(i).getNombre()%>
+                            <%if (i + 1 != tama) {%>, <%}%><%}%>
+                        </li>
+                    
+                        <li class="list-group-item listItem">Descripcion: <%=dEsp.getDescripcion()%></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row">
+                <div style="margin-top: 1em" class="col-sm-12 col-centered">
+                    <ul class="list-group">
+                        <li style="text-align: center"class="list-group-item listTitle"><strong>Especificacion</strong></li>
+                        <li class="list-group-item listItem"><%=dEsp.getEspecificacion()%></li>
+                    </ul>
+                </div>
+            </div>
+
+
+
+            <!--            <div class="row">
+                            <div style="margin-top: 1em" class="col-sm-12 col-centered">
+            <%//for( DataComentario dComen : dProd.getListDataComentarios()){%>
+                
+            <%//}%>
+        </div>
+        </div>-->
+        </div>
         <%@include file="../../WEB-INF/jspf/bottom.jspf" %>
     </body>
 </html>

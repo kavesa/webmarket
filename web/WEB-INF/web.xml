@@ -58,11 +58,15 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Perfil</servlet-name>
-        <url-pattern>/perfil</url-pattern>
+        <url-pattern>/Perfil</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>InfoCompra</servlet-name>
         <url-pattern>/InfoCompra</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InfoProducto</servlet-name>
+        <url-pattern>/InfoProducto</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>GetJSON</servlet-name>
