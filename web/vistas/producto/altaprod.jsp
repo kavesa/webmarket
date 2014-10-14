@@ -11,7 +11,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="stylesheet" href="../../static/jstree/themes/default/style.min.css" />
-        <link rel="stylesheet" href="../../static/bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../static/bootstrap/css/bootstrap.css" />
+
+        <link rel="stylesheet" href="../../static/dropzone/css/dropzone.css" />
 
         <%@include file="../../WEB-INF/jspf/jscss.jspf" %>
 
@@ -20,7 +22,7 @@
         <%@include file="../../WEB-INF/jspf/top.jspf" %>
 
         <div class="container-fluid">
-            <form role="form" method="POST" action="/producto">
+            <form id="formaltaprod" role="form" method="POST" action="/producto" class="dropzone">
 
                 <h2>Alta de Producto</h2>
                 <div id="rootwizard">
@@ -133,12 +135,33 @@
                         <div class="tab-pane" id="step3">
                             <h3>Seleccione las Imagenes del Producto</h3>
 
+                            <script src="../../static/dropzone/dropzone.js"></script>
+                            <div class="dropzone-previews"></div>
+                            <script>
+                                Dropzone.options.myAwesomeDropzone = { // The camelized version of the ID of the form element
 
+                                    // The configuration we've talked about above
+                                    autoProcessQueue: false,
+                                    uploadMultiple: true,
+                                    parallelUploads: 25,
+                                    maxFiles: 25,
+                                    // The setting up of the dropzone
+                                    init: function() {
+                                        var myDropzone = this;
 
+                                        // Here's the change from enyo's tutorial...
 
+                                        $("#submit-all").click(function(e) {
+                                            e.preventDefault();
+                                            e.stopPropagation();
+                                            myDropzone.processQueue();
+                                        }
+                                        );
 
+                                    }
 
-
+                                };
+                            </script>
 
                         </div>
 
