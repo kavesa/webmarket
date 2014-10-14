@@ -17,6 +17,17 @@
         <hr>
         <section>
             <div class="container">
+                <%
+                    String error = (String) session.getAttribute("error");
+                    session.setAttribute("error", null);
+                    String success = (String) session.getAttribute("success");
+                    session.setAttribute("success", null);
+                %>
+                <%if (error != null) {%>
+                <div class="alert alert-danger"><%=error%></div>
+                <%} else if (success != null) {%>
+                <div class="alert alert-success"><%=success%></div>
+                <%}%>
 
                 <!-- Modal -->
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -34,6 +45,7 @@
                 </div>
                 <!-- Imagenes en portada -->
                 <div class="row">
+
                     <div class="col-md-4 col-sm-6 " data-toggle="modal" data-target="#myModal" style="cursor:pointer">
                         <a class="img-modal">
                             <img class="img-responsive img-home-portfolio" src="http://placehold.it/700x450">
@@ -92,7 +104,7 @@
                 </div>
             </div><!--Fin imagenes portada -->
             <%@include file="WEB-INF/jspf/bottom.jspf"%>
-    </section>
+        </section>
 
-</body>
+    </body>
 </html>
