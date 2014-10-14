@@ -9,7 +9,10 @@
         <title>Alta Producto</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        
+
+        <link rel="stylesheet" href="../../static/jstree/themes/default/style.min.css" />
+        <link rel="stylesheet" href="../../static/bootstrap/css/bootstrap.min.css" />
+
         <%@include file="../../WEB-INF/jspf/jscss.jspf" %>
 
     </head>
@@ -19,6 +22,7 @@
         <div class="container-fluid">
             <form role="form" method="POST" action="/producto">
 
+                <h2>Alta de Producto</h2>
                 <div id="rootwizard">
 
                     <!-- 1. Create the tabs themselves  -->
@@ -43,36 +47,35 @@
                     <!-- 3. Create a matching tab pane for each tab. Content goes within these panes -->
                     <div class="tab-content">
                         <div class="tab-pane active" id="step1">
-                            <h2>Alta de Producto</h2>
-                            <p>Ingrese Datos Basicos del Producto</p>
+                            <h3>Ingrese Datos Basicos del Producto</h3>
 
                             <!-- Text input-->
-                            <div class="form-group">
+                            <div class="form-group" style="margin-bottom: 1em;">
                                 <label for="nomprod">Nombre del Producto</label>
                                 <input id="nomprod" name="nomprod" type="text" placeholder="Ingrese el Nombre del Producto" class="input-xxlarge form-control" required="">
 
                             </div>
 
                             <!-- Text input-->
-                            <div class="control-group">
+                            <div class="control-group" style="margin-bottom: 1em;">
                                 <label for="refprod">Referencia del Producto</label>
                                 <input id="refprod" name="refprod" type="text" placeholder="Ingrese la Referencia" class="input-xxlarge form-control" required="">
                             </div>
 
                             <!-- Text input-->
-                            <div class="control-group">
+                            <div class="control-group" style="margin-bottom: 1em;">
                                 <label for="descprod">Descripcion del Producto</label>
                                 <input id="descprod" name="descprod" type="text" placeholder="Ingrese Descripcion del Producto" class="input-xxlarge form-control" required="">
                             </div>
 
                             <!-- Text input-->
-                            <div class="control-group">
+                            <div class="control-group" style="margin-bottom: 1em;">
                                 <label for="precprod">Precio del Producto</label>
                                 <input id="precprod" name="precprod" type="text" placeholder="0.00" class="input-xxlarge form-control" required="">
                             </div>
 
                             <!-- Textarea -->
-                            <div class="control-group">
+                            <div class="control-group" style="margin-bottom: 1em;">
                                 <label for="textarea">Especificaciones</label>
                                 <textarea id="espprod" name="espprod" required="" class="form-control"></textarea>
                             </div>
@@ -80,15 +83,30 @@
 
                         </div>
                         <div class="tab-pane" id="step2">
-                            <h2>Alta de Producto</h2>
-                            <p>Ingrese las Categorias del Producto</p>
+                            <h3>Seleccione las Categorias del Producto</h3>
 
+                            <p style="float:left; margin-right:5px;">Categorias Seleccionadas: </p>
 
-                            <div id="treecat"  class="demo">
+                            <div id="seleccionados" class="treeSelectedDiv">
                             </div>
+
+                            <div id="treecat">
+                            </div>
+
+                            <script src="../../static/bootstrap/js/vendor/jquery-1.11.0.min.js"></script>
+                            <script src="../../static/jstree/jstree.js"></script>
                             <script>
                                 $(function() {
-                                    //var cats =   [{"id": "Celulares", "text": "Celulares", "parent": "#"}, {"id": "Sistemas Operativos", "text": "Sistemas Operativos", "parent": "Celulares"}, {"id": "iOS", "text": "iOS", "parent": "Sistemas Operativos"}, {"id": "Android", "text": "Android", "parent": "Sistemas Operativos"}, {"id": "Windows Phone", "text": "Windows Phone", "parent": "Sistemas Operativos"}, {"id": "Symbian", "text": "Symbian", "parent": "Sistemas Operativos"}, {"id": "Blackberry OS", "text": "Blackberry OS", "parent": "Sistemas Operativos"}, {"id": "Equipos", "text": "Equipos", "parent": "Celulares"}, {"id": "iPhone", "text": "iPhone", "parent": "Equipos"}, {"id": "Nexus", "text": "Nexus", "parent": "Equipos"}, {"id": "Samsung", "text": "Samsung", "parent": "Equipos"}, {"id": "Galaxy S3", "text": "Galaxy S3", "parent": "Samsung"}, {"id": "Galaxy S4", "text": "Galaxy S4", "parent": "Samsung"}, {"id": "Galaxy Ace", "text": "Galaxy Ace", "parent": "Samsung"}, {"id": "Blackberry", "text": "Blackberry", "parent": "Equipos"}, {"id": "Nokia", "text": "Nokia", "parent": "Equipos"}, {"id": "Accesorios", "text": "Accesorios", "parent": "Celulares"}, {"id": "Protectores", "text": "Protectores", "parent": "Accesorios"}, {"id": "Baterías", "text": "Baterías", "parent": "Accesorios"}, {"id": "Apple", "text": "Apple", "parent": "#"}, {"id": "Videojuegos", "text": "Videojuegos", "parent": "#"}, {"id": "Playstation", "text": "Playstation", "parent": "Videojuegos"}, {"id": "Xbox", "text": "Xbox", "parent": "Videojuegos"}];
+                                    $('#treecat')
+                                            // listen for event
+                                            .on('changed.jstree', function(e, data) {
+                                        var i, j, r = [];
+                                        for (i = 0, j = data.selected.length; i < j; i++) {
+                                            r.push(data.instance.get_node(data.selected[i]).text);
+                                        }
+                                        $('#seleccionados').html(r.join(', '));
+                                    });
+
                                     $('#treecat').jstree({
                                         'core': {
                                             'data': {
@@ -105,18 +123,15 @@
                                                 "icons": true
                                             }
                                         },
-                                        "plugins": ["contextmenu", "dnd", "search", "state", "types", "wholerow"]
+                                        "plugins": ["wholerow", "checkbox"]
                                     });
-                                });</script>
 
-
-
-
-
+                                });
+                            </script>
                         </div>
+
                         <div class="tab-pane" id="step3">
-                            <h2>Alta de Producto</h2>
-                            <p>Ingrese las Imagenes del Producto</p>
+                            <h3>Seleccione las Imagenes del Producto</h3>
 
 
 
@@ -151,32 +166,10 @@
         </div><!-- ./container-fluid -->
 
 
-        <!-- Get latest version of jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <!-- Currently jQuery should be loaded first. -->
         <script src="../../static/bootstrap/js/vendor/jquery-1.11.0.min.js"></script>
-
-        <!-- Use online (CDN) Bootstrap Javascript -->
         <script src="../../static/bootstrap/js/vendor/bootstrap.min.js"></script>
-
-        <!---------------------- -->
-        <!-- BEGIN TUTORIAL CODE -->
-        <!---------------------- -->
-
-        <!-- 5. Thanks to https://github.com/VinceG/twitter-bootstrap-wizard -->
         <script src="../../static/bootstrap/js/vendor/jquery.bootstrap.wizard.js"></script>
-
-        <!---------------------- -->
-        <!-- END TUTORIAL CODE   -->
-        <!---------------------- -->
-
-
         <!-- Load javascript at bottom of the file to avoid delays loading other resources -->
-
-        <!---------------------- -->
-        <!-- BEGIN TUTORIAL CODE -->
-        <!---------------------- -->
-
-        <!-- 6. Javascript is required to switch panes. -->
         <script>
                                 $(document).ready(function() {
                                     $('#rootwizard').bootstrapWizard({onTabShow: function(tab, navigation, index) {
@@ -198,7 +191,7 @@
                                 });
         </script>
 
-
         <%@include file="../../WEB-INF/jspf/bottom.jspf" %>
+        <script src="../../static/jstree/jstree.js"></script>
     </body>
 </html>

@@ -5,20 +5,31 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
         <link rel="stylesheet" href="../../static/jstree/themes/default/style.min.css" />
-	<link rel="stylesheet" href="../../static/bootstrap/css/bootstrap.min.css" />
-        <script src="../../static/jstree/jquery-1.10.2.min.js"></script>
-        <script src="../../static/jstree/jstree.js"></script>
-
-        
+        <link rel="stylesheet" href="../../static/bootstrap/css/bootstrap.min.css" />
     </head>
     <body>
         <%@include file="../../WEB-INF/jspf/top.jspf" %>
 
-        <div id="treecat"  class="demo">
+        <div id="treecat" class="treeDiv" style="margin-top:4em;">
         </div>
+        
+        <div id="seleccionados">
+        </div>
+
+        <script src="../../static/bootstrap/js/vendor/jquery-1.11.0.min.js"></script>
+        <script src="../../static/jstree/jstree.js"></script>
         <script>
             $(function() {
-                //var cats =   [{"id": "Celulares", "text": "Celulares", "parent": "#"}, {"id": "Sistemas Operativos", "text": "Sistemas Operativos", "parent": "Celulares"}, {"id": "iOS", "text": "iOS", "parent": "Sistemas Operativos"}, {"id": "Android", "text": "Android", "parent": "Sistemas Operativos"}, {"id": "Windows Phone", "text": "Windows Phone", "parent": "Sistemas Operativos"}, {"id": "Symbian", "text": "Symbian", "parent": "Sistemas Operativos"}, {"id": "Blackberry OS", "text": "Blackberry OS", "parent": "Sistemas Operativos"}, {"id": "Equipos", "text": "Equipos", "parent": "Celulares"}, {"id": "iPhone", "text": "iPhone", "parent": "Equipos"}, {"id": "Nexus", "text": "Nexus", "parent": "Equipos"}, {"id": "Samsung", "text": "Samsung", "parent": "Equipos"}, {"id": "Galaxy S3", "text": "Galaxy S3", "parent": "Samsung"}, {"id": "Galaxy S4", "text": "Galaxy S4", "parent": "Samsung"}, {"id": "Galaxy Ace", "text": "Galaxy Ace", "parent": "Samsung"}, {"id": "Blackberry", "text": "Blackberry", "parent": "Equipos"}, {"id": "Nokia", "text": "Nokia", "parent": "Equipos"}, {"id": "Accesorios", "text": "Accesorios", "parent": "Celulares"}, {"id": "Protectores", "text": "Protectores", "parent": "Accesorios"}, {"id": "Baterías", "text": "Baterías", "parent": "Accesorios"}, {"id": "Apple", "text": "Apple", "parent": "#"}, {"id": "Videojuegos", "text": "Videojuegos", "parent": "#"}, {"id": "Playstation", "text": "Playstation", "parent": "Videojuegos"}, {"id": "Xbox", "text": "Xbox", "parent": "Videojuegos"}];
+                $('#treecat')
+                        // listen for event
+                        .on('changed.jstree', function(e, data) {
+                    var i, j, r = [];
+                    for (i = 0, j = data.selected.length; i < j; i++) {
+                        r.push(data.instance.get_node(data.selected[i]).text);
+                    }
+                    $('#seleccionados').html('Selected: ' + r.join(', '));
+                });
+
                 $('#treecat').jstree({
                     'core': {
                         'data': {
@@ -35,9 +46,19 @@
                             "icons": true
                         }
                     },
-                    "plugins": ["contextmenu", "dnd", "search", "state", "types", "wholerow"]
+                    "plugins": ["checkbox"]
                 });
-            });</script>
+            });
+        </script>
+        <script>
+
+            arr = $("#treecat").jstree('get_checked');
+            for (var i = 0; i < arr.length; ++i) {
+                console.log(arr[i]);
+            }
+
+        </script>
+
 
         <%@include file="../../WEB-INF/jspf/bottom.jspf" %>
 

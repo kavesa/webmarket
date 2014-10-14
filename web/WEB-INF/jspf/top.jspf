@@ -30,7 +30,7 @@
                 </li>
                 <%} else {%>
                 <li>
-                    <a class="fa fa-user navbar-brand" title="Perfil" href="<%= request.getContextPath()%>/Perfil" id="perfil"> ${sessionScope.usuario}</a>
+                    <a class="fa fa-user navbar-brand" title="Perfil" href="<%= request.getContextPath()%>/perfil" id="perfil"> ${sessionScope.usuario}</a>
                 </li>
                     <% if (sesion.getAttribute("tipoUsuario").toString().equals("PROVEEDOR")) {%>
                     <li>
