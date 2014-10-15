@@ -22,7 +22,7 @@
         <%@include file="../../WEB-INF/jspf/top.jspf" %>
 
         <div class="container-fluid">
-            <form role="form" method="POST" action="/producto" >
+            <form id="altaprodform" role="form" method="POST" action="/producto" >
 
                 <h2>Alta de Producto</h2>
                 <div id="rootwizard">
@@ -132,90 +132,14 @@
                             </script>
                         </div>
 
-                        <div class="tab-pane" id="step3">
+                        <div class="tab-pane active" id="step3">
                             <h3>Seleccione las Imagenes del Producto</h3>
+                            
+                            <script type="text/javascript" src="../../static/bootstrap/js/vendor/bootstrap-filestyle.min.js"></script>
+                            <input type="file" class="filestyle" data-buttonText="Imagen 1">
+                            <input type="file" class="filestyle" data-input="false" data-buttonText="Imagen 2">
+                            <input type="file" class="filestyle" data-input="false" data-buttonText="Imagen 3">
 
-                            <div id="mydropzone"></div>
-                            <div class="dropzone-previews dz-default dz-clickable dz-message"></div>
-
-                            <script src="../../static/dropzone/dropzone.js"></script>
-                            <script>
-                                jQuery(document).ready(function()
-                                {
-                                    var myDropzone = new Dropzone("div#mydropzone", {url: "/algo"});
-                                });
-                                Dropzone.options.myDropzone = { // The camelized version of the ID of the form element
-
-                                    // The configuration we've talked about above
-                                    autoProcessQueue: false,
-                                    uploadMultiple: true,
-                                    parallelUploads: 6,
-                                    maxFiles: 3,
-                                    // The setting up of the dropzone
-                                    init: function() {
-                                        var myDropzone = this;
-
-                                        this.on("addedfile", function(file) {
-
-                                            // Create the remove button
-                                            var removeButton = Dropzone.createElement("<button>Remove file</button>");
-
-                                            // Capture the Dropzone instance as closure.
-                                            var _this = this;
-
-                                            // Listen to the click event
-                                            removeButton.addEventListener("click", function(e) {
-                                                // Make sure the button click doesn't submit the form:
-                                                e.preventDefault();
-                                                e.stopPropagation();
-
-                                                // Remove the file preview.
-                                                _this.removeFile(file);
-                                                // If you want to the delete the file on the server as well,
-                                                // you can do the AJAX request here.
-                                            });
-
-                                            // Add the button to the file preview element.
-                                            file.previewElement.appendChild(removeButton);
-                                        });
-
-
-                                        // First change the button to actually tell Dropzone to process the queue.
-                                        this.element.querySelector("button[type=submit]").addEventListener("click", function(e) {
-                                            // Make sure that the form isn't actually being sent.
-                                            e.preventDefault();
-                                            e.stopPropagation();
-                                            myDropzone.processQueue();
-                                        });
-
-                                        // Listen to the sendingmultiple event. In this case, it's the sendingmultiple event instead
-                                        // of the sending event because uploadMultiple is set to true.
-                                        this.on("sendingmultiple", function() {
-                                            // Gets triggered when the form is actually being sent.
-                                            // Hide the success button or the complete form.
-                                        });
-                                        this.on("successmultiple", function(files, response) {
-                                            // Gets triggered when the files have successfully been sent.
-                                            // Redirect user or notify of success.
-                                        });
-                                        this.on("errormultiple", function(files, response) {
-                                            // Gets triggered when there was an error sending the files.
-                                            // Maybe show form again, and notify user of error
-                                        });
-                                        $("#submit-all").click(function(e) {
-                                            e.preventDefault();
-                                            e.stopPropagation();
-                                            myDropzone.processQueue();
-                                        });
-                                        this.on("maxfilesexceeded", function(file) {
-                                            this.removeFile(file);
-                                            alert("Puede elegir como maximo 3 imagenes.");
-                                        });
-                                    }
-                                };
-                            </script>
-
-                            <p>Maximo: 3 imagenes</p>
                         </div>
 
                         <!-- 4. Declare buttons used by the wizard. -->

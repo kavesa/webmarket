@@ -30,7 +30,7 @@
                 </li>
                 <%} else {%>
                 <li>
-                    <a class="fa fa-user navbar-brand" title="Perfil" href="<%= request.getContextPath()%>/perfil" id="perfil"> ${sessionScope.usuario}</a>
+                    <a class="fa fa-user navbar-brand" title="Perfil" href="<%= request.getContextPath()%>/Perfil" id="perfil"> ${sessionScope.usuario}</a>
                 </li>
                     <% if (sesion.getAttribute("tipoUsuario").toString().equals("PROVEEDOR")) {%>
                     <li>
@@ -38,7 +38,7 @@
                     </li>
                     <%} else {%>
                     <li>
-                        <a class="fa fa-shopping-cart navbar-brand"  title="Agregar al Carrito" href="<%= request.getContextPath()%>/addToShoppingCart" id="adduser"> </a>
+                        <a class="fa fa-shopping-cart navbar-brand"  title="Ver Carrito" href="<%= request.getContextPath()%>/addToShoppingCart" id="adduser"> </a>
                     </li>
                     <%}%>
                 <li>

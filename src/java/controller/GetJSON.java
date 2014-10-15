@@ -35,15 +35,32 @@ public class GetJSON extends HttpServlet {
 
             for (int i = 0; i < categorias.size();) {
                 JSONObject jSONObject = new JSONObject();
+                JSONObject jSONObjectDisabled = new JSONObject();
                 //verifico si esta en la raiz o tiene padre
                 if (categorias.get(i).getParent().toString().equals("Categorias")) {
-                    jSONObject.put("id", categorias.get(i).getNombre());
-                    jSONObject.put("parent", "#");
-                    jSONObject.put("text", categorias.get(i).getNombre());
+                    if (categorias.get(i).isContieneProductos()) {
+                        jSONObject.put("id", categorias.get(i).getNombre());
+                        jSONObject.put("parent", "#");
+                        jSONObject.put("text", categorias.get(i).getNombre());
+                    } else {
+                        jSONObject.put("id", categorias.get(i).getNombre());
+                        jSONObject.put("parent", "#");
+                        jSONObject.put("text", categorias.get(i).getNombre());
+                        jSONObjectDisabled.put("disabled", true);
+                        jSONObject.put("state", jSONObjectDisabled);
+                    }
                 } else {
-                    jSONObject.put("id", categorias.get(i).getNombre());
-                    jSONObject.put("parent", categorias.get(i).getParent());
-                    jSONObject.put("text", categorias.get(i).getNombre());
+                    if (categorias.get(i).isContieneProductos()) {
+                        jSONObject.put("id", categorias.get(i).getNombre());
+                        jSONObject.put("parent", categorias.get(i).getParent());
+                        jSONObject.put("text", categorias.get(i).getNombre());
+                    } else {
+                        jSONObject.put("id", categorias.get(i).getNombre());
+                        jSONObject.put("parent", categorias.get(i).getParent());
+                        jSONObject.put("text", categorias.get(i).getNombre());
+                        jSONObjectDisabled.put("disabled", true);
+                        jSONObject.put("state", jSONObjectDisabled);
+                    }
                 }
                 //le seteo el icono de acuerdo a si contiene productos o no
                 if (categorias.get(i).isContieneProductos()) {

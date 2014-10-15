@@ -3650,6 +3650,9 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .tab-content > .tab-pane {
   display: none;
 }
+.tab-content > #step3 {
+  max-width: 30%;
+}
 .tab-content > .active {
   display: block;
 }

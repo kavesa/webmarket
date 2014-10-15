@@ -12,11 +12,12 @@ import org.apache.tomcat.util.codec.binary.StringUtils;
  * @author nightmare
  */
 public class util {
-    static public String byteImgToBase64(byte[] imgByte){
+
+    static public String byteImgToBase64(byte[] imgByte) {
         StringBuilder sb = new StringBuilder();
-            sb.append("data:image/png;base64,");
-            sb.append(StringUtils.newStringUtf8(Base64.encodeBase64(imgByte, false)));
-            String contourChart = sb.toString();
-            return contourChart;
+        sb.append("data:image/png;base64,");
+        sb.append(StringUtils.newStringUtf8(Base64.encodeBase64(imgByte, false)));
+        String contourChart = sb.toString();
+        return contourChart;
     }
 }

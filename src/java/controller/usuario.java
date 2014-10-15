@@ -27,7 +27,6 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.*;
 import org.apache.commons.fileupload.disk.*;
 import org.apache.commons.fileupload.servlet.*;
-import org.apache.jasper.tagplugins.jstl.core.Redirect;
 
 /**
  *
@@ -121,6 +120,9 @@ public class usuario extends HttpServlet {
             Logger.getLogger(usuario.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+
+        
+        
         // Process the uploaded items
         Iterator<FileItem> iter = items.iterator();
         String tipoForm = "", nickForm = null, passForm = null,
