@@ -14,14 +14,14 @@
 <html> 
 
     <head> 
-       
+
         <title>Carrito</title> 
         <%@include file="../../WEB-INF/jspf/jscss.jspf" %>
     </head> 
     <body>
         <%@include file="../../WEB-INF/jspf/top.jspf" %>
         <%
-            List<DataLineaOC> lineas = (ArrayList<DataLineaOC>) request.getAttribute("lineasOrden");
+            List<DataLineaOC> lineas = (ArrayList<DataLineaOC>) sesion.getAttribute("lineasOrden");
         %>
         <div id="carrito"> 
             <form action="<%=request.getContextPath()%>/GenerarOrdenCompraServlet" method="POST">
@@ -38,8 +38,9 @@
                     <tbody>
 
                         <%
-                            for (int i = 0; i < lineas.size(); i++) {
-
+                            if (lineas !=null) {
+                                for (int i = 0; i < lineas.size(); i++) {
+                                
                         %>
 
                         <tr>
@@ -48,11 +49,11 @@
                             <td><%=lineas.get(i).getProducto().getDataEspecificacion().getPrecio()%></td>
                             <td><%=lineas.get(i).getProducto().getDataEspecificacion().getPrecio() * lineas.get(i).getCantidad()%></td>
                         </tr>
-                        <%}%>
+                        <%}}%>
                     </tbody>
 
                 </table>
-                    <input type="button" id="actualizar" value="Actualizar"/>
+                <input type="button" id="actualizar" value="Actualizar"/>
                 <input type="submit" id="comprar" value="Comprar" />
             </form>
         </div>

@@ -69,25 +69,6 @@ public class AgregarItemCarritoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        HttpSession sesion = request.getSession(true);
-        List<DataLineaOC> lineas = (ArrayList<DataLineaOC>) sesion.getAttribute("lineasOrden");
-        if(lineas==null){
-            lineas = new ArrayList<DataLineaOC>();
-        //Falta crear datalineaoc
-        }
-        DataLineaOC dataLinea = new DataLineaOC();
-        DataProducto prod= new DataProducto();
-        DataEspecificacionProducto esp = new DataEspecificacionProducto();
-        esp.setDescripcion("prueba");
-        esp.setPrecio(10);
-        prod.setDataEspecificacion(esp);
-        dataLinea.setCantidad(2);
-        dataLinea.setProducto(prod);
-        lineas.add(dataLinea);
-        request.setAttribute("lineasOrden", lineas);
-        
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/vistas/carrito/carrito.jsp");
-        dispatcher.forward(request, response);
     }
 
     /**
@@ -101,7 +82,28 @@ public class AgregarItemCarritoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       
+        HttpSession sesion = request.getSession();
+        List<DataLineaOC> lineas = (ArrayList<DataLineaOC>) sesion.getAttribute("lineasOrden");
+        if(lineas==null){
+            lineas = new ArrayList<DataLineaOC>();
+        //Falta crear datalineaoc
+        }
+        DataLineaOC dataLinea = new DataLineaOC();
+        DataProducto prod= (DataProducto) request.getAttribute("datosProd");
+        DataEspecificacionProducto esp = prod.getDataEspecificacion();
+        esp.setDescripcion(esp.getDescripcion());
+        esp.setPrecio(esp.getPrecio());
+        esp.setId(esp.getId());
+        prod.setDataEspecificacion(esp);
+        prod.setReferencia(prod.getReferencia());
+        dataLinea.setCantidad(2); //falta
+        dataLinea.setProducto(prod);
+        lineas.add(dataLinea);
+        sesion.setAttribute("lineasOrden", lineas);
+        
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/vistas/carrito/carrito.jsp");
+        dispatcher.forward(request, response);
     }
 
     /**
