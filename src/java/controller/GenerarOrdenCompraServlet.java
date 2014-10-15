@@ -33,8 +33,9 @@ import javax.servlet.http.HttpSession;
 public class GenerarOrdenCompraServlet extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+     * Processes requests for both HTTP
+     * <code>GET</code> and
+     * <code>POST</code> methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -63,7 +64,8 @@ public class GenerarOrdenCompraServlet extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * Handles the HTTP <code>GET</code> method.
+     * Handles the HTTP
+     * <code>GET</code> method.
      *
      * @param request servlet request
      * @param response servlet response
@@ -77,7 +79,8 @@ public class GenerarOrdenCompraServlet extends HttpServlet {
     }
 
     /**
-     * Handles the HTTP <code>POST</code> method.
+     * Handles the HTTP
+     * <code>POST</code> method.
      *
      * @param request servlet request
      * @param response servlet response
@@ -87,26 +90,26 @@ public class GenerarOrdenCompraServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession sesion = request.getSession(true);
+        HttpSession sesion = request.getSession();
         List<DataLineaOC> lineas = (ArrayList<DataLineaOC>) sesion.getAttribute("lineasOrden");
-        String usuario = (String) request.getAttribute("usuario");
-     //   try {
-          //  DataUsuario dataUsuario = Factory.getInstance().getUsuarioController().getDataCliente(usuario);
-        //    DataOC ordenCompra = new DataOC();
-     //       ordenCompra.setLineas(lineas);
+        String usuario = (String) sesion.getAttribute("usuario");
+        try {
+            DataUsuario dataUsuario = Factory.getInstance().getUsuarioController().getDataCliente(usuario);
+            DataOC ordenCompra = new DataOC();
+            ordenCompra.setLineas(lineas);
             int numeroOrden;
-          //  numeroOrden = Factory.getInstance().getOrdenCompraController().altaOrdenCompra(ordenCompra);
-         //   Factory.getInstance().getUsuarioController().modificarCliente(dataUsuario, numeroOrden);
-            request.setAttribute("lineasOrden", new ArrayList<DataLineaOC>());
-             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/vistas/carrito/carrito.jsp");
-        dispatcher.forward(request, response);
+            numeroOrden = Factory.getInstance().getOrdenCompraController().altaOrdenCompra(ordenCompra);
+            Factory.getInstance().getUsuarioController().modificarCliente(dataUsuario, numeroOrden);
+            sesion.setAttribute("lineasOrden", new ArrayList<DataLineaOC>());
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/vistas/carrito/carrito.jsp");
+            dispatcher.forward(request, response);
 
-     //   } catch (UsuarioException ex) {
-        //    Logger.getLogger(GenerarOrdenCompraServlet.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (OCException ex) {
-//            Logger.getLogger(GenerarOrdenCompraServlet.class.getName()).log(Level.SEVERE, null, ex);
-   //    }
-        
+        } catch (UsuarioException ex) {
+            Logger.getLogger(GenerarOrdenCompraServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (OCException ex) {
+            Logger.getLogger(GenerarOrdenCompraServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     /**
@@ -118,5 +121,4 @@ public class GenerarOrdenCompraServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

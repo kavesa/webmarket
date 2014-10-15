@@ -34,9 +34,9 @@
                 
                 <div style="margin-top: 1em" class="row">
                     <div class="col-sm-12 col-centered">                        
-                        <form action="<%= request.getContextPath()%>/myservlet" method="post">
+                        <form action="<%= request.getContextPath()%>/AgregarItemCarritoServlet" method="post">
                             <input style="float: right; margin-right: 1em"type="submit" name="add" value="Agregar al carro"/>
-</form>
+                        </form>
                     </div>
                 </div>
                 
