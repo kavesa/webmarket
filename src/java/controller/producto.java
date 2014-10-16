@@ -120,29 +120,29 @@ public class producto extends HttpServlet {
 
             dataEsp.setImagenes(imagenes);
 
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet altaprod</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Nombre: " + request.getParameter("nomprod") + "</h1>");
-            out.println("<h1>Referencia: " + request.getParameter("refprod") + "</h1>");
-            out.println("<h1>Descripcion: " + request.getParameter("descprod") + "</h1>");
-            out.println("<h1>Precio: " + request.getParameter("precprod") + "</h1>");
-            out.println("<h1>Categorias: " + Arrays.toString(request.getParameterValues("catsprod")) + "</h1>");
-            out.println("<h1>CatString: " + catString + "</h1>");
-            out.println("<h1>Categoria1: " + catList.get(0).toString() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-
-
+//            out.println("<!DOCTYPE html>");
+//            out.println("<html>");
+//            out.println("<head>");
+//            out.println("<title>Servlet altaprod</title>");
+//            out.println("</head>");
+//            out.println("<body>");
+//            out.println("<h1>Nombre: " + request.getParameter("nomprod") + "</h1>");
+//            out.println("<h1>Referencia: " + request.getParameter("refprod") + "</h1>");
+//            out.println("<h1>Descripcion: " + request.getParameter("descprod") + "</h1>");
+//            out.println("<h1>Precio: " + request.getParameter("precprod") + "</h1>");
+//            out.println("<h1>Categorias: " + Arrays.toString(request.getParameterValues("catsprod")) + "</h1>");
+//            out.println("<h1>CatString: " + catString + "</h1>");
+//            out.println("<h1>Categoria1: " + catList.get(0).toString() + "</h1>");
+//            out.println("</body>");
+//            out.println("</html>");
 
             dp.setDataEspecificacion(dataEsp);
             Factory.getInstance().getProductoController().altaProducto(dp);
 
-
-
+            request.setAttribute("pCat", catList);
+            request.setAttribute("datosProd", dp);
+            request.getRequestDispatcher("/vistas/producto/InfoProducto.jsp").forward(request, response);
+            //response.sendRedirect(response.encodeRedirectURL(catString));
         } catch (Exception ex) {
             out.close();
         }
@@ -164,7 +164,12 @@ public class producto extends HttpServlet {
         String op = request.getParameter("op");
         String pagina = "";
         if (op.equals("create")) {
-            pagina = "/vistas/producto/altaprod.jsp";
+            if (!(request.getSession().getAttribute("usuario") == null)
+                    && Factory.getInstance().getUsuarioController().getDataProveedor(request.getSession().getAttribute("usuario").toString()) != null) {
+                pagina = "/vistas/producto/altaprod.jsp";
+            } else {
+                pagina = "/index.jsp";
+            }
         }
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);
         dispatcher.forward(request, response);

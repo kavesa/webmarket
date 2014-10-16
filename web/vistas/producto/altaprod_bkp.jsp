@@ -57,32 +57,32 @@
 
                             <!-- Text input-->
                             <div class="form-group" style="margin-bottom: 1em;">
-                                <label for="nomprod">* Nombre del Producto</label>
+                                <label for="nomprod">Nombre del Producto</label>
                                 <input id="nomprod" name="nomprod" type="text" placeholder="Ingrese el Nombre del Producto" class="input-xxlarge form-control" required="">
 
                             </div>
 
                             <!-- Text input-->
                             <div class="control-group" style="margin-bottom: 1em;">
-                                <label for="refprod">* Referencia del Producto</label>
+                                <label for="refprod">Referencia del Producto</label>
                                 <input id="refprod" name="refprod" type="text" placeholder="Ingrese la Referencia" class="input-xxlarge form-control" required="">
                             </div>
 
                             <!-- Text input-->
                             <div class="control-group" style="margin-bottom: 1em;">
-                                <label for="descprod">* Descripcion del Producto</label>
+                                <label for="descprod">Descripcion del Producto</label>
                                 <input id="descprod" name="descprod" type="text" placeholder="Ingrese Descripcion del Producto" class="input-xxlarge form-control" required="">
                             </div>
 
                             <!-- Text input-->
                             <div class="control-group" style="margin-bottom: 1em;">
-                                <label for="precprod">* Precio del Producto</label>
+                                <label for="precprod">Precio del Producto</label>
                                 <input id="precprod" name="precprod" type="text" placeholder="0.00" class="input-xxlarge form-control" required="">
                             </div>
 
                             <!-- Textarea -->
                             <div class="control-group" style="margin-bottom: 1em;">
-                                <label for="textarea">* Especificaciones</label>
+                                <label for="textarea">Especificaciones</label>
                                 <textarea id="espprod" name="espprod" required="" class="form-control"></textarea>
                             </div>
 
@@ -104,6 +104,7 @@
                             </div>
 
                             <script src="../../static/bootstrap/js/vendor/jquery-1.11.0.min.js"></script>
+                            <script src="../../static/jstree/jstree.js"></script>
                             <!-- javascript del JSTREE -->
                             <script>
                                 $(function() {

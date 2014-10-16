@@ -80,7 +80,7 @@
                         </div>
                         <div class="form-group" id="divDir-web">
                             <label for="url">Dirección Web</label>
-                            <input type="url" class="form-control" name="url" id="url" placeholder="Ingrese Direccion Web" required>
+                            <input type="text" class="form-control" name="url" id="url" placeholder="Ingrese Direccion Web" required>
                         </div>
                         <div class="form-group" id="divImgUser">
                             <label class="control-label"id="LblImgUser" for="img">Imagen</label>
