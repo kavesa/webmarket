@@ -38,7 +38,7 @@
                     </li>
                     <%} else {%>
                     <li>
-                        <a class="fa fa-shopping-cart navbar-brand"  title="Ver Carrito" href="<%= request.getContextPath()%>/addToShoppingCart" id="adduser"> </a>
+                        <a class="fa fa-shopping-cart navbar-brand"  title="Ver Carrito" href="<%= request.getContextPath()%>/verCarrito" id="vercar"> </a>
                     </li>
                     <%}%>
                 <li>
