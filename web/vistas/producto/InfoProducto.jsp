@@ -28,10 +28,20 @@
             DataProducto dProd = (DataProducto) request.getAttribute("datosProd");
             List<DataCategoria> catList = (List<DataCategoria>) request.getAttribute("pCat");
             DataEspecificacionProducto dEsp = dProd.getDataEspecificacion();
+
+            String error = (String) session.getAttribute("error");
+            session.setAttribute("error", null);
+            String success = (String) session.getAttribute("success");
+            session.setAttribute("success", null);
         %>
         <div style="margin-bottom: 1em" class="col-sm-5 col-centered perfDiv">
+            <%if (error != null) {%>
+            <div class="alert alert-danger"><%=error%></div>
+            <%} else if (success != null) {%>
+            <div class="alert alert-success"><%=success%></div>
+            <%}%>
             <div style="margin-top: 1em" class="row">
-                
+
                 <div style="margin-top: 1em" class="row">
                     <div class="col-sm-12 col-centered">                        
                         <form action="<%= request.getContextPath()%>/AgregarItemCarritoServlet" method="post">
@@ -39,7 +49,7 @@
                         </form>
                     </div>
                 </div>
-                
+
                 <div class="col-sm-12 col-centered">
                     <%
                         for (byte[] ima : dEsp.getImagenes()) {
@@ -65,7 +75,7 @@
                             <%=catList.get(i).getNombre()%>
                             <%if (i + 1 != tama) {%>, <%}%><%}%>
                         </li>
-                    
+
                         <li class="list-group-item listItem">Descripcion: <%=dEsp.getDescripcion()%></li>
                     </ul>
                 </div>
@@ -82,13 +92,22 @@
 
 
 
-            <!--            <div class="row">
-                            <div style="margin-top: 1em" class="col-sm-12 col-centered">
-            <%//for( DataComentario dComen : dProd.getListDataComentarios()){%>
-                
-            <%//}%>
-        </div>
-        </div>-->
+            <div class="row">
+                <form role="form" id="formComentario" action="<%=request.getContextPath()%>/comentario" method="POST">
+                    <input name="numRefProd" type="text" value="<%=dProd.getReferencia()%>" hidden="true"/>
+                    <div class="form-group">
+                        <label for="idComentario">Padre</label>
+                        <input type="number" class="form-control" name="idCom" id="idCom" placeholder="Ingrese id del comentario a responder (vacio es un comentario nuevo).">
+                    </div>
+                    <div class="form-group">
+                        <label for="Comentario">Comentario</label>
+                        <textarea class="form-control" name="com" id="com" placeholder="Ingrese comentario."></textarea>
+                    </div>
+                    <button type="submit" id="btnGuardar" class="btn btn-success">Ingresar Comentario</button>
+                </form>
+
+            </div>
+
         </div>
         <%@include file="../../WEB-INF/jspf/bottom.jspf" %>
     </body>
