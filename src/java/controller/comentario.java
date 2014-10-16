@@ -97,7 +97,7 @@ public class comentario extends HttpServlet {
         try {
             Factory.getInstance().getProductoController().agregarComentario(idProd, dc);
             request.getSession().setAttribute("success", "Comentario ingresado con éxito.");
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("index.jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
             dispatcher.forward(request, response);
         } catch (ProductoException ex) {
             Logger.getLogger(comentario.class.getName()).log(Level.SEVERE, null, ex);
