@@ -334,6 +334,9 @@
   color: #8b0000;
   font-weight: bold;
 }
+.no_checkbox>i.jstree-checkbox {
+  display: none;
+}
 .jstree-default .jstree-no-checkboxes .jstree-checkbox {
   display: none !important;
 }

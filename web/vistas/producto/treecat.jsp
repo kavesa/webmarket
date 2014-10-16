@@ -12,10 +12,10 @@
 
         <div id="treecat" class="treeDiv" style="margin-top:4em;">
         </div>
-        
-        <div id="seleccionados">
-        </div>
 
+        <div id="seleccionados" class="treeSelectedDiv">
+                            </div>
+                            
         <script src="../../static/bootstrap/js/vendor/jquery-1.11.0.min.js"></script>
         <script src="../../static/jstree/jstree.js"></script>
         <script>
@@ -27,7 +27,8 @@
                     for (i = 0, j = data.selected.length; i < j; i++) {
                         r.push(data.instance.get_node(data.selected[i]).text);
                     }
-                    $('#seleccionados').html('Selected: ' + r.join(', '));
+
+                    $('#seleccionados').html(r.join(', '));
                 });
 
                 $('#treecat').jstree({
@@ -46,7 +47,28 @@
                             "icons": true
                         }
                     },
-                    "plugins": ["checkbox"]
+                    "plugins": ["wholerow", "checkbox", "types"],
+                    "checkbox": {
+                        "two_state": true
+                    },
+                    "types": {
+                        "types": {
+                            "disabled": {
+                                "check_node": false,
+                                "uncheck_node": false
+                            },
+                            "default": {
+                                "check_node": function(node) {
+                                    $(node).children('ul').children('li').children('a').children('.jstree-checkbox').click();
+                                    return true;
+                                },
+                                "unckeck_node": function(node) {
+                                    $(node).children('ul').children('li').children('a').children('.jstree-checkbox').click();
+                                    return true;
+                                }
+                            }
+                        }
+                    }
                 });
             });
         </script>

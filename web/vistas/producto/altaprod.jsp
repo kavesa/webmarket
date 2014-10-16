@@ -10,10 +10,10 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="stylesheet" href="../../static/jstree/themes/default/style.min.css" />
+        <link rel="stylesheet" href="../../static/jstree/themes/default/style.css" />
         <link rel="stylesheet" href="../../static/bootstrap/css/bootstrap.css" />
 
-        <link rel="stylesheet" href="../../static/dropzone/css/dropzone.css" />
+        <link rel="stylesheet" href="../../static/jasny-bootstrap/css/jasny-bootstrap.min.css" />
 
         <%@include file="../../WEB-INF/jspf/jscss.jspf" %>
 
@@ -22,24 +22,28 @@
         <%@include file="../../WEB-INF/jspf/top.jspf" %>
 
         <div class="container-fluid">
-            <form role="form" method="POST" action="/producto" >
+            <form role="form" method="POST" action="/producto" enctype="multipart/form-data">
 
                 <h2>Alta de Producto</h2>
                 <div id="rootwizard">
-
-                    <!-- 1. Create the tabs themselves  -->
-                    <!-- data-toggle required. -->
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li><a href="#step1" role="tab" data-toggle="tab">Datos Basicos</a></li>
-                        <li><a href="#step2" role="tab" data-toggle="tab">Categorias</a></li>
-                        <li><a href="#step3" role="tab" data-toggle="tab">Imagenes</a></li>
-                    </ul>
-
+                    <div class="navbar">
+                        <div class="navbar-inner">
+                            <div class="container">
+                                <!-- 1. Create the tabs themselves  -->
+                                <!-- data-toggle required. -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li><a href="#step1" role="tab" data-toggle="tab">Datos Basicos</a></li>
+                                    <li><a href="#step2" role="tab" data-toggle="tab">Categorias</a></li>
+                                    <li><a href="#step3" role="tab" data-toggle="tab">Imagenes</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                     <!-- 2. Create progress bar -->
                     <!-- div class="progress" required. -->
                     <!-- on div id="progressBar" class="progress" required. -->
                     <div class="progress">
-                        <div id="progressBar" class="progress-bar progress-bar-striped"  >
+                        <div id="progressBar" class="progress-bar progress-bar-striped active"  >
                             <div class="bar">
                                 <span></span>
                             </div>
@@ -87,27 +91,34 @@
                         <div class="tab-pane" id="step2">
                             <h3>Seleccione las Categorias del Producto</h3>
 
+                            <!--
                             <p style="float:left; margin-right:5px;">Categorias Seleccionadas: </p>
 
                             <div id="seleccionados" class="treeSelectedDiv">
                             </div>
+                            -->
+                            
+                            <input type="hidden" name="catsprod" id="catsprod" value="" />
 
                             <div id="treecat">
                             </div>
 
                             <script src="../../static/bootstrap/js/vendor/jquery-1.11.0.min.js"></script>
                             <script src="../../static/jstree/jstree.js"></script>
+                            <!-- javascript del JSTREE -->
                             <script>
                                 $(function() {
                                     $('#treecat')
                                             // listen for event
-                                            .on('changed.jstree', function(e, data) {
+                                        .on('changed.jstree', function(e, data) {
                                         var i, j, r = [];
                                         for (i = 0, j = data.selected.length; i < j; i++) {
                                             r.push(data.instance.get_node(data.selected[i]).text);
                                         }
-                                        $('#seleccionados').html(r.join(', '));
-                                    });
+                                        document.getElementById('catsprod').value = r.join(',');
+
+                                        //$('#seleccionados').html(r.join(', '));
+                                        });
 
                                     $('#treecat').jstree({
                                         'core': {
@@ -125,96 +136,64 @@
                                                 "icons": true
                                             }
                                         },
-                                        "plugins": ["wholerow", "checkbox"]
+                                        "plugins": ["wholerow", "checkbox", "types"],
+                                        "checkbox": {
+                                            "two_state": true
+                                        },
+                                        "types": {
+                                            "types": {
+                                                "disabled": {
+                                                    "check_node": false,
+                                                    "uncheck_node": false
+                                                },
+                                                "default": {
+                                                    "check_node": function (node) {
+                                                        $(node).children('ul').children('li').children('a').children('.jstree-checkbox').click();
+                                                        return true;
+                                                    },
+                                                    "unckeck_node": function (node) {
+                                                        $(node).children('ul').children('li').children('a').children('.jstree-checkbox').click();
+                                                        return true;
+                                                    }
+                                                }
+                                            }
+                                        }
                                     });
-
                                 });
                             </script>
                         </div>
-
                         <div class="tab-pane" id="step3">
                             <h3>Seleccione las Imagenes del Producto</h3>
 
-                            <div id="mydropzone"></div>
-                            <div class="dropzone-previews dz-default dz-clickable dz-message"></div>
+                            <script src="../../static/jasny-bootstrap/js/jasny-bootstrap.min.js"></script>     
 
-                            <script src="../../static/dropzone/dropzone.js"></script>
-                            <script>
-                                jQuery(document).ready(function()
-                                {
-                                    var myDropzone = new Dropzone("div#mydropzone", {url: "/algo"});
-                                });
-                                Dropzone.options.myDropzone = { // The camelized version of the ID of the form element
+                            <div class="center-block">
 
-                                    // The configuration we've talked about above
-                                    autoProcessQueue: false,
-                                    uploadMultiple: true,
-                                    parallelUploads: 6,
-                                    maxFiles: 3,
-                                    // The setting up of the dropzone
-                                    init: function() {
-                                        var myDropzone = this;
+                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+                                    <div>
+                                        <span class="btn btn-default btn-file"><span class="fileinput-new">Seleccionar Imagen</span><span class="fileinput-exists">Cambiar</span><input type="file" name="fotoprod1" id="fotoprod1" multiple="multiple" /></span>
+                                        <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Quitar</a>
+                                    </div>
+                                </div>
 
-                                        this.on("addedfile", function(file) {
+                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+                                    <div>
+                                        <span class="btn btn-default btn-file"><span class="fileinput-new">Seleccionar Imagen</span><span class="fileinput-exists">Cambiar</span><input type="file" name="fotoprod2" id="fotoprod2" multiple="multiple" /></span>
+                                        <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Quitar</a>
+                                    </div>
+                                </div>
 
-                                            // Create the remove button
-                                            var removeButton = Dropzone.createElement("<button>Remove file</button>");
+                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+                                    <div>
+                                        <span class="btn btn-default btn-file"><span class="fileinput-new">Seleccionar Imagen</span><span class="fileinput-exists">Cambiar</span><input type="file" name="fotoprod3" id="fotoprod3" multiple="multiple" /></span>
+                                        <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Quitar</a>
+                                    </div>
+                                </div>
 
-                                            // Capture the Dropzone instance as closure.
-                                            var _this = this;
-
-                                            // Listen to the click event
-                                            removeButton.addEventListener("click", function(e) {
-                                                // Make sure the button click doesn't submit the form:
-                                                e.preventDefault();
-                                                e.stopPropagation();
-
-                                                // Remove the file preview.
-                                                _this.removeFile(file);
-                                                // If you want to the delete the file on the server as well,
-                                                // you can do the AJAX request here.
-                                            });
-
-                                            // Add the button to the file preview element.
-                                            file.previewElement.appendChild(removeButton);
-                                        });
-
-
-                                        // First change the button to actually tell Dropzone to process the queue.
-                                        this.element.querySelector("button[type=submit]").addEventListener("click", function(e) {
-                                            // Make sure that the form isn't actually being sent.
-                                            e.preventDefault();
-                                            e.stopPropagation();
-                                            myDropzone.processQueue();
-                                        });
-
-                                        // Listen to the sendingmultiple event. In this case, it's the sendingmultiple event instead
-                                        // of the sending event because uploadMultiple is set to true.
-                                        this.on("sendingmultiple", function() {
-                                            // Gets triggered when the form is actually being sent.
-                                            // Hide the success button or the complete form.
-                                        });
-                                        this.on("successmultiple", function(files, response) {
-                                            // Gets triggered when the files have successfully been sent.
-                                            // Redirect user or notify of success.
-                                        });
-                                        this.on("errormultiple", function(files, response) {
-                                            // Gets triggered when there was an error sending the files.
-                                            // Maybe show form again, and notify user of error
-                                        });
-                                        $("#submit-all").click(function(e) {
-                                            e.preventDefault();
-                                            e.stopPropagation();
-                                            myDropzone.processQueue();
-                                        });
-                                        this.on("maxfilesexceeded", function(file) {
-                                            this.removeFile(file);
-                                            alert("Puede elegir como maximo 3 imagenes.");
-                                        });
-                                    }
-                                };
-                            </script>
-
+                            </div>
                             <p>Maximo: 3 imagenes</p>
                         </div>
 
@@ -222,11 +201,10 @@
                         <!-- "pager wizard" required. -->
                         <ul class="pager wizard">
                             <!-- These show as disabled on first tab. Add style="display:none;" to make the First button disappear when first tab.      -->
-                            <li class="first previous"><a href="#" accesskey="f">Inicio</a></li>
-                            <li class="previous"><a href="#" accesskey="p">Anterior</a></li>
+                            <li class="previous" style="display:none;" ><a href="#" accesskey="p">Anterior</a></li>
                             <li class="last" style="display:none;" >
                                 <label class="control-label" for="altaproducto"></label>
-                                <div class="controls">
+                                <div class="last controls">
                                     <button id="altaproducto" name="altaproducto" class="btn btn-primary btn-success" type="submit" style="margin-top: 1em">Crear Producto</button>
                                 </div>
                             </li>
@@ -240,32 +218,74 @@
             </form>
         </div><!-- ./container-fluid -->
 
-
         <script src="../../static/bootstrap/js/vendor/jquery-1.11.0.min.js"></script>
         <script src="../../static/bootstrap/js/vendor/bootstrap.min.js"></script>
         <script src="../../static/bootstrap/js/vendor/jquery.bootstrap.wizard.js"></script>
         <!-- Load javascript at bottom of the file to avoid delays loading other resources -->
+        <!-- javascript del WIZARD -->
         <script>
-                                $(document).ready(function() {
-                                    $('#rootwizard').bootstrapWizard({onTabShow: function(tab, navigation, index) {
+            $(document).ready(function() {
+                $('#rootwizard').bootstrapWizard({
+                    onTabShow: function(tab, navigation, index) {
 
-                                            // Dynamically change percentage completion on progress bar
-                                            var tabCount = navigation.find('li').length;
-                                            var current = index + 1;
-                                            var percentDone = (current / tabCount) * 100;
-                                            $('#rootwizard').find('#progressBar').css({width: percentDone + '%'});
+                        // Dynamically change percentage completion on progress bar
+                        var tabCount = navigation.find('li').length;
+                        var current = index + 1;
+                        var percentDone = (current / tabCount) * 100;
+                        $('#rootwizard').find('#progressBar').css({width: percentDone + '%'});
 
-                                            // Optional: Show Done button when on last tab; 
-                                            // It is invisible by default.
-                                            $('#rootwizard').find('.last').toggle(current >= tabCount);
+                        // Optional: Show Done button when on last tab; 
+                        // It is invisible by default.
+                        $('#rootwizard').find('.last').toggle(current >= tabCount);
 
-                                            // Optional: Hide Next button if on last tab; 
-                                            // otherwise it shows but is disabled
-                                            $('#rootwizard').find('.next').toggle(current < tabCount);
-                                        }});
-                                });
+                        // Optional: Hide Next button if on last tab; 
+                        // otherwise it shows but is disabled
+                        $('#rootwizard').find('.next').toggle(current < tabCount);
+                        $('#rootwizard').find('.previous').toggle(current > 1);
+                    },
+                    onTabClick: function(tab, navigation, index) {
+                        return false;
+                    },
+                    onNext: function(tab, navigation, index) {
+                        if (index === 1) {
+                            if (!$('#nomprod').val()) {
+                                alert('Debe ingresar un Nombre del Producto');
+                                $('#nomprod').focus();
+                                return false;
+                            }
+                            if (!$('#refprod').val()) {
+                                alert('Debe ingresar la Referencia');
+                                $('#refprod').focus();
+                                return false;
+                            }
+                            if (!$('#descprod').val()) {
+                                alert('Debe ingresar una Descripcion');
+                                $('#descprod').focus();
+                                return false;
+                            }
+                            if (!$('#precprod').val()) {
+                                alert('Debe ingresar el Precio');
+                                $('#precprod').focus();
+                                return false;
+                            }
+                            if (!$('#espprod').val()) {
+                                alert('Debe ingresar las Especificaciones');
+                                $('#espprod').focus();
+                                return false;
+                            }
+                        }
+                        if (index === 2) {
+                            if(!$('#catsprod').val()) {
+                                alert('Debe seleccionar al menos una categoria');
+                                return false;
+                            }
+                        }
+                    }
+                });
+            });
         </script>
 
+       
         <%@include file="../../WEB-INF/jspf/bottom.jspf" %>
         <script src="../../static/jstree/jstree.js"></script>
     </body>

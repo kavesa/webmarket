@@ -11,24 +11,34 @@ import direct.market.datatype.DataUsuario;
 import direct.market.exceptions.CategoryException;
 import direct.market.exceptions.ProductoException;
 import direct.market.factory.Factory;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import javax.websocket.Session;
+//import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.apache.tomcat.util.http.fileupload.ByteArrayOutputStream;
 
 /**
  *
  * @author kavesa
  */
-
+@MultipartConfig
 public class producto extends HttpServlet {
+
     private static final long serialVersionUID = 1L;
 
     /**
@@ -46,60 +56,94 @@ public class producto extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
+
+            //Collection<Part> partes = request.getParts();
             /* TODO output your page here. You may use following sample code. */
             //lo que sigue son pruebas para verificar que los datos lleguen como se enviaron
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet altaprod</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet altaprod at " + request.getContextPath() + "</h1>");
-            out.println("<h1>Nombre: " + request.getParameter("nomprod") + "</h1>");
-            out.println("<h1>Referencia: " + request.getParameter("refprod") + "</h1>");
-            out.println("<h1>Descripcion: " + request.getParameter("descprod") + "</h1>");
-            out.println("<h1>Precio: " + request.getParameter("precprod") + "</h1>");
-            out.println("<h1>Especificacion: " + request.getParameter("espprod") + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-            
+
 
             //Producto =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
             DataProducto dp = new DataProducto();
             dp.setNombre(request.getParameter("nomprod"));
             dp.setReferencia(request.getParameter("refprod"));
+
+
+
 //Producto Categorias
+            //separo el string que vino en el array de categorias (separo por comas)
+            String catString = request.getParameter("catsprod");
+            //String catTrim = catString.substring(1, catString.length()-1);
+            List<String> catList = new ArrayList<String>(Arrays.asList(catString.split(",")));
+
             List<DataCategoria> lDC = new ArrayList<DataCategoria>();
             DataCategoria dataCategoria;
-            dataCategoria = Factory.getInstance().getCategoriaController().getCategoriaPorNombre("iPhone");
-            lDC.add(dataCategoria);
-            dataCategoria = Factory.getInstance().getCategoriaController().getCategoriaPorNombre("iOS");
-            lDC.add(dataCategoria);
-            dataCategoria = Factory.getInstance().getCategoriaController().getCategoriaPorNombre("Apple");
-            lDC.add(dataCategoria);
+
+            for (String cat : catList) {
+                if (Factory.getInstance().getCategoriaController().getCategoriaPorNombre(cat).isContieneProductos()) {
+                    dataCategoria = Factory.getInstance().getCategoriaController().getCategoriaPorNombre(cat);
+                    lDC.add(dataCategoria);
+                }
+            }
             dp.setDataCategorias(lDC);
-//Producto Proveedor
-            DataUsuario dataProv = new DataUsuario();
-            dataProv.setNickname("Tim1");
+
+
+            //Producto Proveedor
+            //DataUsuario dataProv;
+            String provNickname = request.getSession().getAttribute("usuario").toString();
+            DataUsuario dataProv = Factory.getInstance().getUsuarioController().getDataProveedor(provNickname);
+            //dataProv.setNickname(provNickname);
+            //dataProv.setNickname("Eddy");
             dp.setDataProveedor(dataProv);
+
 //Producto Especificacion
             DataEspecificacionProducto dataEsp = new DataEspecificacionProducto();
             dataEsp.setDescripcion(request.getParameter("descprod"));
             dataEsp.setEspecificacion(request.getParameter("espprod"));
             dataEsp.setPrecio(Double.parseDouble(request.getParameter("precprod")));
 //Producto Especificacion Imagenes
-            List<String> imagenes = new ArrayList<String>();
-            imagenes.add("/fotos/IM1-topic_iphone_5.png");
-            //dataEsp.setImagenes(imagenes);
-            dataEsp.setImagenes(null);
-            //TODO:
-            //cambiar para enviar imagenes como byte[]
+            List<byte[]> imagenes = new ArrayList<byte[]>();
+
+            byte[] foto1 = util.InputStreamToByteArray(request.getPart("fotoprod1").getInputStream());
+            if (foto1 != null && foto1.length > 0) {
+                imagenes.add(foto1);
+            }
+
+            byte[] foto2 = util.InputStreamToByteArray(request.getPart("fotoprod2").getInputStream());
+            if (foto2 != null && foto2.length > 0) {
+                imagenes.add(foto2);
+            }
+
+            byte[] foto3 = util.InputStreamToByteArray(request.getPart("fotoprod3").getInputStream());
+            if (foto3 != null && foto3.length > 0) {
+                imagenes.add(foto3);
+            }
+
+            dataEsp.setImagenes(imagenes);
+
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet altaprod</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Nombre: " + request.getParameter("nomprod") + "</h1>");
+            out.println("<h1>Referencia: " + request.getParameter("refprod") + "</h1>");
+            out.println("<h1>Descripcion: " + request.getParameter("descprod") + "</h1>");
+            out.println("<h1>Precio: " + request.getParameter("precprod") + "</h1>");
+            out.println("<h1>Categorias: " + Arrays.toString(request.getParameterValues("catsprod")) + "</h1>");
+            out.println("<h1>CatString: " + catString + "</h1>");
+            out.println("<h1>Categoria1: " + catList.get(0).toString() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+
+
 
             dp.setDataEspecificacion(dataEsp);
             Factory.getInstance().getProductoController().altaProducto(dp);
 
-            
-        } catch(Exception ex) {            
+
+
+        } catch (Exception ex) {
             out.close();
         }
     }
@@ -114,8 +158,6 @@ public class producto extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-
-    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
