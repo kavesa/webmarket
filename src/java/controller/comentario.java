@@ -17,13 +17,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author clobes
  */
 public class comentario extends HttpServlet {
-
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -89,10 +89,10 @@ public class comentario extends HttpServlet {
         padre = request.getParameter("idCom");
         int padre1 = Integer.parseInt(padre);
         texto= request.getParameter("com");
- 
+        String user= request.getParameter("user");
         
         //DataComentario dc = new DataComentario(padre, "comentariode prueba", fecha);
-        DataComentario dc = new DataComentario(padre1, texto, fecha);
+        DataComentario dc = new DataComentario(user, padre1, texto, fecha);
 
         try {
             Factory.getInstance().getProductoController().agregarComentario(idProd, dc);
