@@ -36,6 +36,10 @@
         <servlet-name>GetJSON</servlet-name>
         <servlet-class>controller.GetJSON</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>comentario</servlet-name>
+        <servlet-class>controller.comentario</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>index</servlet-name>
         <url-pattern>/index</url-pattern>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>GetJSON</servlet-name>
         <url-pattern>/GetJSON</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>comentario</servlet-name>
+        <url-pattern>/comentario</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
