@@ -166,7 +166,7 @@ public class usuario extends HttpServlet {
             ///////////////////////////////////////////////////////////////////
 
             String tipoForm = "", nickForm, passForm, nomForm, apeForm, mailForm, fecNacForm,
-                    nomCompForm = null, urlForm = null;
+                    nomCompForm = "", urlForm = "";
 
             nickForm = request.getParameter("nickname");
             passForm = request.getParameter("repass");
@@ -174,6 +174,7 @@ public class usuario extends HttpServlet {
             apeForm = request.getParameter("ape");
             mailForm = request.getParameter("mail");
             fecNacForm = request.getParameter("fecNac");
+            tipoForm = request.getParameter("tipo");
 
             byte[] foto = util.InputStreamToByteArray(request.getPart("imgUser").getInputStream());
             if (foto == null || foto.length <= 0) {
