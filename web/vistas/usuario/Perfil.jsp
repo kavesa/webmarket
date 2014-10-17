@@ -30,8 +30,11 @@
         %>
         <div class="row">
             <!--IMG PERFIL -->
-            <div class="col-sm-3 col-sm-push-4 perfDiv">
-                <img style="margin-top: 1em" class="img-responsive imgMarco" src="<%=imgBase64%>" alt="Imagen de Perfil" width="350px">
+            <div style="background-color: black"class="col-sm-4 col-centered">
+                <div class="col-sm-8 perfDiv">
+                <span style="display:block;text-align:center;" >
+                    <img style="margin-top: 1em" class="img-responsive imgMarco" src="<%=imgBase64%>" alt="Imagen de Perfil">
+                </span>
                 <ul style="margin-top: 1em" class="list-group">                    
                     <li class="list-group-item listTitle"><strong>Informacion Personal</strong></li>
                     <li class="list-group-item listItem">Nickname: <%= usu.getNickname()%></li>
@@ -47,11 +50,12 @@
                 </ul>
             </div>
             <!--IMG PERFIL -->
-            <div class="col-sm-2 col-sm-push-4 perfDiv">
+            
                 <%
                     int lc;
-                    if (usu.getTipoUsu().equalsIgnoreCase("Proveedor")) {
+                    if (usu.getTipoUsu().equalsIgnoreCase("Proveedor") && dpList.size()>0) {
                 %>
+                <div class="col-sm-4 perfDiv">
                 <ul style="margin-top: 1em" class="list-group">
                     <li class="list-group-item listTitle"><strong>Productos</strong></li>
                         <%
@@ -61,7 +65,9 @@
                     <li class="list-group-item listItem"><a href="InfoProducto?nocid=<%=dpList.get(i).getReferencia()%>"><%= dpList.get(i).getNombre()%></a></li>
                         <%}%>
                 </ul>
-                <% } else {%>
+                </div>
+                <% } else if(usu.getTipoUsu().equalsIgnoreCase("Cliente") && usu.getListaCompras().size()>0) {%>
+                <div class="col-sm-4 perfDiv">
                 <ul style="margin-top: 1em" class="list-group">
                     <li class="list-group-item listTitle"><strong>Compras</strong></li>
                         <%
@@ -74,8 +80,10 @@
     
                         <%}%>
                 </ul>
+                </div>
                 <%}%>
-            </div>
+            
+        </div>
         </div>
 
         <div class="bottom">
