@@ -95,6 +95,7 @@
             <div class="row">
                 <form role="form" id="formComentario" action="<%=request.getContextPath()%>/comentario" method="POST">
                     <input name="numRefProd" type="text" value="<%=dProd.getReferencia()%>" hidden="true"/>
+                    <input name="user" type="text" value="<%=request.getSession()%>" hidden="true"/>
                     <div class="form-group">
                         <label for="idComentario">Padre</label>
                         <input type="number" class="form-control" name="idCom" id="idCom" placeholder="Ingrese id del comentario a responder (vacio es un comentario nuevo).">
