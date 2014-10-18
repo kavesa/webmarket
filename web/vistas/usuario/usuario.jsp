@@ -80,7 +80,7 @@
                         </div>
                         <div class="form-group" id="divDir-web">
                             <label for="url">Dirección Web</label>
-                            <input type="text" class="form-control" name="url" id="url" placeholder="Ingrese Direccion Web" required>
+                            <input type="text" pattern="^([a-zA-Z]{2,3}([w]*)*.([0-9a-zA-Z][-w]*[0-9a-zA-Z].)+([a-zA-Z]{0,9}.)+[a-zA-Z]{2,3})$" class="form-control" name="url" id="url" placeholder="Ingrese Direccion Web" required>
                         </div>
                         <div class="form-group" id="divImgUser">
                             <label class="control-label"id="LblImgUser" for="img">Imagen</label>
