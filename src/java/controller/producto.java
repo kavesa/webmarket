@@ -11,13 +11,10 @@ import direct.market.datatype.DataUsuario;
 import direct.market.exceptions.CategoryException;
 import direct.market.exceptions.ProductoException;
 import direct.market.factory.Factory;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,10 +24,6 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
-import javax.websocket.Session;
-//import org.apache.tomcat.util.http.fileupload.IOUtils;
-import org.apache.tomcat.util.http.fileupload.ByteArrayOutputStream;
 
 /**
  *
@@ -64,10 +57,8 @@ public class producto extends HttpServlet {
 
             //Producto =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
             DataProducto dp = new DataProducto();
-            dp.setNombre(request.getParameter("nomprod"));
-            dp.setReferencia(request.getParameter("refprod"));
-
-
+            dp.setNombre(request.getParameter("NomProd"));
+            dp.setReferencia(request.getParameter("RefProd"));
 
 //Producto Categorias
             //separo el string que vino en el array de categorias (separo por comas)
@@ -118,16 +109,14 @@ public class producto extends HttpServlet {
                 imagenes.add(foto3);
             }
 
-            dataEsp.setImagenes(imagenes);
-
 //            out.println("<!DOCTYPE html>");
 //            out.println("<html>");
 //            out.println("<head>");
 //            out.println("<title>Servlet altaprod</title>");
 //            out.println("</head>");
 //            out.println("<body>");
-//            out.println("<h1>Nombre: " + request.getParameter("nomprod") + "</h1>");
-//            out.println("<h1>Referencia: " + request.getParameter("refprod") + "</h1>");
+//            out.println("<h1>Nombre: " + request.getParameter("NomProd") + "</h1>");
+//            out.println("<h1>Referencia: " + request.getParameter("RefProd") + "</h1>");
 //            out.println("<h1>Descripcion: " + request.getParameter("descprod") + "</h1>");
 //            out.println("<h1>Precio: " + request.getParameter("precprod") + "</h1>");
 //            out.println("<h1>Categorias: " + Arrays.toString(request.getParameterValues("catsprod")) + "</h1>");
@@ -136,15 +125,20 @@ public class producto extends HttpServlet {
 //            out.println("</body>");
 //            out.println("</html>");
 
+            dataEsp.setImagenes(imagenes);
+
             dp.setDataEspecificacion(dataEsp);
             Factory.getInstance().getProductoController().altaProducto(dp);
 
-            request.setAttribute("pCat", catList);
-            request.setAttribute("datosProd", dp);
-            request.getRequestDispatcher("/vistas/producto/InfoProducto.jsp").forward(request, response);
+//            request.setAttribute("pCat", catList);
+//            request.setAttribute("datosProd", dp);
+            request.getSession().setAttribute("success", "Producto Creado Correctamente");
+            request.getRequestDispatcher("/vistas/producto/altaprod.jsp").forward(request, response);
             //response.sendRedirect(response.encodeRedirectURL(catString));
         } catch (Exception ex) {
-            out.close();
+            request.getSession().setAttribute("error", ex.getMessage());
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/vistas/producto/altaprod.jsp");
+            dispatcher.forward(request, response);
         }
     }
 
