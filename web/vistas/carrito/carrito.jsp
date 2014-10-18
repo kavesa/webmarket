@@ -29,7 +29,7 @@
                 <table class="table table-condensed">
                     <thead>
                         <tr>
-                            <th> Descripcion</th>
+                            <th> Nombre</th>
                             <th> Cantidad</th>
                             <th> Precio Unitario</th>
                             <th> Total </th>
@@ -38,23 +38,30 @@
                     <tbody>
 
                         <%
-                            if (lineas !=null) {
+                            if (lineas != null && !lineas.isEmpty()) {
                                 for (int i = 0; i < lineas.size(); i++) {
-                                
+
                         %>
 
                         <tr>
-                            <td><%=lineas.get(i).getProducto().getDataEspecificacion().getDescripcion()%></td>
+                            <td><%=lineas.get(i).getProducto().getNombre()%></td>
                             <td><%=lineas.get(i).getCantidad()%></td>
                             <td><%=lineas.get(i).getProducto().getDataEspecificacion().getPrecio()%></td>
                             <td><%=lineas.get(i).getProducto().getDataEspecificacion().getPrecio() * lineas.get(i).getCantidad()%></td>
                         </tr>
-                        <%}}%>
-                    </tbody>
 
+                        <%}%>
+
+                    </tbody>
+                    
                 </table>
-                <input type="button" id="actualizar" value="Actualizar"/>
-                <input type="submit" id="comprar" value="Comprar" />
+<input type="submit" id="comprar" value="Comprar"/>
+                    <%}else{%>
+                    </tbody>                    
+                </table><%}%>
+
+
+
             </form>
         </div>
         <%@include file="../../WEB-INF/jspf/bottom.jspf" %>

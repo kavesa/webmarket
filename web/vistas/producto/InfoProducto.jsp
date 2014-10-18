@@ -33,6 +33,7 @@
             session.setAttribute("error", null);
             String success = (String) session.getAttribute("success");
             session.setAttribute("success", null);
+            session.setAttribute("ref", dProd.getReferencia());
         %>
         <div style="margin-bottom: 1em" class="col-sm-5 col-centered perfDiv">
             <%if (error != null) {%>
@@ -43,19 +44,63 @@
             <div style="margin-top: 1em" class="row">
 
                 <div style="margin-top: 1em" class="row">
-                    <div class="col-sm-12 col-centered">                        
-                        <form action="<%= request.getContextPath()%>/AgregarItemCarritoServlet" method="post">
+                    <div class="col-sm-12 col-centered">
+
+                        <form action="<%= request.getContextPath()%>/addToShoppingCart?nocid=<%=dProd.getReferencia()%>" method="post">
                             <input style="float: right; margin-right: 1em"type="submit" name="add" value="Agregar al carro"/>
+                            <input style="float: right; margin-right: 1em; width: 50px" type="number" id="cant" name="cant"/>
+
+
                         </form>
                     </div>
                 </div>
 
                 <div class="col-sm-12 col-centered">
-                    <%
-                        for (byte[] ima : dEsp.getImagenes()) {
-                    %>
-                    <img style="margin-bottom: 1em; margin-top: 1em" class="img-responsive imgMarco" src="<%=util.byteImgToBase64(ima)%>" alt="Imagen de Producto" width="365px">
-                    <%}%>
+                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <%Integer cont = 0;
+                                for (byte[] ima : dEsp.getImagenes()) {
+                                    if (cont == 0) {%>
+                            <li data-target="#carousel-example-generic" data-slide-to="<%=cont.toString()%>" class="active"></li>
+                                <%} else {%>
+                            <li data-target="#carousel-example-generic" data-slide-to="<%=cont.toString()%>"></li>
+                                <%}
+                                    cont++;
+                                }%>
+                        </ol>
+
+                        <!-- Wrapper for slides -->
+                        <% cont = 0;
+                                for (byte[] ima : dEsp.getImagenes()) {
+                                    if (cont == 0) {%>
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img style="max-width:100%;max-height:100%;float: none; margin: auto"src="<%=util.byteImgToBase64(ima)%>" alt="Imagen de Producto">
+                                <!--                                <div class="carousel-caption">
+                                                                    ...
+                                                                </div>-->
+                            </div>
+                                <%} else {%>
+                            <div class="item">
+                                <img style="max-width:100%;max-height:100%;float: none; margin: auto"src="<%=util.byteImgToBase64(ima)%>" alt="Imagen de Producto">
+<!--                                <div class="carousel-caption">
+                                    ...
+                                </div>-->
+                            </div>
+                            <%}
+                                    cont++;
+                                }%>
+                        </div>
+                        
+                        <!-- Controls -->
+                        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
+                        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                        </a>
+                    </div>
                 </div>
             </div>
 
