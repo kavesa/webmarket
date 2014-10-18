@@ -56,34 +56,46 @@
                             <h3>Ingrese Datos Basicos del Producto</h3>
 
                             <!-- Text input-->
-                            <div class="form-group" style="margin-bottom: 1em;">
-                                <label for="nomprod">* Nombre del Producto</label>
-                                <input id="nomprod" name="nomprod" type="text" placeholder="Ingrese el Nombre del Producto" class="input-xxlarge form-control" required="">
-
+                            <div class="form-group" id="divNomProd">
+                                <label class="control-label" id="LblNomProd" for="LblNomProd">* Nombre del Producto</label>
+                                <input type="text" class="form-control" id="NomProd" name="NomProd" placeholder="Ingrese el Nombre del Producto" onblur="cheqNomProd();">
+                                <span id="spNomProd" class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
+                                <label id="LblNomProdMsg" class="control-label small">Debe ingresar nombre del producto.</label>
+                                <span id="spNomProdError" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                                <label id="LblNomProdError" class="control-label small">Este producto ya se encuentra ingresado.</label>
+                            </div>
+                            <!-- Text input-->
+                            <div class="form-group" id="divRefProd">
+                                <label class="control-label" id="LblRefProd" for="LblRefProd">* Referencia del Producto</label>
+                                <input name="RefProd" id="RefProd" class="form-control" name="RefProd" type="text" placeholder="Ingrese la Referencia" onblur="cheqNumRefProd();">
+                                <span id="spRefProd" class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
+                                <label id="LblRefProdMsg" class="control-label small">Debe ingresar una referencia para el producto.</label>
+                                <span id="spRefProdError" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                                <label id="LblRefProdError" class="control-label small">Este número de referencia ya se encuentra ingresado.</label>
                             </div>
 
                             <!-- Text input-->
-                            <div class="control-group" style="margin-bottom: 1em;">
-                                <label for="refprod">* Referencia del Producto</label>
-                                <input id="refprod" name="refprod" type="text" placeholder="Ingrese la Referencia" class="input-xxlarge form-control" required="">
+                            <div class="form-group" id="divDesProd">
+                                <label class="control-label" id="lblDesProd" for="lblDesProd">* Descripcion del Producto</label>
+                                <input id="descprod" class="form-control" name="descprod" type="text" placeholder="Ingrese Descripcion del Producto">
+                                <span id="spDesProd" class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
+                                <label id="LblDesProdMsg" class="control-label small">Debe ingresar una descripcion del producto.</label>
                             </div>
 
                             <!-- Text input-->
-                            <div class="control-group" style="margin-bottom: 1em;">
-                                <label for="descprod">* Descripcion del Producto</label>
-                                <input id="descprod" name="descprod" type="text" placeholder="Ingrese Descripcion del Producto" class="input-xxlarge form-control" required="">
-                            </div>
-
-                            <!-- Text input-->
-                            <div class="control-group" style="margin-bottom: 1em;">
-                                <label for="precprod">* Precio del Producto</label>
-                                <input id="precprod" name="precprod" type="text" placeholder="0.00" class="input-xxlarge form-control" required="">
+                            <div class="form-group" id="divPreProd">
+                                <label class="control-label" id="lblPreProd" for="lblPreProd">* Precio del Producto</label>
+                                <input id="precprod" class="form-control" name="precprod" type="number" placeholder="0.00">
+                                <span id="spPreProd" class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
+                                <label id="LblPreProdMsg" class="control-label small">Debe ingresar un precio valido para el producto.</label>
                             </div>
 
                             <!-- Textarea -->
-                            <div class="control-group" style="margin-bottom: 1em;">
-                                <label for="textarea">* Especificaciones</label>
-                                <textarea id="espprod" name="espprod" required="" class="form-control"></textarea>
+                            <div class="form-group" id="divEspProd">
+                                <label class="control-label" id="lblEspProd" for="textarea">* Especificaciones</label>
+                                <textarea id="espprod" name="espprod"  class="form-control" placeholder="Ingrese especificaciones del producto."></textarea>
+                                <span id="spEspProd" class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
+                                <label id="LblEspProdMsg" class="control-label small">Debe ingresar una especificacion para el producto.</label>
                             </div>
 
 
@@ -91,13 +103,12 @@
                         <div class="tab-pane" id="step2">
                             <h3>Seleccione las Categorias del Producto</h3>
 
-                            <!--
-                            <p style="float:left; margin-right:5px;">Categorias Seleccionadas: </p>
-
-                            <div id="seleccionados" class="treeSelectedDiv">
+                            <div id="divCat" class="alert alert-warning alert-dismissible" role="alert">
+                                <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
+                                Debe seleccionar al menos una categoria.
                             </div>
-                            -->
-                            
+
+
                             <input type="hidden" name="catsprod" id="catsprod" value="" />
 
                             <div id="treecat">
@@ -106,59 +117,59 @@
                             <script src="../../static/bootstrap/js/vendor/jquery-1.11.0.min.js"></script>
                             <!-- javascript del JSTREE -->
                             <script>
-                                $(function() {
-                                    $('#treecat')
-                                            // listen for event
-                                        .on('changed.jstree', function(e, data) {
-                                        var i, j, r = [];
-                                        for (i = 0, j = data.selected.length; i < j; i++) {
-                                            r.push(data.instance.get_node(data.selected[i]).text);
-                                        }
-                                        document.getElementById('catsprod').value = r.join(',');
+                                    $(function() {
+                                        $('#treecat')
+                                                // listen for event
+                                                .on('changed.jstree', function(e, data) {
+                                            var i, j, r = [];
+                                            for (i = 0, j = data.selected.length; i < j; i++) {
+                                                r.push(data.instance.get_node(data.selected[i]).text);
+                                            }
+                                            document.getElementById('catsprod').value = r.join(',');
 
-                                        //$('#seleccionados').html(r.join(', '));
+                                            //$('#seleccionados').html(r.join(', '));
                                         });
 
-                                    $('#treecat').jstree({
-                                        'core': {
-                                            'data': {
-                                                type: "POST",
-                                                cache: false,
-                                                url: "/GetJSON",
-                                                dataType: "json"
-                                            },
-                                            "animation": 0,
-                                            "check_callback": true,
-                                            "themes": {
-                                                "theme": "default",
-                                                "dots": true,
-                                                "icons": true
-                                            }
-                                        },
-                                        "plugins": ["wholerow", "checkbox", "types"],
-                                        "checkbox": {
-                                            "two_state": true
-                                        },
-                                        "types": {
-                                            "types": {
-                                                "disabled": {
-                                                    "check_node": false,
-                                                    "uncheck_node": false
+                                        $('#treecat').jstree({
+                                            'core': {
+                                                'data': {
+                                                    type: "POST",
+                                                    cache: false,
+                                                    url: "/GetJSON",
+                                                    dataType: "json"
                                                 },
-                                                "default": {
-                                                    "check_node": function (node) {
-                                                        $(node).children('ul').children('li').children('a').children('.jstree-checkbox').click();
-                                                        return true;
+                                                "animation": 0,
+                                                "check_callback": true,
+                                                "themes": {
+                                                    "theme": "default",
+                                                    "dots": true,
+                                                    "icons": true
+                                                }
+                                            },
+                                            "plugins": ["wholerow", "checkbox", "types"],
+                                            "checkbox": {
+                                                "two_state": true
+                                            },
+                                            "types": {
+                                                "types": {
+                                                    "disabled": {
+                                                        "check_node": false,
+                                                        "uncheck_node": false
                                                     },
-                                                    "unckeck_node": function (node) {
-                                                        $(node).children('ul').children('li').children('a').children('.jstree-checkbox').click();
-                                                        return true;
+                                                    "default": {
+                                                        "check_node": function(node) {
+                                                            $(node).children('ul').children('li').children('a').children('.jstree-checkbox').click();
+                                                            return true;
+                                                        },
+                                                        "unckeck_node": function(node) {
+                                                            $(node).children('ul').children('li').children('a').children('.jstree-checkbox').click();
+                                                            return true;
+                                                        }
                                                     }
                                                 }
                                             }
-                                        }
+                                        });
                                     });
-                                });
                             </script>
                         </div>
                         <div class="tab-pane" id="step3">
@@ -223,68 +234,99 @@
         <!-- Load javascript at bottom of the file to avoid delays loading other resources -->
         <!-- javascript del WIZARD -->
         <script>
-            $(document).ready(function() {
-                $('#rootwizard').bootstrapWizard({
-                    onTabShow: function(tab, navigation, index) {
+                                    $(document).ready(function() {
+                                        $('#rootwizard').bootstrapWizard({
+                                            onTabShow: function(tab, navigation, index) {
 
-                        // Dynamically change percentage completion on progress bar
-                        var tabCount = navigation.find('li').length;
-                        var current = index + 1;
-                        var percentDone = (current / tabCount) * 100;
-                        $('#rootwizard').find('#progressBar').css({width: percentDone + '%'});
+                                                // Dynamically change percentage completion on progress bar
+                                                var tabCount = navigation.find('li').length;
+                                                var current = index + 1;
+                                                var percentDone = (current / tabCount) * 100;
+                                                $('#rootwizard').find('#progressBar').css({width: percentDone + '%'});
 
-                        // Optional: Show Done button when on last tab; 
-                        // It is invisible by default.
-                        $('#rootwizard').find('.last').toggle(current >= tabCount);
+                                                // Optional: Show Done button when on last tab; 
+                                                // It is invisible by default.
+                                                $('#rootwizard').find('.last').toggle(current >= tabCount);
 
-                        // Optional: Hide Next button if on last tab; 
-                        // otherwise it shows but is disabled
-                        $('#rootwizard').find('.next').toggle(current < tabCount);
-                        $('#rootwizard').find('.previous').toggle(current > 1);
-                    },
-                    onTabClick: function(tab, navigation, index) {
-                        return false;
-                    },
-                    onNext: function(tab, navigation, index) {
-                        if (index === 1) {
-                            if (!$('#nomprod').val()) {
-                                alert('Debe ingresar un Nombre del Producto');
-                                $('#nomprod').focus();
-                                return false;
-                            }
-                            if (!$('#refprod').val()) {
-                                alert('Debe ingresar la Referencia');
-                                $('#refprod').focus();
-                                return false;
-                            }
-                            if (!$('#descprod').val()) {
-                                alert('Debe ingresar una Descripcion');
-                                $('#descprod').focus();
-                                return false;
-                            }
-                            if (!$('#precprod').val()) {
-                                alert('Debe ingresar el Precio');
-                                $('#precprod').focus();
-                                return false;
-                            }
-                            if (!$('#espprod').val()) {
-                                alert('Debe ingresar las Especificaciones');
-                                $('#espprod').focus();
-                                return false;
-                            }
-                        }
-                        if (index === 2) {
-                            if(!$('#catsprod').val()) {
-                                alert('Debe seleccionar al menos una categoria');
-                                return false;
-                            }
-                        }
-                    }
-                });
-            });
+                                                // Optional: Hide Next button if on last tab; 
+                                                // otherwise it shows but is disabled
+                                                $('#rootwizard').find('.next').toggle(current < tabCount);
+                                                $('#rootwizard').find('.previous').toggle(current > 1);
+                                            },
+                                            onTabClick: function(tab, navigation, index) {
+                                                return false;
+                                            },
+                                            onNext: function(tab, navigation, index) {
+                                                if (index === 1) {
+                                                    var espacio_blanco = /[a-zA-Z0-9]/i;
+                                                    var espacio_blancoN = /[0-9]/i;
+                                                    if (!espacio_blanco.test($("#NomProd").val())) {
+                                                        $("#divNomProd").prop("class", "form-group has-warning has-feedback");
+                                                        $("#LblNomProdMsg").show();
+                                                        $("#spNomProd").show();
+                                                        $("#NomProd").focus();
+                                                        return false;
+                                                    }
+                                                    $("#divNomProd").prop("class", "form-group");
+                                                    $("#LblNomProdMsg").hide();
+                                                    $("#spNomProd").hide();
+
+                                                    if (!espacio_blanco.test($("#RefProd").val())) {
+                                                        $("#divRefProd").prop("class", "form-group has-warning has-feedback");
+                                                        $("#LblRefProdMsg").show();
+                                                        $("#spRefProd").show();
+                                                        $("#RefProd").focus();
+                                                        return false;
+                                                    }
+                                                    $("#divRefProd").prop("class", "form-group");
+                                                    $("#LblRefProdMsg").hide();
+                                                    $("#spRefProd").hide();
+
+                                                    if (!espacio_blanco.test($("#descprod").val())) {
+                                                        $("#divDesProd").prop("class", "form-group has-warning has-feedback");
+                                                        $("#LblDesProdMsg").show();
+                                                        $("#spDesProd").show();
+                                                        $("#descprod").focus();
+                                                        return false;
+                                                    }
+                                                    $("#divDesProd").prop("class", "form-group");
+                                                    $("#LblDesProdMsg").hide();
+                                                    $("#spDesProd").hide();
+
+                                                    if (!espacio_blancoN.test($("#precprod").val())) {
+                                                        $("#divPreProd").prop("class", "form-group has-warning has-feedback");
+                                                        $("#LblPreProdMsg").show();
+                                                        $("#spPreProd").show();
+                                                        $("#precprod").focus();
+                                                        return false;
+                                                    }
+                                                    $("#divPreProd").prop("class", "form-group");
+                                                    $("#LblPreProdMsg").hide();
+                                                    $("#spPreProd").hide();
+
+                                                    if (!espacio_blanco.test($("#espprod").val())) {
+                                                        $("#divEspProd").prop("class", "form-group has-warning has-feedback");
+                                                        $("#LblEspProdMsg").show();
+                                                        $("#spEspProd").show();
+                                                        $("#espprod").focus();
+                                                        return false;
+                                                    }
+                                                    $("#divEspProd").prop("class", "form-group");
+                                                    $("#LblEspProdMsg").hide();
+                                                    $("#spEspProd").hide();
+                                                }
+                                                if (index === 2) {
+                                                    if (!$('#catsprod').val()) {
+                                                        $("#divCat").show();
+                                                        return false;
+                                                    }
+                                                }
+                                            }
+                                        });
+                                    });
         </script>
 
-       
+
         <%@include file="../../WEB-INF/jspf/bottom.jspf" %>
         <script src="../../static/jstree/jstree.js"></script>
     </body>

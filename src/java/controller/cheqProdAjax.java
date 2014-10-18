@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.simple.JSONObject;
 
 /**
  *
@@ -79,23 +80,29 @@ public class cheqProdAjax extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String op, usermail;
+        JSONObject jSONObject = new JSONObject();
+        PrintWriter out = response.getWriter();
+        String op, nomRef;
         op = request.getParameter("op");
-        usermail=request.getParameter("usermail");
+        nomRef = request.getParameter("nomRef");
         boolean resp = false;
-        if (op.equals("nomprod")) {
+        if (op.equals("NomProd")) {
             try {
-                resp = (Factory.getInstance().getProductoController().buscarProductoPorName(usermail) != null);
+                resp = (Factory.getInstance().getProductoController().buscarProductoPorName(nomRef) != null);
             } catch (ProductoException ex) {
                 Logger.getLogger(cheqProdAjax.class.getName()).log(Level.SEVERE, null, ex);
             }
-            PrintWriter out = response.getWriter();
-            out.print(op+"+"+resp);
-        } else if (op.equals("refprod")){
-            resp = (Factory.getInstance().getProductoController().buscarProductoPorRef(usermail) != null);
-            PrintWriter out = response.getWriter();
-           // out.print(op+",");
-            out.print(op+"+"+resp);
+
+            jSONObject.put("resp", resp);
+            out.print(jSONObject);
+            //out.print(op+"+"+resp);
+        } else if (op.equals("RefProd")) {
+            resp = (Factory.getInstance().getProductoController().buscarProductoPorRef(nomRef) != null);
+           // PrintWriter out = response.getWriter();
+            // out.print(op+",");
+            //out.print(op + "+" + resp);
+            jSONObject.put("resp", resp);
+            out.print(jSONObject);
         }
     }
 

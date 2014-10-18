@@ -40,6 +40,10 @@
         <servlet-name>comentario</servlet-name>
         <servlet-class>controller.comentario</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>cheqProdAjax</servlet-name>
+        <servlet-class>controller.cheqProdAjax</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>index</servlet-name>
         <url-pattern>/index</url-pattern>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>comentario</servlet-name>
         <url-pattern>/comentario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cheqProdAjax</servlet-name>
+        <url-pattern>/cheqProdAjax</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

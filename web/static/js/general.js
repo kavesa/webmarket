@@ -7,6 +7,25 @@ $(document).ready(function() {
     $("#SpMail").hide();
     $("#SpImg").hide();
 
+    //divs prod
+    $("#spNomProd").hide();
+    $("#LblNomProdMsg").hide();
+    $("#spRefProd").hide();
+    $("#LblRefProdMsg").hide();
+    $("#spDesProd").hide();
+    $("#LblDesProdMsg").hide();
+    $("#spPreProd").hide();
+    $("#LblPreProdMsg").hide();
+    $("#spEspProd").hide();
+    $("#LblEspProdMsg").hide();
+    //lbl de errores
+    $("#spNomProdError").hide();
+    $("#LblNomProdError").hide();
+    $("#spRefProdError").hide();
+    $("#LblRefProdError").hide();
+    //seleccion de categorias
+    $("#divCat").hide();
+
     $("#divNom-comp").hide();
     $("#divDir-web").hide();
     $("#nom-comp").prop("required", false);
@@ -38,7 +57,61 @@ $(document).ready(function() {
     });
 
 
+
+
 });
+function cheqNomProd() {
+    var valor = document.getElementById("NomProd");
+    $("#divNomProd").prop("class", "form-group");
+    $("#LblNomProdMsg").hide();
+    $("#spNomProd").hide();
+    $.ajax({
+        type: "post",
+        url: "cheqProdAjax",
+        data: {'op': valor.name, 'nomRef': valor.value}, //Parametro enviados a la acción
+        cache: false,
+        dataType: 'json',
+        success: function(data) //Si se ejecuta correctamente
+        {
+            if (data.resp) {
+                $("#divNomProd").prop("class", "form-group has-error has-feedback");
+                $("#spNomProdError").show();
+                $("#LblNomProdError").show();
+                $("#NomProd").focus();
+            } else {
+                $("#divNomProd").prop("class", "form-group");
+                $("#spNomProdError").hide();
+                $("#LblNomProdError").hide();
+            }
+        }
+    });
+}
+function cheqNumRefProd() {
+    var valor = document.getElementById("RefProd");
+    $("#divRefProd").prop("class", "form-group");
+    $("#LblRefProdMsg").hide();
+    $("#spRefProd").hide();
+    $.ajax({
+        type: "post",
+        url: "cheqProdAjax",
+        data: {'op': valor.name, 'nomRef': valor.value}, //Parametro enviados a la acción
+        cache: false,
+        dataType: 'json',
+        success: function(data) //Si se ejecuta correctamente
+        {
+            if (data.resp) {
+                $("#divRefProd").prop("class", "form-group has-error has-feedback");
+                $("#spRefProdError").show();
+                $("#LblRefProdError").show();
+                $("#RefProd").focus();
+            } else {
+                $("#divRefProd").prop("class", "form-group");
+                $("#spRefProdError").hide();
+                $("#LblRefProdError").hide();
+            }
+        }
+    });
+}
 //peticion request mediante ajax
 function getXmlHttpRequestObject()
 {
