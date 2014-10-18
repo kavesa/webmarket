@@ -8,6 +8,7 @@ package controller;
 import direct.market.datatype.DataEspecificacionProducto;
 import direct.market.datatype.DataLineaOC;
 import direct.market.datatype.DataProducto;
+import direct.market.factory.Factory;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -28,8 +29,9 @@ import javax.servlet.http.HttpSession;
 public class AgregarItemCarritoServlet extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+     * Processes requests for both HTTP
+     * <code>GET</code> and
+     * <code>POST</code> methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -58,7 +60,8 @@ public class AgregarItemCarritoServlet extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * Handles the HTTP <code>GET</code> method.
+     * Handles the HTTP
+     * <code>GET</code> method.
      *
      * @param request servlet request
      * @param response servlet response
@@ -68,11 +71,11 @@ public class AgregarItemCarritoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
     }
 
     /**
-     * Handles the HTTP <code>POST</code> method.
+     * Handles the HTTP
+     * <code>POST</code> method.
      *
      * @param request servlet request
      * @param response servlet response
@@ -82,25 +85,27 @@ public class AgregarItemCarritoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
         HttpSession sesion = request.getSession();
         List<DataLineaOC> lineas = (ArrayList<DataLineaOC>) sesion.getAttribute("lineasOrden");
-        if(lineas==null){
+
+        if (lineas == null) {
             lineas = new ArrayList<DataLineaOC>();
-        //Falta crear datalineaoc
+            //Falta crear datalineaoc
         }
         DataLineaOC dataLinea = new DataLineaOC();
-        DataProducto prod= (DataProducto) request.getAttribute("datosProd");
+        String refProd = request.getParameter("nocid");
+        DataProducto prod = Factory.getInstance().getProductoController().buscarProductoPorRef(refProd);
         DataEspecificacionProducto esp = prod.getDataEspecificacion();
         esp.setDescripcion(esp.getDescripcion());
         esp.setPrecio(esp.getPrecio());
         esp.setId(esp.getId());
         prod.setDataEspecificacion(esp);
         prod.setReferencia(prod.getReferencia());
-        dataLinea.setCantidad(2); //falta
+        dataLinea.setCantidad(Integer.parseInt(request.getParameter("cant")));
         dataLinea.setProducto(prod);
         lineas.add(dataLinea);
         sesion.setAttribute("lineasOrden", lineas);
+        request.setAttribute("flag", "1");
         
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/vistas/carrito/carrito.jsp");
         dispatcher.forward(request, response);
@@ -115,5 +120,4 @@ public class AgregarItemCarritoServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

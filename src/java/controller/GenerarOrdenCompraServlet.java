@@ -93,21 +93,23 @@ public class GenerarOrdenCompraServlet extends HttpServlet {
         HttpSession sesion = request.getSession();
         List<DataLineaOC> lineas = (ArrayList<DataLineaOC>) sesion.getAttribute("lineasOrden");
         String usuario = (String) sesion.getAttribute("usuario");
-        try {
-            DataUsuario dataUsuario = Factory.getInstance().getUsuarioController().getDataCliente(usuario);
-            DataOC ordenCompra = new DataOC();
-            ordenCompra.setLineas(lineas);
-            int numeroOrden;
-            numeroOrden = Factory.getInstance().getOrdenCompraController().altaOrdenCompra(ordenCompra);
-            Factory.getInstance().getUsuarioController().modificarCliente(dataUsuario, numeroOrden);
-            sesion.setAttribute("lineasOrden", new ArrayList<DataLineaOC>());
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/vistas/carrito/carrito.jsp");
-            dispatcher.forward(request, response);
+        if (lineas != null && !lineas.isEmpty()) {
+            try {
+                DataUsuario dataUsuario = Factory.getInstance().getUsuarioController().getDataCliente(usuario);
+                DataOC ordenCompra = new DataOC();
+                ordenCompra.setLineas(lineas);
+                int numeroOrden;
+                numeroOrden = Factory.getInstance().getOrdenCompraController().altaOrdenCompra(ordenCompra);
+                Factory.getInstance().getUsuarioController().modificarCliente(dataUsuario, numeroOrden);
+                sesion.setAttribute("lineasOrden", new ArrayList<DataLineaOC>());
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/vistas/carrito/carrito.jsp");
+                dispatcher.forward(request, response);
 
-        } catch (UsuarioException ex) {
-            Logger.getLogger(GenerarOrdenCompraServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (OCException ex) {
-            Logger.getLogger(GenerarOrdenCompraServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UsuarioException ex) {
+                Logger.getLogger(GenerarOrdenCompraServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (OCException ex) {
+                Logger.getLogger(GenerarOrdenCompraServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }
