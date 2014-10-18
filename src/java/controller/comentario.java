@@ -89,7 +89,7 @@ public class comentario extends HttpServlet {
         padre = request.getParameter("idCom");
         int padre1 = Integer.parseInt(padre);
         texto= request.getParameter("com");
-        String user= request.getParameter("user");
+        String user = request.getParameter("user"); //esta tirando un objeto para la base en lugar de string
         
         //DataComentario dc = new DataComentario(padre, "comentariode prueba", fecha);
         DataComentario dc = new DataComentario(user, padre1, texto, fecha);
