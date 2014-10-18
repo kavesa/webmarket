@@ -194,7 +194,7 @@
                                 <div class="fileinput fileinput-new" data-provides="fileinput">
                                     <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
                                     <div>
-                                        <span class="btn btn-default btn-file"><span class="fileinput-new">Seleccionar Imagen</span><span class="fileinput-exists">Cambiar</span><input type="file" name="fotoprod1" id="fotoprod1" multiple="multiple" /></span>
+                                        <span class="btn btn-primary btn-success"><span class="fileinput-new">Seleccionar Imagen</span><span class="fileinput-exists">Cambiar</span><input type="file" name="fotoprod1" id="fotoprod1" multiple="multiple" /></span>
                                         <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Quitar</a>
                                     </div>
                                 </div>
