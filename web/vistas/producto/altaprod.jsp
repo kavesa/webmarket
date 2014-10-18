@@ -21,6 +21,18 @@
     <body>
         <%@include file="../../WEB-INF/jspf/top.jspf" %>
 
+        <%
+            String error = (String) session.getAttribute("error");
+            session.setAttribute("error", null);
+            String success = (String) session.getAttribute("success");
+            session.setAttribute("success", null);
+        %>
+        <%if (error != null) {%>
+        <div class="alert alert-danger"><%=error%></div>
+        <%} else if (success != null) {%>
+        <div class="alert alert-success"><%=success%></div>
+        <%}%>
+
         <div class="container-fluid">
             <form role="form" method="POST" action="/producto" enctype="multipart/form-data">
 
@@ -85,7 +97,7 @@
                             <!-- Text input-->
                             <div class="form-group" id="divPreProd">
                                 <label class="control-label" id="lblPreProd" for="lblPreProd">* Precio del Producto</label>
-                                <input id="precprod" class="form-control" name="precprod" type="number" placeholder="0.00">
+                                <input id="precprod" class="form-control" name="precprod" type="text" placeholder="0.00">
                                 <span id="spPreProd" class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
                                 <label id="LblPreProdMsg" class="control-label small">Debe ingresar un precio valido para el producto.</label>
                             </div>
