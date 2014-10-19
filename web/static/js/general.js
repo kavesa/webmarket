@@ -55,10 +55,37 @@ $(document).ready(function() {
             event.preventDefault();
         }
     });
+    $("#btnBuscador").click(function() {
+        var valor = document.getElementById("buscador88");
+        location.href = "/InfoProducto?nocid=" + valor.value
+//        $.ajax({
+//            type: "post",
+//            url: "BuscadorServlet",
+//            data: {'nocid': valor.value}, //Parametro enviados a la acción
+//            cache: false,
+//            dataType: 'json',
+//            success: function(data) {
+//
+//            }
+//        });
+        $('#treecat').on('changed.jstree', function(e, data) {
+            var valor = data.selected[0];
+            $.ajax({
+                type: "post",
+                url: "PanelProductos",
+                data: {"b": valor},
+                cache: "false",
+                datatype: "json",
+                success: function(data) {
+                    //document.getElementById("productos").innerHTML=xmlHttp.responseText;  
+                    // location.href="/vistas/producto/PanelProductos.jsp";
+                    $("#productos").load("/vistas/producto/PanelProductos.jsp");//
+                }
+            });
+        });
 
 
-
-
+    });
 });
 function cheqNomProd() {
     var valor = document.getElementById("NomProd");

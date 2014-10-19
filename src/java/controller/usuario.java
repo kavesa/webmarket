@@ -7,13 +7,18 @@ package controller;
 import direct.market.enums.UsuarioType;
 import direct.market.exceptions.UsuarioException;
 import direct.market.factory.Factory;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URL;
+import java.nio.charset.Charset;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -94,77 +99,7 @@ public class usuario extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //////////////////////////////////////////////////////////////////
-//        DiskFileItemFactory factory = new DiskFileItemFactory();
-//        factory.setSizeThreshold(1024);
-//        String ubicacionArchivo = getServletContext().getRealPath("/") + "static/media/img/";
-//        // Configure a repository (to ensure a secure temp location is used)
-//        ServletContext servletContext = this.getServletConfig().getServletContext();
-//        //File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
-//        factory.setRepository(new File(ubicacionArchivo));
-//
-//        // Create a new file upload handler
-//        ServletFileUpload upload = new ServletFileUpload(factory);
-//
-//        // Parse the request
-//        List<FileItem> items = null;
-//        try {
-//            items = upload.parseRequest(request);
-//        } catch (FileUploadException ex) {
-//            Logger.getLogger(usuario.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//
-
-
-        // Process the uploaded items
-//        Iterator<FileItem> iter = items.iterator();
-
-//        while (iter.hasNext()) {
-//            FileItem item = iter.next();
-//
-//            if (item.isFormField()) {
-//                //String name = item.getFieldName();
-//                if (item.getFieldName().equals("tipo")) {
-//                    tipoForm = item.getString();
-//                }
-//                if (item.getFieldName().equals("nickname")) {
-//                    nickForm = item.getString();
-//                }
-//                if (item.getFieldName().equals("pass")) {
-//                    passForm = item.getString();
-//                }
-//                if (item.getFieldName().equals("nom")) {
-//                    nomForm = item.getString();
-//                }
-//                if (item.getFieldName().equals("ape")) {
-//                    apeForm = item.getString();
-//                }
-//                if (item.getFieldName().equals("mail")) {
-//                    mailForm = item.getString();
-//                }
-//                if (item.getFieldName().equals("fecNac")) {
-//                    fecNacForm = item.getString();
-//                }
-//                if (item.getFieldName().equals("nom-comp")) {
-//                    nomCompForm = item.getString();
-//                }
-//                if (item.getFieldName().equals("url")) {
-//                    urlForm = item.getString();
-//                }
-//            } else {
         try {
-//                    String ext = getExtension(item.getName());
-//                    String ubicacionBd = ubicacionArchivo + nickForm + "." + ext;
-//                    if (item.getName().equals("")) {
-//                        ubicacionBd = ubicacionArchivo + "Perfil.jpg";
-//                    } else {
-//                        File file = new File(ubicacionArchivo, nickForm + "." + ext);
-//                        item.write(file);
-//                    }
-
-            ///////////////////////////////////////////////////////////////////
-
             String tipoForm = "", nickForm, passForm, nomForm, apeForm, mailForm, fecNacForm,
                     nomCompForm = "", urlForm = "";
 
@@ -178,16 +113,9 @@ public class usuario extends HttpServlet {
 
             byte[] foto = util.InputStreamToByteArray(request.getPart("imgUser").getInputStream());
             if (foto == null || foto.length <= 0) {
-                foto = null;
+                File foo = util.getFotoEstandar("default.jpg");
+                foto = util.imgToBytes(foo);
             }
-
-//                    tipoForm = "", nickForm = null, passForm = null,
-//                nomForm = null, apeForm = null, mailForm = null,
-//                fecNacForm = null, nomCompForm = null, urlForm = null;
-
-            
-            
-            //SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
             SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
             Date fechaDate = null;
             try {

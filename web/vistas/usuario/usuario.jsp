@@ -1,3 +1,5 @@
+<%@page import="java.io.File"%>
+<%@page import="controller.util"%>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -24,8 +26,7 @@
                         session.setAttribute("error", null);
                         String success = (String) session.getAttribute("success");
                         session.setAttribute("success", null);
-
-
+                        
                     %>
                     <%if (error != null) {%>
                         <div class="alert alert-danger"><%=error%></div>
@@ -80,7 +81,7 @@
                         </div>
                         <div class="form-group" id="divDir-web">
                             <label for="url">Dirección Web</label>
-                            <input type="text" class="form-control" name="url" id="url" placeholder="Ingrese Direccion Web" required>
+                            <input type="text" pattern="^([a-zA-Z]{2,3}([w]*)*.([0-9a-zA-Z][-w]*[0-9a-zA-Z].)+([a-zA-Z]{0,9}.)+[a-zA-Z]{2,3})$" class="form-control" name="url" id="url" placeholder="Ingrese Direccion Web" required>
                         </div>
                         <div class="form-group" id="divImgUser">
                             <label class="control-label"id="LblImgUser" for="img">Imagen</label>
