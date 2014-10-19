@@ -23,46 +23,50 @@
         <%
             List<DataLineaOC> lineas = (ArrayList<DataLineaOC>) sesion.getAttribute("lineasOrden");
         %>
-        <div id="carrito"> 
-            <form action="<%=request.getContextPath()%>/GenerarOrdenCompraServlet" method="POST">
+        <div id="carrito" style="margin-top: 2em; margin-left: 4em; margin-right: 4em" class=" panel-info"> 
+            <div class=" panel-heading"> Carrito </div>
+            <div class=" panel-body">
+                
+                <form action="<%=request.getContextPath()%>/GenerarOrdenCompraServlet" method="POST">
 
-                <table class="table table-condensed">
-                    <thead>
-                        <tr>
-                            <th> Nombre</th>
-                            <th> Cantidad</th>
-                            <th> Precio Unitario</th>
-                            <th> Total </th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th> Nombre</th>
+                                <th> Cantidad</th>
+                                <th> Precio Unitario</th>
+                                <th> Total </th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                        <%
-                            if (lineas != null && !lineas.isEmpty()) {
-                                for (int i = 0; i < lineas.size(); i++) {
+                            <%
+                                if (lineas != null && !lineas.isEmpty()) {
+                                    for (int i = 0; i < lineas.size(); i++) {
 
-                        %>
+                            %>
 
-                        <tr>
-                            <td><%=lineas.get(i).getProducto().getNombre()%></td>
-                            <td><%=lineas.get(i).getCantidad()%></td>
-                            <td><%=lineas.get(i).getProducto().getDataEspecificacion().getPrecio()%></td>
-                            <td><%=lineas.get(i).getProducto().getDataEspecificacion().getPrecio() * lineas.get(i).getCantidad()%></td>
-                        </tr>
+                            <tr>
+                                <td><%=lineas.get(i).getProducto().getNombre()%></td>
+                                <td><%=lineas.get(i).getCantidad()%></td>
+                                <td><%=lineas.get(i).getProducto().getDataEspecificacion().getPrecio()%></td>
+                                <td><%=lineas.get(i).getProducto().getDataEspecificacion().getPrecio() * lineas.get(i).getCantidad()%></td>
+                            </tr>
 
-                        <%}%>
+                            <%}%>
 
-                    </tbody>
-                    
-                </table>
-<input type="submit" id="comprar" value="Comprar"/>
-                    <%}else{%>
+                        </tbody>
+
+                    </table>
+                    <input class="btn btn-primary" type="submit" id="comprar" value="Comprar"/>
+                    <%} else {%>
                     </tbody>                    
-                </table><%}%>
+                    </table><%}%>
 
 
 
-            </form>
+                </form>
+            </div>
         </div>
         <%@include file="../../WEB-INF/jspf/bottom.jspf" %>
     </body>
