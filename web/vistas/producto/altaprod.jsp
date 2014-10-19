@@ -83,7 +83,7 @@
                                 <span id="spRefProd" class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
                                 <label id="LblRefProdMsg" class="control-label small">Debe ingresar una referencia para el producto.</label>
                                 <span id="spRefProdError" class="glyphicon glyphicon-remove form-control-feedback"></span>
-                                <label id="LblRefProdError" class="control-label small">Este número de referencia ya se encuentra ingresado.</label>
+                                <label id="LblRefProdError" class="control-label small">Este nï¿½mero de referencia ya se encuentra ingresado.</label>
                             </div>
 
                             <!-- Text input-->
@@ -194,24 +194,24 @@
                                 <div class="fileinput fileinput-new" data-provides="fileinput">
                                     <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
                                     <div>
-                                        <span class="btn btn-primary btn-success"><span class="fileinput-new">Seleccionar Imagen</span><span class="fileinput-exists">Cambiar</span><input type="file" name="fotoprod1" id="fotoprod1" multiple="multiple" /></span>
-                                        <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Quitar</a>
+                                        <span class="btn btn-primary btn-file"><span class="fileinput-new">Seleccionar Imagen</span><span class="fileinput-exists">Cambiar</span><input type="file" name="fotoprod1" id="fotoprod1" multiple="multiple" /></span>
+                                        <a href="#" class="btn btn-warning fileinput-exists" data-dismiss="fileinput">Quitar</a>
                                     </div>
                                 </div>
 
                                 <div class="fileinput fileinput-new" data-provides="fileinput">
                                     <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
                                     <div>
-                                        <span class="btn btn-default btn-file"><span class="fileinput-new">Seleccionar Imagen</span><span class="fileinput-exists">Cambiar</span><input type="file" name="fotoprod2" id="fotoprod2" multiple="multiple" /></span>
-                                        <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Quitar</a>
+                                        <span class="btn btn-primary btn-file"><span class="fileinput-new">Seleccionar Imagen</span><span class="fileinput-exists">Cambiar</span><input type="file" name="fotoprod2" id="fotoprod2" multiple="multiple" /></span>
+                                        <a href="#" class="btn btn-warning fileinput-exists" data-dismiss="fileinput">Quitar</a>
                                     </div>
                                 </div>
 
                                 <div class="fileinput fileinput-new" data-provides="fileinput">
                                     <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
                                     <div>
-                                        <span class="btn btn-default btn-file"><span class="fileinput-new">Seleccionar Imagen</span><span class="fileinput-exists">Cambiar</span><input type="file" name="fotoprod3" id="fotoprod3" multiple="multiple" /></span>
-                                        <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Quitar</a>
+                                        <span class="btn btn-primary btn-file"><span class="fileinput-new">Seleccionar Imagen</span><span class="fileinput-exists">Cambiar</span><input type="file" name="fotoprod3" id="fotoprod3" multiple="multiple" /></span>
+                                        <a href="#" class="btn btn-warning fileinput-exists" data-dismiss="fileinput">Quitar</a>
                                     </div>
                                 </div>
 
