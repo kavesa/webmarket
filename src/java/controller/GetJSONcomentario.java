@@ -32,6 +32,7 @@ public class GetJSONcomentario extends HttpServlet {
             String prodRef = request.getSession().getAttribute("ref").toString();
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             DataProducto dprod = Factory.getInstance().getProductoController().buscarProductoPorRef(prodRef);
+            //DataProducto dprod = Factory.getInstance().getProductoController().buscarProductoPorRef("7");
             List<DataComentario> dcomlist = dprod.getListDataComentarios();
 
             JSONArray jSONArray = new JSONArray();
@@ -40,10 +41,9 @@ public class GetJSONcomentario extends HttpServlet {
                 JSONObject jSONObject = new JSONObject();
                 //verifico si esta en la raiz o tiene padre
                 if (dcomlist.get(i).getParent() == 0) {
-
                     jSONObject.put("id", dcomlist.get(i).getId());
                     jSONObject.put("parent", "#");
-                    jSONObject.put("text", dcomlist.get(i).getComentario());
+                    jSONObject.put("text", dcomlist.get(i).getNickname() + " dijo el " + sdf.format(dcomlist.get(i).getFechaComentario()) + ": " + dcomlist.get(i).getComentario());
                     //jSONObject.put("fecha", sdf.format(dcomlist.get(i).getFechaComentario()));
                     //jSONObject.put("nick", dcomlist.get(i).getNickname());
 
@@ -51,7 +51,7 @@ public class GetJSONcomentario extends HttpServlet {
 
                     jSONObject.put("id", dcomlist.get(i).getId());
                     jSONObject.put("parent", dcomlist.get(i).getParent());
-                    jSONObject.put("text", dcomlist.get(i).getComentario());
+                    jSONObject.put("text", dcomlist.get(i).getNickname() + " dijo el " + sdf.format(dcomlist.get(i).getFechaComentario()) + ": " + dcomlist.get(i).getComentario());
                     //jSONObject.put("fecha", sdf.format(dcomlist.get(i).getFechaComentario()));
                     //jSONObject.put("nick", dcomlist.get(i).getNickname());
 

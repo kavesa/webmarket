@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +25,7 @@ import javax.servlet.http.HttpSession;
  * @author clobes
  */
 public class comentario extends HttpServlet {
+
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -87,17 +89,22 @@ public class comentario extends HttpServlet {
         Date fecha = new Date();
         idProd = request.getParameter("numRefProd");
         padre = request.getParameter("idCom");
-        int padre1 = Integer.parseInt(padre);
-        texto= request.getParameter("com");
+        int padre1;
+        if (padre.equals("")) {
+            padre1 = 0;
+        } else {
+            padre1 = Integer.parseInt(padre);
+        }
+        texto = request.getParameter("com");
         String user = request.getParameter("user"); //esta tirando un objeto para la base en lugar de string
-        
+
         //DataComentario dc = new DataComentario(padre, "comentariode prueba", fecha);
         DataComentario dc = new DataComentario(user, padre1, texto, fecha);
 
         try {
             Factory.getInstance().getProductoController().agregarComentario(idProd, dc);
             request.getSession().setAttribute("success", "Comentario ingresado con éxito.");
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/InfoProducto?nocid="+idProd);
             dispatcher.forward(request, response);
         } catch (ProductoException ex) {
             Logger.getLogger(comentario.class.getName()).log(Level.SEVERE, null, ex);
