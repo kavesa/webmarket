@@ -102,6 +102,7 @@ public class GenerarOrdenCompraServlet extends HttpServlet {
                 numeroOrden = Factory.getInstance().getOrdenCompraController().altaOrdenCompra(ordenCompra);
                 Factory.getInstance().getUsuarioController().modificarCliente(dataUsuario, numeroOrden);
                 sesion.setAttribute("lineasOrden", new ArrayList<DataLineaOC>());
+                request.getSession().setAttribute("success", "Gracias por su compra. Orden de compra Nro "+numeroOrden);
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/vistas/carrito/carrito.jsp");
                 dispatcher.forward(request, response);
 
