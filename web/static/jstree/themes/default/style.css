@@ -334,6 +334,18 @@
   color: #8b0000;
   font-weight: bold;
 }
+.jstree-default a {
+  white-space:normal !important; 
+  height: auto !important;
+}
+.jstree-default li > ins {
+  vertical-align:top;
+  height: 55px;
+}
+.jstree-default li {
+  vertical-align:top;
+  height: auto;
+}
 .no_checkbox>i.jstree-checkbox {
   display: none;
 }
