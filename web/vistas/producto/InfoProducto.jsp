@@ -48,7 +48,7 @@
                     <%if (request.getAttribute("tipoU").equals("y")) {%>
                     <div class="col-sm-11 col-centered">
 
-                        <form action="<%= request.getContextPath()%>/addToShoppingCart?nocid=<%=dProd.getReferencia()%>" method="post">
+                        <form id="formCar" action="<%= request.getContextPath()%>/addToShoppingCart?nocid=<%=dProd.getReferencia()%>" method="post">
                             <input class="btn-xs btn-primary" style="float: right; margin-right: 1em"type="submit" name="add" value="Agregar al carro"/>
                             <input style="float: right; margin-right: 1em; width: 50px" type="number" id="cant" name="cant"/>
 
