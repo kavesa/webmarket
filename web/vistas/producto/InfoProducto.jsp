@@ -143,9 +143,7 @@
                     <form role="form" id="formComentario" action="<%=request.getContextPath()%>/comentario" method="POST">
                         <ul class="list-group">
                             <li style="text-align: center" class="list-group-item listTitle"><span class="glyphicon glyphicon-thumbs-up"></span><strong> Comentarios </strong><span class="glyphicon glyphicon-thumbs-down"></span></li>
-                            <%if ((Boolean) request.getAttribute("usuarioCompro")) {%>
                             <li style="text-align: center" class="list-group-item listTitle">Haga clic en un comentario para responderlo</li>
-                            <%}%>
                             <div id="treecom" class="col-sm-11 col-centered"></div>
                         </ul>
                         <input name="numRefProd" type="text" value="<%=dProd.getReferencia()%>" hidden="true"/>
