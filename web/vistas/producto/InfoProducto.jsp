@@ -45,15 +45,16 @@
             <div style="margin-top: 1em" class="row">
 
                 <div style="margin-top: 1em" class="row col-sm-5 col-centered">
+                    <%if (request.getAttribute("tipoU").equals("y")) {%>
                     <div class="col-sm-11 col-centered">
 
                         <form action="<%= request.getContextPath()%>/addToShoppingCart?nocid=<%=dProd.getReferencia()%>" method="post">
-                            <input style="float: right; margin-right: 1em"type="submit" name="add" value="Agregar al carro"/>
+                            <input class="btn-xs btn-primary" style="float: right; margin-right: 1em"type="submit" name="add" value="Agregar al carro"/>
                             <input style="float: right; margin-right: 1em; width: 50px" type="number" id="cant" name="cant"/>
-
 
                         </form>
                     </div>
+                    <%}%>
                 </div>
 
                 <div class="col-sm-5 col-centered">
@@ -143,11 +144,14 @@
                     <form role="form" id="formComentario" action="<%=request.getContextPath()%>/comentario" method="POST">
                         <ul class="list-group">
                             <li style="text-align: center" class="list-group-item listTitle"><span class="glyphicon glyphicon-thumbs-up"></span><strong> Comentarios </strong><span class="glyphicon glyphicon-thumbs-down"></span></li>
+                            <%if ((Boolean) request.getAttribute("usuarioCompro")) {%>
                             <li style="text-align: center" class="list-group-item listTitle">Haga clic en un comentario para responderlo</li>
+                            <%}%>
                             <div id="treecom" class="col-sm-11 col-centered"></div>
                         </ul>
                         <input name="numRefProd" type="text" value="<%=dProd.getReferencia()%>" hidden="true"/>
                         <input name="user" type="text" value="<%=request.getSession().getAttribute("usuario")%>" hidden="true"/>
+                        <%if ((Boolean) request.getAttribute("usuarioCompro")) {%>
                         <div class="form-group">
                             <input type="hidden" class="form-control" name="idCom" id="idCom" placeholder="Ingrese id del comentario a responder (vacio es un comentario nuevo)." />
                         </div>
@@ -156,6 +160,7 @@
                             <textarea class="form-control" name="com" id="com" placeholder="Ingrese comentario."></textarea>
                         </div>
                         <button type="submit" id="btnGuardar" class="btn btn-success">Ingresar Comentario</button>
+                        <%}%>
                     </form>
                 </div>
             </div>
