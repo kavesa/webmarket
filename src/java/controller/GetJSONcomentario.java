@@ -37,33 +37,42 @@ public class GetJSONcomentario extends HttpServlet {
 
             JSONArray jSONArray = new JSONArray();
 
-            for (int i = 0; i < dcomlist.size();) {
-                JSONObject jSONObject = new JSONObject();
-                //verifico si esta en la raiz o tiene padre
-                if (dcomlist.get(i).getParent() == 0) {
-                    jSONObject.put("id", dcomlist.get(i).getId());
-                    jSONObject.put("parent", "#");
-                    jSONObject.put("text", dcomlist.get(i).getNickname() + " dijo el " + sdf.format(dcomlist.get(i).getFechaComentario()) + ": " + dcomlist.get(i).getComentario());
-                    //jSONObject.put("fecha", sdf.format(dcomlist.get(i).getFechaComentario()));
-                    //jSONObject.put("nick", dcomlist.get(i).getNickname());
+            if (dcomlist != null && !dcomlist.isEmpty()) {
+                for (int i = 0; i < dcomlist.size();) {
+                    JSONObject jSONObject = new JSONObject();
+                    //verifico si esta en la raiz o tiene padre
+                    if (dcomlist.get(i).getParent() == 0) {
+                        jSONObject.put("id", dcomlist.get(i).getId());
+                        jSONObject.put("parent", "#");
+                        jSONObject.put("text", dcomlist.get(i).getNickname() + " dijo el " + sdf.format(dcomlist.get(i).getFechaComentario()) + ": " + dcomlist.get(i).getComentario());
+                        //jSONObject.put("fecha", sdf.format(dcomlist.get(i).getFechaComentario()));
+                        //jSONObject.put("nick", dcomlist.get(i).getNickname());
 
-                } else {
+                    } else {
 
-                    jSONObject.put("id", dcomlist.get(i).getId());
-                    jSONObject.put("parent", dcomlist.get(i).getParent());
-                    jSONObject.put("text", dcomlist.get(i).getNickname() + " dijo el " + sdf.format(dcomlist.get(i).getFechaComentario()) + ": " + dcomlist.get(i).getComentario());
-                    //jSONObject.put("fecha", sdf.format(dcomlist.get(i).getFechaComentario()));
-                    //jSONObject.put("nick", dcomlist.get(i).getNickname());
+                        jSONObject.put("id", dcomlist.get(i).getId());
+                        jSONObject.put("parent", dcomlist.get(i).getParent());
+                        jSONObject.put("text", dcomlist.get(i).getNickname() + " dijo el " + sdf.format(dcomlist.get(i).getFechaComentario()) + ": " + dcomlist.get(i).getComentario());
+                        //jSONObject.put("fecha", sdf.format(dcomlist.get(i).getFechaComentario()));
+                        //jSONObject.put("nick", dcomlist.get(i).getNickname());
 
+                    }
+
+                    if (!jSONObject.isEmpty()) {
+                        jSONArray.add(jSONObject);
+                        //jSONObject = null;
+                    }
+
+                    i++;
                 }
-
-                if (!jSONObject.isEmpty()) {
-                    jSONArray.add(jSONObject);
-                    //jSONObject = null;
-                }
-
-                i++;
+            } else {
+                JSONObject sinComent = new JSONObject();
+                sinComent.put("id", 0);
+                sinComent.put("parent", "#");
+                sinComent.put("text", "Nadie ha comentado aun, sea usted el primero en comentar");
+                jSONArray.add(sinComent);
             }
+
             out.print(jSONArray.toJSONString().toString());
             //jSONArray = null;
         } catch (Exception e) {
