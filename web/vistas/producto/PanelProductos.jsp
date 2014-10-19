@@ -19,8 +19,6 @@
     <body>
               <div id="productos" class="row">
                     <%
-//                    String lp = (String) session.getAttribute("listaPr");
-//                    if (!lp.equals("")){
                     List<DataProducto> dpList = (List<DataProducto>) session.getAttribute("listaPr");
                     if (dpList != null){
                         int tam = dpList.size();
@@ -30,29 +28,17 @@
                         String imagen;
                         byte[] imagenbyte = imagenesbyte.get(0);
                         imagen = util.byteImgToBase64(imagenbyte);
-
-                    
-                    
-//                        HttpSession sesion = request.getSession();
-//                        String prueba = (String) session.getAttribute("prueba");
-                        
                         %>
-                    <div class="col-sm-6 col-md-3">
-                        <div class="thumbnail" style="height: 200px; width: 200px;" >
-                            <img style="margin-top: 1em" class="img-responsive" src="<%=imagen%>" alt="Miniatura" width="100px" height="100px" >
+                        <div class="col-sm-5 col-md-2" style="margin: 1em">
+                        <div class="thumbnail" style="height: 170px; width: 170px;" >
+                            <a href="InfoProducto?nocid=<%=dp.getReferencia()%>">
+                                <img style="margin-top: 1em" class="img-responsive" src="<%=imagen%>" alt="Miniatura" width="100px" height="100px" >
+                            </a>
                         </div>
                         <div class="caption">
                            
-                           <h5><%=dp.getNombre()%></h5>
-                           <h6><%=dp.getDataEspecificacion().getPrecio()%></h6>
-                           <p>
-                              <a href="#" class="btn btn-primary" role="button">
-                                 Añadir al carrito
-                              </a> 
-                              <a href="#" class="btn btn-default" role="button">
-                                 Detalles
-                              </a>
-                           </p>
+                           <h5> <strong><%=dp.getNombre()%></strong></h5>
+                           <h6><strong>Precio: <%=dp.getDataEspecificacion().getPrecio()%></strong></h6>
                         </div>
                     </div>
                     <% }}

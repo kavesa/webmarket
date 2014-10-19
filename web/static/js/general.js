@@ -1,5 +1,13 @@
 //cuando la pag esta lista realiza las setea los atributos 
 $(document).ready(function() {
+    $.ajax({
+                    type: "get",
+                    url: "PanelProductos",
+                    cache: "false",
+                    success: function(data){
+                     $("#productos").load("/vistas/producto/PanelProductos.jsp");
+                    }
+                });
     $("#LblNickError").hide();
     $("#SpNick").hide();
     $("#LblMailError").hide();

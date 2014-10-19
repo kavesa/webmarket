@@ -15,8 +15,8 @@
         
         <div id="seleccionados">
         </div>
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-<!--        <script src="../../static/bootstrap/js/vendor/jquery-1.11.0.min.js"></script>-->
+<!--        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>-->
+        <script src="../../static/bootstrap/js/vendor/jquery-1.11.0.min.js"></script>
         <script>
         function cargar(div, desde)
         {
@@ -27,29 +27,6 @@
         <script src="../../static/jstree/jstree.js"></script>
         <script>
             $(function() {
-//                $('#treecat')
-//                        // listen for event
-//                        .on('changed.jstree', function(e, data) {
-//                    var i, j, r = [];
-//                    //session["categoria"]=data/selected.valueOf().toString();
-////                        $.ajax({
-////                            type:"post",
-////                            url:"ProductNavigation",
-////                            cache: "false"
-////                        });
-//                    
-////                    for (i = 0, j = data.selected.length; i < j; i++) {
-////                        r.push(data.instance.get_node(data.selected[i]).text);
-////                        //session.setAttribute("categoria", (data.selected[i]).text);
-////                        session["categoria"]=(data.selected[i]).text;
-////                        $.ajax({
-////                            type:"post",
-////                            url:"ProductNavigation",
-////                            cache: "false"
-////                        });
-////                    }
-//                    $('#seleccionados').html('Selected: ' + r.join(', '));
-//                });
 
                 $('#treecat').jstree({
                     'core': {
@@ -63,7 +40,7 @@
 //                        "check_callback": true,
                         "themes": {
                             "theme": "default",
-//                            "dots": true,
+                            "dots": false,
                             "icons": true
                         }
                     },

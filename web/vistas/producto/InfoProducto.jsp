@@ -16,7 +16,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Informacion de compra</title>
+        <title>Informacion de Producto</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="../../static/jstree/themes/default/style.css" />
@@ -45,15 +45,16 @@
             <div style="margin-top: 1em" class="row">
 
                 <div style="margin-top: 1em" class="row col-sm-5 col-centered">
+                    <%if (request.getAttribute("tipoU").equals("y")) {%>
                     <div class="col-sm-11 col-centered">
 
                         <form action="<%= request.getContextPath()%>/addToShoppingCart?nocid=<%=dProd.getReferencia()%>" method="post">
-                            <input style="float: right; margin-right: 1em"type="submit" name="add" value="Agregar al carro"/>
+                            <input class="btn-xs btn-primary" style="float: right; margin-right: 1em"type="submit" name="add" value="Agregar al carro"/>
                             <input style="float: right; margin-right: 1em; width: 50px" type="number" id="cant" name="cant"/>
-
 
                         </form>
                     </div>
+                    <%}%>
                 </div>
 
                 <div class="col-sm-5 col-centered">
@@ -150,6 +151,7 @@
                         </ul>
                         <input name="numRefProd" type="text" value="<%=dProd.getReferencia()%>" hidden="true"/>
                         <input name="user" type="text" value="<%=request.getSession().getAttribute("usuario")%>" hidden="true"/>
+                        <%if ((Boolean) request.getAttribute("usuarioCompro")) {%>
                         <div class="form-group">
                             <input type="hidden" class="form-control" name="idCom" id="idCom" placeholder="Ingrese id del comentario a responder (vacio es un comentario nuevo)." />
                         </div>
@@ -158,6 +160,7 @@
                             <textarea class="form-control" name="com" id="com" placeholder="Ingrese comentario."></textarea>
                         </div>
                         <button type="submit" id="btnGuardar" class="btn btn-success">Ingresar Comentario</button>
+                        <%}%>
                     </form>
                 </div>
             </div>
