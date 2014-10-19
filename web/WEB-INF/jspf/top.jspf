@@ -13,15 +13,29 @@
             </button>
             <a class="navbar-brand" href="index">Direct Market</a>
         </div>
-        <div class="navbar-collapse collapse">
+
+        <div class=" col-centered" id="buscador" style="padding-top: 10px;">
+           
+            <div class="col-lg-6">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="buscador88" id="buscador88">
+                    <span class="input-group-btn">
+                        <a id="btnBuscador" class="btn btn-default"><i class="fa fa-search"></i></a>
+                        <!-- button class="btn btn-default" type="button">Buscar Producto </button> -->
+                    </span>
+                        
+                </div><!-- /input-group -->
+            </div>
+
+
             <ul class=" nav navbar-nav navbar-right">
                 <% HttpSession sesion = null;
                     sesion = request.getSession();
 
                     if (sesion.getAttribute("usuario") == null) {
-
-
                 %>
+
+
                 <li>
                     <a class="fa fa-sign-in navbar-brand" data-toggle="modal" data-target="#myModalLogin" title="Ingresar" href="" id="login"> Ingresar</a>
                 </li>
@@ -32,19 +46,22 @@
                 <li>
                     <a class="fa fa-user navbar-brand" title="Perfil" href="<%= request.getContextPath()%>/Perfil" id="perfil"> ${sessionScope.usuario}</a>
                 </li>
-                    <% if (sesion.getAttribute("tipoUsuario").toString().equals("PROVEEDOR")) {%>
-                    <li>
-                        <a class="fa fa-plus-square-o navbar-brand"  title="Nuevo Producto" href="<%= request.getContextPath()%>/producto?op=create" id="altaprod"> Producto</a>
-                    </li>
-                    <%} else {%>
-                    <li>
-                        <a class="fa fa-shopping-cart navbar-brand"  title="Ver Carrito" href="<%= request.getContextPath()%>/verCarrito" id="vercar"> </a>
-                    </li>
-                    <%}%>
+                <% if (sesion.getAttribute("tipoUsuario").toString().equals("PROVEEDOR")) {%>
+                <li>
+                    <a class="fa fa-plus-square-o navbar-brand"  title="Nuevo Producto" href="<%= request.getContextPath()%>/producto?op=create" id="altaprod"> Producto</a>
+                </li>
+                <%} else {%>
+                <li>
+                    <a class="fa fa-shopping-cart navbar-brand"  title="Ver Carrito" href="<%= request.getContextPath()%>/verCarrito" id="vercar"> </a>
+                </li>
+                <%}%>
                 <li>
                     <a class="fa fa-sign-out navbar-brand" title="Salir" href="<%= request.getContextPath()%>/login?op=out" id="logout"> Salir</a>
                 </li>
                 <%}%>
+
+
+
             </ul>
         </div><!--/.navbar-collapse -->
     </div>
