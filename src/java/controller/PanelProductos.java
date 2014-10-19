@@ -40,13 +40,14 @@ public class PanelProductos extends HttpServlet {
         try {
             HttpSession session=request.getSession();
            // sesion.setAttribute("categoria", "Apple");
-            String CatSelect = request.getParameter("b");
-            String pepe="Apple";
+            String CatSelect =null;
+            CatSelect = request.getParameter("b");
+           // String pepe="Apple";
             List<DataProducto> dpList = null;
             //(String)sesion.getAttribute("categoria");
             if (CatSelect==null){
                     //Traer los mas vendidos
-                dpList = Factory.getInstance().getCategoriaController().getProductosPorNombreCategoria(pepe);
+                dpList = Factory.getInstance().getCategoriaController().getProductosPorNombreCategoria("Apple");
                 session.setAttribute("listaPr", dpList);
 //                dpList = null;
 //                session.setAttribute("prueba","No hay naranja en la categoria!!!");
