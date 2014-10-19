@@ -7,10 +7,9 @@ package controller;
 import direct.market.datatype.DataCategoria;
 import direct.market.datatype.DataProducto;
 import direct.market.exceptions.CategoryException;
-import direct.market.exceptions.ProductoException;
+import direct.market.exceptions.UsuarioException;
 import direct.market.factory.Factory;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -19,6 +18,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -36,20 +36,26 @@ public class InfoProducto extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            String refProd = request.getParameter("nocid");
-            DataProducto prod = Factory.getInstance().getProductoController().buscarProductoPorRef(refProd);
-            
-            List<DataCategoria> catList = new ArrayList<DataCategoria>();
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, UsuarioException {
+        HttpSession sesion = request.getSession();
+        String refProd = request.getParameter("nocid");
+        DataProducto prod = Factory.getInstance().getProductoController().buscarProductoPorRef(refProd);
+        String nickname = (String) sesion.getAttribute("usuario");
+        List<DataCategoria> catList = new ArrayList<DataCategoria>();
+
         try {
+            boolean usuarioCompro = Factory.getInstance().getUsuarioController().usuarioComproProducto(nickname, refProd);
+            request.setAttribute("usuarioCompro", usuarioCompro);
             catList = Factory.getInstance().getCategoriaController().getCategoriasDeProducto(prod.getReferencia());
         } catch (CategoryException ex) {
             Logger.getLogger(InfoProducto.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UsuarioException uex) {
+            Logger.getLogger(InfoProducto.class.getName()).log(Level.SEVERE, null, uex);
         }
-            
+
         request.setAttribute("pCat", catList);
-            request.setAttribute("datosProd", prod);
-            request.getRequestDispatcher("/vistas/producto/InfoProducto.jsp").forward(request, response);
+        request.setAttribute("datosProd", prod);
+        request.getRequestDispatcher("/vistas/producto/InfoProducto.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -65,7 +71,11 @@ public class InfoProducto extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (UsuarioException ex) {
+            Logger.getLogger(InfoProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -80,7 +90,11 @@ public class InfoProducto extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (UsuarioException ex) {
+            Logger.getLogger(InfoProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
