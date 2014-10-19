@@ -42,7 +42,6 @@
             <div class="alert alert-success"><%=success%></div>
             <%}%>
             <div style="margin-top: 1em" class="row">
-
                 <div style="margin-top: 1em" class="row">
                     <div class="col-sm-12 col-centered">
 

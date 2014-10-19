@@ -11,6 +11,7 @@ import direct.market.datatype.DataUsuario;
 import direct.market.exceptions.CategoryException;
 import direct.market.exceptions.ProductoException;
 import direct.market.factory.Factory;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -108,7 +109,12 @@ public class producto extends HttpServlet {
             if (foto3 != null && foto3.length > 0) {
                 imagenes.add(foto3);
             }
-
+if(imagenes.isEmpty())
+{
+    File foo = util.getFotoEstandar("defaultP.jpg");
+                byte[] foto = util.imgToBytes(foo);
+                imagenes.add(foto);
+}
 //            out.println("<!DOCTYPE html>");
 //            out.println("<html>");
 //            out.println("<head>");
