@@ -69,11 +69,11 @@ $(document).ready(function() {
         $.ajax({
             type: "post",
             url: "cheqProdAjax",
-            data: {'nocid': valor.value, 'op': "RefProd"}, //Parametro enviados a la acción
+            data: {'nocid': valor.value, 'op': "RefProd", 'nomRef':valor.value}, //Parametro enviados a la acción
             cache: false,
             dataType: 'json',
             success: function(data) {
-                if (data.resp == false) {
+                if (!data.resp) {
                     location.href = "notfound"
                 } else {
                     location.href = "/InfoProducto?nocid=" + valor.value
