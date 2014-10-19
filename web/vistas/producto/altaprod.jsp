@@ -193,7 +193,7 @@
 
                                 <div class="fileinput fileinput-new" data-provides="fileinput">
                                     <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
-                                    <div>
+                                    <div class="center-block">
                                         <span class="btn btn-primary btn-file"><span class="fileinput-new">Seleccionar Imagen</span><span class="fileinput-exists">Cambiar</span><input type="file" name="fotoprod1" id="fotoprod1" multiple="multiple" /></span>
                                         <a href="#" class="btn btn-warning fileinput-exists" data-dismiss="fileinput">Quitar</a>
                                     </div>
