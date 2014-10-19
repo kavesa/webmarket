@@ -18,7 +18,7 @@
            
             <div class="col-lg-6">
                 <div class="input-group">
-                    <input type="text" class="form-control" name="buscador88" id="buscador88">
+                    <input placeholder="Ingrese número de referencia" type="text" class="form-control" name="buscador88" id="buscador88">
                     <span class="input-group-btn">
                         <a id="btnBuscador" class="btn btn-default"><i class="fa fa-search"></i></a>
                         <!-- button class="btn btn-default" type="button">Buscar Producto </button> -->
