@@ -22,11 +22,21 @@
         <%@include file="../../WEB-INF/jspf/top.jspf" %>
         <%
             List<DataLineaOC> lineas = (ArrayList<DataLineaOC>) sesion.getAttribute("lineasOrden");
+            String error = (String) session.getAttribute("error");
+            session.setAttribute("error", null);
+            String success = (String) session.getAttribute("success");
+            session.setAttribute("success", null);
+
         %>
+        <%if (error != null) {%>
+        <div class="alert alert-danger"><%=error%></div>
+        <%} else if (success != null) {%>
+        <div class="alert alert-success"><%=success%></div>
+        <%}%>
         <div id="carrito" style="margin-top: 2em; margin-left: 4em; margin-right: 4em" class=" panel-info"> 
             <div class=" panel-heading"> Carrito </div>
             <div class=" panel-body">
-                
+
                 <form action="<%=request.getContextPath()%>/GenerarOrdenCompraServlet" method="POST">
 
                     <table class="table table-condensed">

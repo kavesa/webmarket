@@ -63,6 +63,13 @@ $(document).ready(function() {
             event.preventDefault();
         }
     });
+     $("#formCar").submit(function(event) {
+        if ($("#cant").val() < 1) {
+            $("#cant").focus();
+            window.alert("La cantidad debe ser mayor a 0.");
+            event.preventDefault();
+        }
+    });
     $("#btnBuscador").click(function() {
         var valor = document.getElementById("buscador88");
         //location.href = "/InfoProducto?nocid=" + valor.value
