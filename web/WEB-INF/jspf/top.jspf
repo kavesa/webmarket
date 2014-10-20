@@ -27,7 +27,7 @@
                 </div><!-- /input-group -->
             </div>
         </div>
-
+        <div class="navbar-collapse collapse">
             <ul class=" nav navbar-nav navbar-right">
                 <% HttpSession sesion = null;
                     sesion = request.getSession();
@@ -80,7 +80,7 @@
                 <form role="form" id="formLogin" action="<%=request.getContextPath()%>/login" method="POST">
                     <div class="form-group">
                         <label for="nickLogin">Nickname / E-mail</label>
-                        <input type="text" class="form-control" name="nickLogin" id="nickLogin" placeholder="Ingrese Nickname o e-mail" required autofocus>
+                        <input type="text" class="form-control" name="nickLogin" id="nickLogin" placeholder="Ingrese Nickname o e-mail" autofocus required>
                     </div>
                     <div class="form-group">
                         <label for="passLogin">Password</label>
