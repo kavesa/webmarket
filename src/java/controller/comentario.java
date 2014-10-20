@@ -96,21 +96,28 @@ public class comentario extends HttpServlet {
             padre1 = Integer.parseInt(padre);
         }
         texto = request.getParameter("com");
-        String user = request.getParameter("user"); //esta tirando un objeto para la base en lugar de string
 
-        //DataComentario dc = new DataComentario(padre, "comentariode prueba", fecha);
-        DataComentario dc = new DataComentario(user, padre1, texto, fecha);
-
-        try {
-            Factory.getInstance().getProductoController().agregarComentario(idProd, dc);
-            request.getSession().setAttribute("success", "Comentario ingresado con éxito.");
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/InfoProducto?nocid="+idProd);
+        if (texto == null || texto.isEmpty()) {
+            request.getSession().setAttribute("error", "Debe ingresar el texto del comentario.");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/InfoProducto?nocid=" + idProd);
             dispatcher.forward(request, response);
-        } catch (ProductoException ex) {
-            Logger.getLogger(comentario.class.getName()).log(Level.SEVERE, null, ex);
+        } else {
+
+            String user = request.getParameter("user"); //esta tirando un objeto para la base en lugar de string
+
+            //DataComentario dc = new DataComentario(padre, "comentariode prueba", fecha);
+            DataComentario dc = new DataComentario(user, padre1, texto, fecha);
+
+            try {
+                Factory.getInstance().getProductoController().agregarComentario(idProd, dc);
+                request.getSession().setAttribute("success", "Comentario ingresado con éxito.");
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/InfoProducto?nocid=" + idProd);
+                dispatcher.forward(request, response);
+            } catch (ProductoException ex) {
+                Logger.getLogger(comentario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         }
-
-
     }
 
     /**
