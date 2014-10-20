@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="../../static/fonts/font-awesome/css/font-awesome.css">
     <link rel="shortcut icon" type="image/ico" href="../../static/img/faviconDM.ico">
     <link rel="stylesheet" href="../../static/css/base.css">
+    <link rel="stylesheet" href="../../static/css/datepickr.css">
 
     <script src="../../static/bootstrap/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
         
@@ -15,4 +16,5 @@
 
     <script src="../../static/js/jquery.js"></script>
     <script src="../../static/js/general.js"></script>
+    <script src="../../static/js/datepickr.js"></script>
     
