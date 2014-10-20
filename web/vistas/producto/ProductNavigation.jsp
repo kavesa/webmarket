@@ -26,7 +26,7 @@
     <body>
         <%@include file="../../WEB-INF/jspf/top.jspf" %>
         
-        <div class="col-md-3 col-sm-5" style="margin-top: 2em">
+        <div class="col-md-3 col-sm-5" style="margin-top: 2em; margin-bottom: 70px;">
             <div class="panel panel-default">
                 <div class="panel-heading small">
                     Categorias
@@ -38,7 +38,7 @@
             </div>
         </div>        
         
-        <div class="col-md-9 col-sm-9" style="margin-top: 2em; margin-bottom: 60px;">
+        <div class="col-md-9 col-sm-9" style="margin-top: 2em; margin-bottom: 70px;">
             <div class="panel panel-default">
                 <div class="panel-heading small">
                     Productos

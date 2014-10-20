@@ -64,7 +64,7 @@
                         background: #fff;
                     }
                 </style>
-                
+
                 <div class="col-sm-5 col-centered">
                     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                         <!-- Indicators -->
@@ -163,11 +163,11 @@
                         <div class="form-group">
                             <input type="hidden" class="form-control" name="idCom" id="idCom" placeholder="Ingrese id del comentario a responder (vacio es un comentario nuevo)." />
                         </div>
-                        <div class="form-group">
+                        <div class="form-group newcomment">
                             <label for="Comentario">Comentario</label>
                             <textarea class="form-control" name="com" id="com" placeholder="Ingrese comentario."></textarea>
+                            <button type="submit" id="btnGuardar" class="btn btn-success">Ingresar Comentario</button>
                         </div>
-                        <button type="submit" id="btnGuardar" class="btn btn-success">Ingresar Comentario</button>
                         <%}%>
                     </form>
                 </div>

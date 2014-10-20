@@ -36,9 +36,9 @@
         <div class="container-fluid">
             <form role="form" method="POST" action="/producto" enctype="multipart/form-data">
 
-                <h2>Alta de Producto</h2>
+                <h2 class="altaprod-title">Alta de Producto</h2>
                 <div id="rootwizard">
-                    <div class="navbar">
+                    <div class="navbar altaprod-navbar">
                         <div class="navbar-inner">
                             <div class="container">
                                 <!-- 1. Create the tabs themselves  -->
@@ -54,7 +54,7 @@
                     <!-- 2. Create progress bar -->
                     <!-- div class="progress" required. -->
                     <!-- on div id="progressBar" class="progress" required. -->
-                    <div class="progress">
+                    <div class="progress altaprod-progress">
                         <div id="progressBar" class="progress-bar progress-bar-striped active"  >
                             <div class="bar">
                                 <span></span>
