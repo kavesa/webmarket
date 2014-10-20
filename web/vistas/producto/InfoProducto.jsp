@@ -44,6 +44,8 @@
             <%}%>
             <div style="margin-top: 1em" class="row">
 
+                <h3 class="prod-title"><%=dProd.getNombre()%></h3>
+
                 <div style="margin-top: 1em" class="row col-sm-5 col-centered">
                     <%if (request.getAttribute("tipoU").equals("y")) {%>
                     <div class="col-sm-11 col-centered">
@@ -57,6 +59,12 @@
                     <%}%>
                 </div>
 
+                <style type="text/css">
+                    .item {
+                        background: #fff;
+                    }
+                </style>
+                
                 <div class="col-sm-5 col-centered">
                     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                         <!-- Indicators -->

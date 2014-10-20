@@ -18,7 +18,7 @@ body {
     float: right;
 }
 #bottom{
-  width: 100%;
+    width: 100%;
 }
 
 #perfil{
@@ -28,35 +28,35 @@ body {
 .listTitle
 {
     color: #CEECF5;
-  background-color: #0B4C5F;
+    background-color: #0B4C5F;
 }
 
 .listItem
 {
     color: #0B4C5F;
-  background-color: white;
+    background-color: white;
 }
 
 .imgMarco {
-  display: inline-block;
-  width:auto;
-  height:auto;
-  max-width:100%;
-  min-width: 80%;
-  max-height: 400px;
-  padding: 4px;
-  line-height: 1.42857143;
-  background-color: #0B4C5F;
-  border: 1px solid #CEECF5;
-  border-radius: 4px;
-  -webkit-transition: all .2s ease-in-out;
-          transition: all .2s ease-in-out;
+    display: inline-block;
+    width:auto;
+    height:auto;
+    max-width:100%;
+    min-width: 80%;
+    max-height: 400px;
+    padding: 4px;
+    line-height: 1.42857143;
+    background-color: #0B4C5F;
+    border: 1px solid #CEECF5;
+    border-radius: 4px;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
 }
 
 .perfDiv
 {
     margin-top: 1em;
-/*    background-color: #CEECF5;*/
+    /*    background-color: #CEECF5;*/
 }
 
 .treeSelectedDiv
@@ -78,6 +78,11 @@ h2{
     font-size: 52px;
     font-family: "trebuchet ms", sans-serif;    
 }
+
+h3.prod-title{
+    text-align: center;
+}
+
 .item{
     background: #333;    
     text-align: center;
@@ -87,14 +92,60 @@ h2{
     margin-top: 20px;
 }
 .bs-example{
-	margin: 20px;
+    margin: 20px;
 }
 
 body {
-     margin: 0;
-     background: url('http://www.epi.com.uy/back2.jpg');
-     background-size: 100% 100%;
-     background-repeat:repeat;
+    margin: 0;
+    background: url('http://www.epi.com.uy/back2.jpg');
+    background-size: 100% 100%;
+    background-repeat:repeat;
     display: compact;
-     font: 13px/18px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font: 13px/18px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.navbar-header {
+    background: url('../img/logodm.png') no-repeat -15px 0;
+    color: #FFF;
+    text-indent: -999em;
+    width: 310px;
+}
+.navbar-header:hover {
+    opacity: 0.4;
+}
+.navbar-header .navbar-brand {
+    width: 310px;
+    height: 60px;
+    padding: 10px;
+}
+.navbar-inverse .navbar-nav > li > a {
+    color: #fff !important;
+    padding-top: 10px;
+}
+.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
+    color: #0387d0 !important;
+}
+#bottom {
+    background: #03476d;
+    bottom: 0;
+    color: #fff;
+    height: 60px;
+    line-height: 37px;
+    padding: 15px 20px;
+    position: fixed;
+    z-index: 1030;
+}
+.container-fluid,
+.perfDiv {
+    margin-bottom: 60px !important;
+
+}
+p.footer-left {
+    float: left;
+}
+p.footer-right {
+    float: right;
+    padding-right: 40px;
+}
+p.footer-right img {
+    margin: -7px 0 0 15px;
 }

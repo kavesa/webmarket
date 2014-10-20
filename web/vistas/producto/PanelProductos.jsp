@@ -1,4 +1,3 @@
-
 <%@page import="controller.util"%>
 <%@page import="java.util.List"%>
 <%@page import="direct.market.datatype.DataEspecificacionProducto"%>
@@ -10,7 +9,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Informacion de compra</title>
+        <title>Direct Market</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">                   
         <link rel="stylesheet" href="../../static/jstree/themes/default/style.min.css" />

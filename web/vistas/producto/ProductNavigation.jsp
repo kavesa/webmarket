@@ -14,7 +14,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Informacion de compra</title>
+        <title>Direct Market</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <%@include file="../../WEB-INF/jspf/jscss.jspf" %>
@@ -38,7 +38,7 @@
             </div>
         </div>        
         
-        <div class="col-md-9 col-sm-9" style="margin-top: 2em">
+        <div class="col-md-9 col-sm-9" style="margin-top: 2em; margin-bottom: 60px;">
             <div class="panel panel-default">
                 <div class="panel-heading small">
                     Productos
@@ -49,8 +49,6 @@
             </div>
         </div>
                 
-        <div class="col-lg-12">
         <%@include file="../../WEB-INF/jspf/bottom.jspf" %>
-        </div>
     </body>
 </html>

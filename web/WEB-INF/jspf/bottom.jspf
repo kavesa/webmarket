@@ -1,10 +1,14 @@
 <%-- any content can be specified here e.g.: --%>
 <%@ page pageEncoding="UTF-8" %>
 <div class="container" id="bottom">
-                <hr>
-
-                <footer>
-                    <p>&copy; Direct Market 2014</p>
-                </footer>
-            </div>
-        </div> <!-- /container -->
+    <footer>
+        <p class="footer-left">&copy; Direct Market 2014</p>
+        <p class="footer-right">
+            <img src="../../static/img/apple40.png"/>
+            <img src="../../static/img/android40.png"/>
+            <img src="../../static/img/windows40.png"/>
+            <img src="../../static/img/blackberry40.png"/>
+        </p>
+    </footer>
+</div>
+</div> <!-- /container -->
