@@ -52,7 +52,7 @@ public class GetJSONcomentario extends HttpServlet {
 
                         jSONObject.put("id", dcomlist.get(i).getId());
                         jSONObject.put("parent", dcomlist.get(i).getParent());
-                        jSONObject.put("text", "<strong>" + dcomlist.get(i).getNickname() + " dijo el " + sdf.format(dcomlist.get(i).getFechaComentario()) + ": </strong><br>" + dcomlist.get(i).getComentario());
+                        jSONObject.put("text", "<strong>" + dcomlist.get(i).getNickname() + " respondio el " + sdf.format(dcomlist.get(i).getFechaComentario()) + ": </strong><br>" + dcomlist.get(i).getComentario());
                         //jSONObject.put("fecha", sdf.format(dcomlist.get(i).getFechaComentario()));
                         //jSONObject.put("nick", dcomlist.get(i).getNickname());
 
@@ -69,7 +69,7 @@ public class GetJSONcomentario extends HttpServlet {
                 JSONObject sinComent = new JSONObject();
                 sinComent.put("id", 0);
                 sinComent.put("parent", "#");
-                sinComent.put("text", "Nadie ha comentado aun, sea usted el primero en comentar");
+                sinComent.put("text", "Nadie ha comentado aun, sea usted el primero en comentar<br><strong>Debe comprar el producto para poder comentar sobre el mismo.</strong>");
                 jSONArray.add(sinComent);
             }
 
