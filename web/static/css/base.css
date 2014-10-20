@@ -161,10 +161,10 @@ p.footer-right img {
     padding-bottom: 10px;
 }
 .form-group.newcomment {
-margin: 0 10px;
+    margin: 0 10px;
 }
 .form-group.newcomment #btnGuardar.btn {
-margin-top: 10px;
+    margin-top: 10px;
 }
 .tab-content {
     padding: 10px;
@@ -174,4 +174,18 @@ margin-top: 10px;
 }
 .altaprod-progress {
     margin-bottom: 0;
+}
+.fileinput-preview.thumbnail {
+    background: url("../img/click-img.png") no-repeat scroll center 13px #fff;
+}
+#bottom, .navbar-inverse {
+    background: #044c93;
+    background: -moz-linear-gradient(top, #044c93 0%, #03476d 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#044c93), color-stop(100%,#03476d));
+    background: -webkit-linear-gradient(top, #044c93 0%,#03476d 100%);
+    background: -o-linear-gradient(top, #044c93 0%,#03476d 100%);
+    background: -ms-linear-gradient(top, #044c93 0%,#03476d 100%);
+    background: linear-gradient(to bottom, #044c93 0%,#03476d 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#044c93', endColorstr='#03476d',GradientType=0 );
+    border:none !important;
 }
