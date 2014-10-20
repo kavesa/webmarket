@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <%@include file="WEB-INF/jspf/jscss.jspf" %>
+    </head>
     <body>
         <section>
 
