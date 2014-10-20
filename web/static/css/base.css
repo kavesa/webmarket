@@ -79,6 +79,12 @@ h2{
     font-family: "trebuchet ms", sans-serif;    
 }
 
+h2.altaprod-title {
+    margin: 0 0 20px;     
+    padding-top: 60px;
+    font-size: 36px;
+}
+
 h3.prod-title{
     text-align: center;
 }
@@ -97,7 +103,7 @@ h3.prod-title{
 
 body {
     margin: 0;
-    background: url('http://www.epi.com.uy/back2.jpg');
+    background: url('../img/white-background1.jpg');
     background-size: 100% 100%;
     background-repeat:repeat;
     display: compact;
@@ -148,4 +154,24 @@ p.footer-right {
 }
 p.footer-right img {
     margin: -7px 0 0 15px;
+}
+#us, #formComentario, .tab-content {
+    background: transparent url("../img/form-bg.png") repeat 0 0;
+    margin-bottom: 70px;
+    padding-bottom: 10px;
+}
+.form-group.newcomment {
+margin: 0 10px;
+}
+.form-group.newcomment #btnGuardar.btn {
+margin-top: 10px;
+}
+.tab-content {
+    padding: 10px;
+}
+.altaprod-navbar {
+    margin-bottom: -8px;
+}
+.altaprod-progress {
+    margin-bottom: 0;
 }
