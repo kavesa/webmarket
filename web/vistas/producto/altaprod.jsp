@@ -83,7 +83,7 @@
                                 <span id="spRefProd" class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
                                 <label id="LblRefProdMsg" class="control-label small">Debe ingresar una referencia para el producto.</label>
                                 <span id="spRefProdError" class="glyphicon glyphicon-remove form-control-feedback"></span>
-                                <label id="LblRefProdError" class="control-label small">Este n�mero de referencia ya se encuentra ingresado.</label>
+                                <label id="LblRefProdError" class="control-label small">Este numero de referencia ya se encuentra ingresado.</label>
                             </div>
 
                             <!-- Text input-->
