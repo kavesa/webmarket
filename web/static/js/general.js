@@ -1,13 +1,13 @@
 //cuando la pag esta lista realiza las setea los atributos 
 $(document).ready(function() {
     $.ajax({
-                    type: "get",
-                    url: "PanelProductos",
-                    cache: "false",
-                    success: function(data){
-                     $("#productos").load("/vistas/producto/PanelProductos.jsp");
-                    }
-                });
+        type: "get",
+        url: "PanelProductos",
+        cache: "false",
+        success: function(data) {
+            $("#productos").load("/vistas/producto/PanelProductos.jsp");
+        }
+    });
     $("#LblNickError").hide();
     $("#SpNick").hide();
     $("#LblMailError").hide();
@@ -63,7 +63,8 @@ $(document).ready(function() {
             event.preventDefault();
         }
     });
-     $("#formCar").submit(function(event) {
+
+    $("#formCar").submit(function(event) {
         if ($("#cant").val() < 1) {
             $("#cant").focus();
             window.alert("La cantidad debe ser mayor a 0.");
@@ -76,7 +77,7 @@ $(document).ready(function() {
         $.ajax({
             type: "post",
             url: "cheqProdAjax",
-            data: {'nocid': valor.value, 'op': "RefProd", 'nomRef':valor.value}, //Parametro enviados a la acción
+            data: {'nocid': valor.value, 'op': "RefProd", 'nomRef': valor.value}, //Parametro enviados a la acción
             cache: false,
             dataType: 'json',
             success: function(data) {
