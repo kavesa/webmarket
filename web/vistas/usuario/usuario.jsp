@@ -26,12 +26,12 @@
                         session.setAttribute("error", null);
                         String success = (String) session.getAttribute("success");
                         session.setAttribute("success", null);
-                        
+
                     %>
                     <%if (error != null) {%>
-                        <div class="alert alert-danger"><%=error%></div>
+                    <div class="alert alert-danger"><%=error%></div>
                     <%} else if (success != null) {%>
-                        <div class="alert alert-success"><%=success%></div>
+                    <div class="alert alert-success"><%=success%></div>
                     <%}%>
 
                     <h3>Alta de Usuario</h3>
@@ -73,7 +73,7 @@
                         </div>
                         <div class="form-group">
                             <label for="fec-nac">Fecha Nacimiento</label>
-                            <input type="date" class="form-control" name="fecNac" id="fecNac" required>
+                            <input type="text" class="form-control" name="fecNac" id="fecNac" placeholder="aaaa-mm-dd" required>
                         </div>
                         <div class="form-group" id="divNom-comp">
                             <label for="nom-comp">Empresa</label>
@@ -91,6 +91,11 @@
                         </div>
                         <button type="submit" id="btnGuardar" class="btn btn-success">Guardar</button>
                     </form>
+                    <script type="text/javascript">
+                                new datepickr('fecNac', {
+                                    'dateFormat': 'Y-m-d'
+                                });
+                    </script>
                 </div>
             </div>
             <%@include file="../../WEB-INF/jspf/bottom.jspf" %>
