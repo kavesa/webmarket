@@ -16,15 +16,6 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Informacion de Producto</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="../../static/jstree/themes/default/style.css" />
-        <%@include file="../../WEB-INF/jspf/jscss.jspf" %>
-    </head>
-    <body>
-        <%@include file="../../WEB-INF/jspf/top.jspf" %>
-
         <%
             DataProducto dProd = (DataProducto) request.getAttribute("datosProd");
             List<DataCategoria> catList = (List<DataCategoria>) request.getAttribute("pCat");
@@ -36,6 +27,15 @@
             session.setAttribute("success", null);
             session.setAttribute("ref", dProd.getReferencia());
         %>
+        <title><%=dProd.getNombre()%> | Informacion de Producto</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../../static/jstree/themes/default/style.css" />
+        <%@include file="../../WEB-INF/jspf/jscss.jspf" %>
+    </head>
+    <body>
+        <%@include file="../../WEB-INF/jspf/top.jspf" %>
+
         <div style="margin-bottom: 1em" class="col-sm-11 col-centered perfDiv">
             <%if (error != null) {%>
             <div class="alert alert-danger"><%=error%></div>
@@ -140,7 +140,7 @@
                 <div style="margin-top: 1em" class="col-sm-11 col-centered">
                     <ul class="list-group">
                         <li style="text-align: center"class="list-group-item listTitle"><strong>Especificacion</strong></li>
-                        <li class="list-group-item listItem"><%=dEsp.getEspecificacion()%></li>
+                        <li class="list-group-item listItem"><%=dEsp.getEspecificacion().replace("\n", "<br/>\n")%></li>
                     </ul>
                 </div>
             </div>
@@ -202,7 +202,6 @@
                             "animation": 0,
                             "check_callback": true,
                             "themes": {
-                                "stripes": true,
                                 "theme": "default",
                                 "dots": false,
                                 "icons": false
