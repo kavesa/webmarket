@@ -69,7 +69,7 @@ public class GetJSONcomentario extends HttpServlet {
                 JSONObject sinComent = new JSONObject();
                 sinComent.put("id", 0);
                 sinComent.put("parent", "#");
-                sinComent.put("text", "Nadie ha comentado aun, sea usted el primero en comentar<br><strong>Debe comprar el producto para poder comentar sobre el mismo.</strong>");
+                sinComent.put("text", "<strong>Nadie ha comentado aun, sea usted el primero en comentar.</strong>");
                 jSONArray.add(sinComent);
             }
 
