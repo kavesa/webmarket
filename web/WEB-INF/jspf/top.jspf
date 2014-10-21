@@ -26,8 +26,8 @@
                         
                 </div><!-- /input-group -->
             </div>
-        </div>
-        <div class="navbar-collapse collapse">
+<!--        </div>
+        <div class="navbar-collapse collapse">-->
             <ul class=" nav navbar-nav navbar-right">
                 <% HttpSession sesion = null;
                     sesion = request.getSession();

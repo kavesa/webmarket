@@ -116,7 +116,7 @@ body {
     width: 310px;
 }
 .navbar-header:hover {
-    opacity: 0.4;
+    background: url('../img/logodm2.gif') no-repeat -15px 0;
 }
 .navbar-header .navbar-brand {
     width: 310px;
@@ -155,10 +155,13 @@ p.footer-right {
 p.footer-right img {
     margin: -7px 0 0 15px;
 }
-#us, #formComentario, .tab-content {
+#us, .tab-content {
     background: transparent url("../img/form-bg.png") repeat 0 0;
     margin-bottom: 70px;
     padding-bottom: 10px;
+}
+#formComentario {
+    background: #fff;
 }
 .form-group.newcomment {
     margin: 0 10px;
@@ -188,4 +191,80 @@ p.footer-right img {
     background: linear-gradient(to bottom, #044c93 0%,#03476d 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#044c93', endColorstr='#03476d',GradientType=0 );
     border:none !important;
+}
+.panel-body, .panel-default {
+    background: transparent url("../img/form-bg.png") repeat 0 0 !important;
+}
+.panel-default > .panel-heading, .listTitle {
+    background-color: #044c93 !important;
+    color: #fff !important;
+    font-size: 13px;
+    font-weight: bold;
+}
+.carousel-control.right {
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 0.3) 100%);
+}
+.carousel-control.left {
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.3) 0px, rgba(0, 0, 0, 0) 100%);
+}
+.carousel-inner > .active {
+    padding: 10px 20px;
+}
+.carousel-inner > .item > img, .carousel-inner > .item > a > img {
+    line-height: 1;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+/* hardcoded styles */
+.carousel-inner > .active img{
+    max-height: 96%;
+    max-width: 96%;
+}
+.comment-node {
+    background: #fff;
+}
+.carousel-indicators {
+    bottom: 0;
+}
+.carousel-indicators .active {
+    background-color: #044c93;
+}
+.carousel-indicators li {
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid #044c93;
+}
+.prod-panel-thumb {
+    padding: 7px;
+}
+.prod-panel-thumb img {
+    margin-top: 0 !important;
+    max-height: 95%;
+    max-width: 95%;
+    position: absolute;
+    top: 23%;
+    left: 31%;
+    transform: translateY(-25%);
+}
+#treecom {
+    width: 56%;
+    text-align: justify;
+    margin: 20px auto 0;
+}
+.jstree-wholerow-ul {
+    width: 98%;
+}
+.jstree-default li {
+    width: 97%;
+}
+
+.comment-node {
+    background: none repeat scroll 0 0 #fff;
+    border-bottom: 1px dotted #044c93;
+    margin: 0 0 20px;
+    padding: 0 0 15px;
+}
+.comment-node > strong {
+    color: #03476d;
+    font-size: 14px;
 }
