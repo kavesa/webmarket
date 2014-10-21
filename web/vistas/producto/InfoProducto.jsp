@@ -154,7 +154,9 @@
                             <li style="text-align: center" class="list-group-item listTitle"><span class="glyphicon glyphicon-thumbs-up"></span><strong> Comentarios </strong><span class="glyphicon glyphicon-thumbs-down"></span></li>
                                     <%if ((Boolean) request.getAttribute("usuarioCompro")) {%>
                             <li style="text-align: center" class="list-group-item listTitle">Haga clic en un comentario para responderlo</li>
-                                <%}%>
+                                <%}else{%>
+                            <li style="text-align: center" class="list-group-item listTitle">Debe comprar el producto para poder comentar</li>
+                            <%}%>
                             <div id="treecom" class="col-sm-11 col-centered"></div>
                         </ul>
                         <input name="numRefProd" type="text" value="<%=dProd.getReferencia()%>" hidden="true"/>
