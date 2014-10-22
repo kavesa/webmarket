@@ -178,7 +178,7 @@ p.footer-right img {
 .altaprod-progress {
     margin-bottom: 0;
 }
-.fileinput-preview.thumbnail {
+.fileinput-new .fileinput-preview.thumbnail {
     background: url("../img/click-img.png") no-repeat scroll center 13px #fff;
 }
 #bottom, .navbar-inverse {
@@ -210,7 +210,7 @@ p.footer-right img {
 .carousel-inner > .active {
     padding: 10px 20px;
 }
-.carousel-inner > .item > img, .carousel-inner > .item > a > img {
+.carousel-inner > .item > img, .carousel-inner > .item > a > img, .fileinput .thumbnail > img {
     line-height: 1;
     position: relative;
     top: 50%;
@@ -269,64 +269,87 @@ p.footer-right img {
     font-size: 14px;
 }
 /* jstree */
-.tree {
-    min-height:20px;
-    padding:19px;
-    margin-bottom:20px;
-    background-color:#fbfbfb;
-    border:1px solid #999;
-    -webkit-border-radius:4px;
-    -moz-border-radius:4px;
-    border-radius:4px;
-    -webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);
-    -moz-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);
-    box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05)
+.treeDiv .jstree-disabled, .treeDiv .jstree-node.jstree-leaf .jstree-anchor {
+    border-radius: 4px;
+    color: #666;
+    height: 26px !important;
+    margin-bottom: 7px;
+    padding: 1px 4px;
 }
-.tree li {
-    list-style-type:none;
-    margin:0;
-    padding:10px 5px 0 5px;
-    position:relative
+.treeDiv .jstree-disabled {
+    background: none repeat scroll 0 0 #eee !important;
+    border: 1px solid #999;
 }
-.tree li::before, .tree li::after {
-    content:'';
-    left:-20px;
-    position:absolute;
-    right:auto
+.treeDiv .jstree-node.jstree-leaf .jstree-anchor {
+    background: none repeat scroll 0 0 #87b7e6 !important;
+    border: 1px solid #044c93;
+    color: #333 !important;
 }
-.tree li::before {
-    border-left:1px solid #999;
-    bottom:50px;
-    height:100%;
-    top:0;
-    width:1px
+.treeDiv .jstree-closed .jstree-themeicon,
+.treeDiv ul li ul li.jstree-closed .jstree-themeicon {
+    background: url("../img/plus.png") no-repeat scroll 5px 5px rgba(0, 0, 0, 0) !important;
 }
-.tree li::after {
-    border-top:1px solid #999;
-    height:20px;
-    top:25px;
-    width:25px
+.treeDiv .jstree-open .jstree-themeicon {
+    background: url("../img/minus.png") no-repeat scroll 5px 5px rgba(0, 0, 0, 0) !important;
 }
-.tree li span {
-    -moz-border-radius:5px;
-    -webkit-border-radius:5px;
-    border:1px solid #999;
-    border-radius:5px;
-    display:inline-block;
-    padding:3px 8px;
-    text-decoration:none
+.treeDiv .jstree-ocl {
+    background: none !important;
+    margin-right: -26px !important;
+    position: relative;
+    z-index: 9999;
 }
-.tree li.parent_li>span {
-    cursor:pointer
+.treeDiv ul li ul li.jstree-leaf .jstree-themeicon, 
+.treeDiv ul li.jstree-leaf .jstree-themeicon {
+    background: url("../img/tick.png") no-repeat scroll 5px 6px rgba(0, 0, 0, 0) !important;
 }
-.tree>ul>li::before, .tree>ul>li::after {
-    border:0
+.treeDiv .jstree-disabled:hover {
+    background: none repeat scroll 0 0 #ddd !important;
 }
-.tree li:last-child::before {
-    height:30px
+.treeDiv .jstree-node.jstree-leaf .jstree-anchor:hover {
+    background: none repeat scroll 0 0 #cde2f7 !important;
+    border: 1px solid #044c93;
 }
-.tree li.parent_li>span:hover, .tree li.parent_li>span:hover+ul li span {
-    background:#eee;
-    border:1px solid #94a0b4;
-    color:#000
+.treeDiv .jstree-node.jstree-leaf .jstree-anchor.jstree-clicked {
+    background: none repeat scroll 0 0 #7cc57c !important;
+    border: 1px solid #194b19;
+    color: #194b19 !important;
+}
+/* Top Buscador */
+#buscador .input-group {
+    float: left;
+    width: 100%;
+}
+#buscador input {
+    width: 92%;
+}
+#buscador .btn-default {
+    border: none !important;
+}
+#buscador .input-group button {
+    float: left;
+    margin-left: -1px;
+    margin-top: -2px;
+    padding: 0;
+    line-height: 1.31857 !important;
+}
+#productosEncontrados {
+    margin: 28px auto 70px;
+    width: 70%;
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) { 
+    #buscador .input-group button {
+        margin-top: -1px;
+        max-width: 39px;
+        max-height: 36px;
+    } 
+    #formUsuario .btn.btn-success {
+        margin-top: -4%;
+    }
+}
+#formUsuario .btn.btn-success {
+    float: right;
+    margin-top: 16%;
+}
+#formUsuario .center-block, #formProducto .center-block {
+    text-align: center;
 }
