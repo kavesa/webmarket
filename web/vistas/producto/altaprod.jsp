@@ -34,7 +34,7 @@
         <%}%>
 
         <div class="container-fluid">
-            <form role="form" method="POST" action="/producto" enctype="multipart/form-data">
+            <form role="form" id="formProducto" method="POST" action="/producto" enctype="multipart/form-data">
 
                 <h2 class="altaprod-title">Alta de Producto</h2>
                 <div id="rootwizard">

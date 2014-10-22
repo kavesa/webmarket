@@ -28,6 +28,7 @@
                             byte[] imagenbyte = imagenesbyte.get(0);
                             imagen = util.byteImgToBase64(imagenbyte);
             %>
+
             <div class="col-sm-5 col-md-2" style="margin: 1em">
                 <div class="thumbnail prod-panel-thumb" style="height: 170px; width: 170px;" >
                     <a href="InfoProducto?nocid=<%=dp.getReferencia()%>">
