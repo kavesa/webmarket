@@ -11,6 +11,7 @@
         <title>Registro Usuario</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../../static/jasny-bootstrap/css/jasny-bootstrap.min.css" />
         <%@include file="../../WEB-INF/jspf/jscss.jspf" %>
     </head>
     <body>
@@ -83,13 +84,25 @@
                             <label for="url">Dirección Web</label>
                             <input type="text" pattern="^([a-zA-Z]{2,3}([w]*)*.([0-9a-zA-Z][-w]*[0-9a-zA-Z].)+([a-zA-Z]{0,9}.)+[a-zA-Z]{2,3})$" class="form-control" name="url" id="url" placeholder="Ingrese Direccion Web" required>
                         </div>
-                        <div class="form-group" id="divImgUser">
-                            <label class="control-label"id="LblImgUser" for="img">Imagen</label>
-                            <input type="file" class="form-control" name="imgUser" id="imgUser" onchange="checkFile();">
-                            <span id="SpImg" class="glyphicon glyphicon-remove form-control-feedback"></span>
-                            <label id="LblImgUserError" class="control-label small">Archivo incorrecto, los tipos permitidos son: jpg, jpeg, png.</label>
+                        <!--                        <div class="form-group" id="divImgUser">
+                                                    <label class="control-label"id="LblImgUser" for="img">Imagen</label>
+                                                    <input type="file" class="form-control" name="imgUser" id="imgUser" onchange="checkFile();">
+                                                    <span id="SpImg" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                                                    <label id="LblImgUserError" class="control-label small">Archivo incorrecto, los tipos permitidos son: jpg, jpeg, png.</label>
+                                                </div>-->
+                        <script src="../../static/jasny-bootstrap/js/jasny-bootstrap.min.js"></script>     
+                        <div id="fotoUsuario">
+                            <label for="imgUser">Foto del Usuario</label>
                         </div>
-                        <button type="submit" id="btnGuardar" class="btn btn-success">Guardar</button>
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                            <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+                            <div class="center-block">
+                                <span class="btn btn-primary btn-file"><span class="fileinput-new">Seleccionar Imagen</span><span class="fileinput-exists">Cambiar</span><input type="file" name="imgUser" id="imgUser" /></span>
+                                <a href="#" class="btn btn-warning fileinput-exists" data-dismiss="fileinput">Quitar</a>
+                            </div>
+                        </div>
+
+                        <button type="submit" id="btnGuardar" class="btn btn-success">Crear Usuario</button>
                     </form>
                     <script type="text/javascript">
                                 new datepickr('fecNac', {
