@@ -7,6 +7,7 @@ package controller;
 import direct.market.datatype.DataProducto;
 import direct.market.exceptions.CategoryException;
 import direct.market.exceptions.ProductoException;
+import direct.market.exceptions.UsuarioException;
 import direct.market.factory.Factory;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -41,7 +42,7 @@ public class buscador extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            String stringBuscado = ((String) request.getParameter("a_buscar")).trim();
+            String stringBuscado = request.getParameter("a_buscar").trim();
             if (stringBuscado.length() < 3) {
                 request.setAttribute("error", "La palabra buscada debe tener al menos 3 letras");
                 //request.getRequestDispatcher("/vistas/producto/ProductNavigation.jsp").forward(request, response);
@@ -69,17 +70,19 @@ public class buscador extends HttpServlet {
                     noencontrado.put("result_search", false);
                     out.print(noencontrado);
                 } else {
-
-                    request.setAttribute("result_search", listResult);
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("/vistas/producto/SearchProductos.jsp");
-                    dispatcher.forward(request, response);
 //                    request.setAttribute("result_search", listResult);
+//                    request.getRequestDispatcher("/vistas/producto/SearchProductos.jsp").forward(request, response);
+                    //                    request.setAttribute("result_search", listResult);
 //                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/vistas/producto/SearchProductos.jsp");
 //                    dispatcher.forward(request, response);
                 }
+                request.setAttribute("result_search", listResult);
+                RequestDispatcher rd1 = request.getRequestDispatcher("/vistas/producto/SearchProductos.jsp");
+                rd1.forward(request, response);
             }
-        } finally {
-            out.close();
+
+        } catch (CategoryException ex) {
+            Logger.getLogger(InfoProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
