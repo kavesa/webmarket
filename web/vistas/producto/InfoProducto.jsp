@@ -120,7 +120,7 @@
                         <li style="text-align: center" class="list-group-item listTitle"><strong>Informacion de Producto</strong></li>
                         <li class="list-group-item listItem">Numero de referencia: <%=dProd.getReferencia()%></li>
                         <li class="list-group-item listItem">Nombre: <%=dProd.getNombre()%></li>
-                        <li class="list-group-item listItem">Proveedor: <%=dProd.getDataProveedor().getNickname()%></li>
+                        <li class="list-group-item listItem">Proveedor: <%=dProd.getDataProveedor().getCompania()%></li>
                         <li class="list-group-item listItem">Precio: <%=dProd.getDataEspecificacion().getPrecio()%></li>
                         <li class="list-group-item listItem">Categorias: 
                             <%
