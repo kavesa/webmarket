@@ -33,9 +33,9 @@
         <%} else if (success != null) {%>
         <div class="alert alert-success"><%=success%></div>
         <%}%>
-        <div id="carrito" style="margin-top: 2em; margin-left: 4em; margin-right: 4em" class=" panel-info"> 
-            <div class=" panel-heading"> Carrito </div>
-            <div class=" panel-body">
+        <div id="carrito" style="margin-top: 2em; margin-left: 4em; margin-right: 4em" class="panel-default panel-info"> 
+            <div class="panel-heading"> Carrito </div>
+            <div class="panel-body">
 
                 <form action="<%=request.getContextPath()%>/GenerarOrdenCompraServlet" method="POST">
 

@@ -216,7 +216,6 @@
                                 </div>
 
                             </div>
-                            <p>Maximo: 3 imagenes</p>
                         </div>
 
                         <!-- 4. Declare buttons used by the wizard. -->

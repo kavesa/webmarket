@@ -20,7 +20,7 @@
         <%@include file="../../WEB-INF/jspf/top.jspf" %>
         <div id="productosEncontrados" class="row">
             <div class="panel panel-default">
-                <div class="panel-heading small">Resultados de Búsqueda </div>
+                <div class="panel-heading small">Resultados de la B&uacute;squeda </div>
                 <div class="panel-body small">
                     <%
                         List<DataProducto> resultList = (List<DataProducto>) request.getAttribute("result_search");

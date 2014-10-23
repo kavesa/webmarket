@@ -21,6 +21,7 @@
     </head>
     <body>
         <%@include file="../../WEB-INF/jspf/top.jspf" %>
+                <h2 class="perfil-title">Mi Perfil</h2>
 
         <%
             DataUsuario usu = (DataUsuario)  request.getAttribute("usuario");
@@ -30,7 +31,7 @@
         %>
         <div class="row">
             <!--IMG PERFIL -->
-            <div style="background-color: black"class="col-sm-4 col-centered">
+            <div class="col-sm-4 col-centered col-perfil">
                 <div class="col-sm-8 perfDiv">
                 <span style="display:block;text-align:center;" >
                     <img style="margin-top: 1em" class="img-responsive imgMarco" src="<%=imgBase64%>" alt="Imagen de Perfil">
