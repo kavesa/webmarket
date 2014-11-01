@@ -43,11 +43,13 @@ $(document).ready(function() {
         if ($(this).val() == "Cliente") {
             $("#divNom-comp").hide();
             $("#divDir-web").hide();
+            $("#divMailing").show();
             $("#nom-comp").prop("required", false);
             $("#url").prop("required", false);
             $("#nom-comp").val("");
             $("#url").val("");
         } else {
+            $("#divMailing").hide();
             $("#divNom-comp").show();
             $("#divDir-web").show();
             $("#nom-comp").prop("required", true);
