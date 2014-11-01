@@ -78,7 +78,7 @@
                         </div>
                         <div class="form-group" id="divNom-comp">
                             <label for="nom-comp">Empresa</label>
-                            <input type="text" class="form-control" name="nom-comp" id="nom-comp" placeholder="Ingrese Nombre de la Empresa"required>
+                            <input type="text" class="form-control" name="nom-comp" id="nom-comp" placeholder="Ingrese Nombre de la Empresa" required>
                         </div>
                         <div class="form-group" id="divDir-web">
                             <label for="url">Dirección Web</label>
@@ -100,6 +100,10 @@
                                 <span class="btn btn-primary btn-file"><span class="fileinput-new">Seleccionar Imagen</span><span class="fileinput-exists">Cambiar</span><input type="file" name="imgUser" id="imgUser" /></span>
                                 <a href="#" class="btn btn-warning fileinput-exists" data-dismiss="fileinput">Quitar</a>
                             </div>
+                        </div>
+                        <div class="form-group checkbox" id="divMailing">
+                            <label for="nom-comp">Desea recibir informacion sumamente interesante?</label>
+                            <input type="checkbox" class="form-control" name="mailing" id="mailing" checked>
                         </div>
 
                         <button type="submit" id="btnGuardar" class="btn btn-success">Crear Usuario</button>

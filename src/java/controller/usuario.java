@@ -7,18 +7,14 @@ package controller;
 import direct.market.enums.UsuarioType;
 import direct.market.exceptions.UsuarioException;
 import direct.market.factory.Factory;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.URL;
-import java.nio.charset.Charset;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -102,6 +98,7 @@ public class usuario extends HttpServlet {
         try {
             String tipoForm = "", nickForm, passForm, nomForm, apeForm, mailForm, fecNacForm,
                     nomCompForm = "", urlForm = "";
+            boolean mailing = false;
 
             nickForm = request.getParameter("nickname");
             passForm = request.getParameter("repass");
@@ -126,6 +123,7 @@ public class usuario extends HttpServlet {
             String tipo;
             if (tipoForm.equals("Cliente")) {
                 tipo = UsuarioType.CLIENTE.name();
+                mailing = request.getParameter("mailing").equals("true");
             } else {
                 tipo = UsuarioType.PROVEEDOR.name();
                 nomCompForm = request.getParameter("nom-comp");
@@ -133,7 +131,7 @@ public class usuario extends HttpServlet {
             }
             //impacta en bd
             //Factory.getInstance().getUsuarioController().altaUsuario(nickForm, passForm, nomForm, apeForm, fechaDate, mailForm, ubicacionBd, tipo, nomCompForm, urlForm);
-            Factory.getInstance().getUsuarioController().altaUsuario(nickForm, passForm, nomForm, apeForm, fechaDate, mailForm, foto, tipo, nomCompForm, urlForm);
+            Factory.getInstance().getUsuarioController().altaUsuario(nickForm, passForm, nomForm, apeForm, fechaDate, mailForm, foto, tipo, nomCompForm, urlForm, mailing);
             //mensaje de success y redirige a usuario
             request.getSession().setAttribute("success", "Usuario Creado Correctamente.");
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/vistas/usuario/usuario.jsp");
