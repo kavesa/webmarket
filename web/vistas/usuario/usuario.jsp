@@ -102,7 +102,7 @@
                             </div>
                         </div>
                         <div class="form-group checkbox" id="divMailing">
-                            <label for="nom-comp">Desea recibir informacion sumamente interesante?</label>
+                            <label for="nom-comp">Desea recibir spam sumamente interesante?</label>
                             <input type="checkbox" class="form-control" name="mailing" id="mailing" checked>
                         </div>
 
