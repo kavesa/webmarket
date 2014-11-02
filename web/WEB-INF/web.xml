@@ -52,6 +52,10 @@
         <servlet-name>buscador</servlet-name>
         <servlet-class>controller.buscador</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Mailing</servlet-name>
+        <servlet-class>controller.Mailing</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>index</servlet-name>
         <url-pattern>/index</url-pattern>
@@ -103,6 +107,10 @@
     <servlet-mapping>
         <servlet-name>buscador</servlet-name>
         <url-pattern>/buscador</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Mailing</servlet-name>
+        <url-pattern>/Mailing</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
