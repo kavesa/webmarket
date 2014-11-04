@@ -21,6 +21,23 @@
     </head>
     <body>
         <%@include file="../../WEB-INF/jspf/top.jspf" %>
+
+        <%
+
+            String error = (String) session.getAttribute("error");
+            session.setAttribute("error", null);
+            String success = (String) session.getAttribute("success");
+            session.setAttribute("success", null);
+
+        %>
+
+        <%if (error != null) {%>
+        <div class="alert alert-danger"><%=error%></div>
+        <%} else if (success != null) {%>
+        <div class="alert alert-success"><%=success%></div>
+        <%}%>
+
+
         <h2 class="perfil-title">Mi Perfil</h2>
 
         <%
@@ -49,25 +66,18 @@
                         <li class="list-group-item listItem">Direccion web: <%= usu.getWebLink()%></li>
                             <% } else {%>
                         <li class="list-group-item listItem">Notificaciones: <%= usu.isMailing() ? "SI" : "NO"%></li>
-                        <form role="form" id="formMailing" action="<%=request.getContextPath()%>/Mailing" method="POST" enctype="text/plain">
-                            <input type="hidden" class="form-control" name="nickname" id="nickname" value="<%= usu.getNickname()%>"/>
-                            <button type="submit" name="mailing" value="alta" id="btnSImailing" class="btn btn-success">Deseo Recibir Notificaciones</button>
-                            <button type="submit" name="mailing" value="baja" id="btnNOmailing" class="btn btn-danger">NO Deseo Recibir Notificaciones</button>
+<!--                        <form role="form" id="formMailing" action="<%=request.getContextPath()%>/Mailing" method="POST" enctype="text/plain">
+                            <input type="hidden" class="form-control" name="nickform" id="nickform" value="<%= usu.getNickname()%>"/>
+                            <input type="submit" name="btnMailingSI" value="SI" id="btnMailingSI" class="btn btn-success"/>
+                            <input type="submit" name="btnMailingNO" value="NO" id="btnMailingNO" class="btn btn-danger"/>
+                        </form>-->
+
+                        <form id="formMailing" action="<%=request.getContextPath()%>/Mailing" method="POST">
+                            <input type="submit" name="botonsi" value="Deseo recibir notificaciones" class="btn btn-success"/>
+                            <input type="submit" name="botonno" value="NO deseo recibir mas notificaciones" class="btn btn-danger"/>
                         </form>
+
                         <% }%>
-                        <%
-
-                            String error = (String) session.getAttribute("error");
-                            session.setAttribute("error", null);
-                            String success = (String) session.getAttribute("success");
-                            session.setAttribute("success", null);
-
-                        %>
-                        <%if (error != null) {%>
-                        <div class="alert alert-danger"><%=error%></div>
-                        <%} else if (success != null) {%>
-                        <div class="alert alert-success"><%=success%></div>
-                        <%}%>
 
                     </ul>
                 </div>
