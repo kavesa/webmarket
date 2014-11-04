@@ -34,18 +34,6 @@ public class Mailing extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            String usuario = request.getParameter("nickname");
-            //Defino si el usuario apreto boton de ALTA o BAJA de mailing
-            if (request.getAttribute("mailing").equals("alta")) { //ALTA de mailing
-                Factory.getInstance().getUsuarioController().cambiarMailing(usuario, true);
-            } else { //BAJA de mailing
-                Factory.getInstance().getUsuarioController().cambiarMailing(usuario, false);
-            }
-            
-            request.getSession().setAttribute("success", "Configuracion guardada.");
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/vistas/usuario/Perfil.jsp");
-            dispatcher.forward(request, response);
-
             /* TODO output your page here. You may use following sample code. */
 //            out.println("<!DOCTYPE html>");
 //            out.println("<html>");
@@ -89,7 +77,29 @@ public class Mailing extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        PrintWriter out = response.getWriter();
+
+        if (request.getSession().getAttribute("usuario") != null) {
+
+            String nickuser = request.getSession().getAttribute("usuario").toString();
+
+            //Defino si el usuario apreto boton de ALTA o BAJA de mailing
+            if (request.getParameter("botonsi") != null) { //ALTA de mailing
+                Factory.getInstance().getUsuarioController().cambiarMailing(nickuser, true);
+            } else if (request.getParameter("botonno") != null) { //BAJA de mailing
+                Factory.getInstance().getUsuarioController().cambiarMailing(nickuser, false);
+            }
+
+            request.getSession().setAttribute("success", "Configuracion guardada.");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/Perfil");
+            dispatcher.forward(request, response);
+        } else {
+            request.getSession().invalidate();
+            response.sendRedirect("index.jsp");
+
+        }
+
     }
 
     /**

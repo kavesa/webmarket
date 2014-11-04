@@ -37,7 +37,6 @@ public class Perfil extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             HttpSession sesion=request.getSession();
-            //sesion.setAttribute("usuario", "dan");
             String loUsNick=(String)sesion.getAttribute("usuario");
             DataUsuario du2;
             du2 = Factory.getInstance().getUsuarioController().getDataProveedor(loUsNick);
