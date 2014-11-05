@@ -154,9 +154,9 @@
                             <li style="text-align: center" class="list-group-item listTitle"><span class="glyphicon glyphicon-thumbs-up"></span><strong> Comentarios </strong><span class="glyphicon glyphicon-thumbs-down"></span></li>
                                     <%if ((Boolean) request.getAttribute("usuarioCompro")) {%>
                             <li style="text-align: center" class="list-group-item listTitle">Haga clic en un comentario para responderlo</li>
-                                <%}else{%>
+                                <%} else {%>
                             <li style="text-align: center" class="list-group-item listTitle">Debe comprar el producto para poder comentar</li>
-                            <%}%>
+                                <%}%>
                             <div id="treecom" class="col-sm-11 col-centered"></div>
                         </ul>
                         <input name="numRefProd" type="text" value="<%=dProd.getReferencia()%>" hidden="true"/>
@@ -174,6 +174,25 @@
                     </form>
                 </div>
             </div>
+            <!--Ingreso de Reclamo-->
+            <%if ((Boolean) request.getAttribute("usuarioCompro")) {%>
+            <div class="row col-sm-11 col-centered">
+                <div style="margin-top: 1em; margin-bottom: 1em" class="col-sm-11 col-centered">
+                    <form role="form" id="formReclamo" action="<%=request.getContextPath()%>/IngresarReclamo" method="POST">
+                        <input name="numRefProd" type="text" value="<%=dProd.getReferencia()%>" hidden="true"/>
+                        <input name="user" type="text" value="<%=request.getSession().getAttribute("usuario")%>" hidden="true"/>
+                      
+                        <div class="form-group newcomment">
+                            <label for="Reclamo">Reclamo</label>
+                            <textarea class="form-control" name="reclamo" id="reclamo" placeholder="Ingrese reclamo."></textarea>
+                            <button type="submit" id="btnGuardar" class="btn btn-success">Ingresar Reclamo</button>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+            <%}%>
+            <!--////////////////////////////////-->
 
             <script src="../../static/bootstrap/js/vendor/jquery-1.11.0.min.js"></script>
             <script src="../../static/jstree/jstree.js"></script>

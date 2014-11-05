@@ -56,6 +56,10 @@
         <servlet-name>Mailing</servlet-name>
         <servlet-class>controller.Mailing</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>IngresarReclamo</servlet-name>
+        <servlet-class>controller.IngresarReclamo</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>index</servlet-name>
         <url-pattern>/index</url-pattern>
@@ -111,6 +115,10 @@
     <servlet-mapping>
         <servlet-name>Mailing</servlet-name>
         <url-pattern>/Mailing</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IngresarReclamo</servlet-name>
+        <url-pattern>/IngresarReclamo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
