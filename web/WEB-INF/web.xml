@@ -60,6 +60,10 @@
         <servlet-name>IngresarReclamo</servlet-name>
         <servlet-class>controller.IngresarReclamo</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>VerReclamos</servlet-name>
+        <servlet-class>controller.VerReclamos</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>index</servlet-name>
         <url-pattern>/index</url-pattern>
@@ -119,6 +123,10 @@
     <servlet-mapping>
         <servlet-name>IngresarReclamo</servlet-name>
         <url-pattern>/IngresarReclamo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VerReclamos</servlet-name>
+        <url-pattern>/VerReclamos</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
