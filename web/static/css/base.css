@@ -345,7 +345,7 @@ p.footer-right img {
     width: 100%;
 }
 #buscador input {
-    width: 92%;
+    width: 90%;
 }
 #buscador .btn-default {
     border: none !important;
@@ -386,4 +386,17 @@ p.footer-right img {
 }
 .col-perfil {
     width: 49%;
+}
+.treeReclamos .jstree-children strong {
+    color: #000;
+}
+.treeReclamos .producto-reclamo strong {
+    font-size: 16px;
+}
+.treeReclamos .jstree-anchor {
+    width: 96%;
+}
+.treeReclamos {
+    width: 96% !important;
+    padding: 1em;
 }

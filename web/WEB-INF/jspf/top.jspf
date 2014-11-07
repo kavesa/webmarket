@@ -16,7 +16,7 @@
 
         <div class=" col-centered" id="buscador" style="padding-top: 10px;">
 
-            <div class="col-lg-6">
+            <div class="col-lg-5">
                 <div class="input-group">
                     <!--                    <input placeholder="Ingrese número de referencia" type="text" class="form-control" name="buscador88" id="buscador88">
                                         <span class="input-group-btn">
@@ -63,6 +63,9 @@
             <% if (sesion.getAttribute("tipoUsuario").toString().equals("PROVEEDOR")) {%>
             <li>
                 <a class="fa fa-plus-square-o navbar-brand"  title="Nuevo Producto" href="<%= request.getContextPath()%>/producto?op=create" id="altaprod"> Producto</a>
+            </li>
+            <li>
+                <a class="fa fa-exclamation-triangle navbar-brand"  title="Ver Reclamos" href="<%= request.getContextPath()%>/VerReclamos" id="verReclamos"> Reclamos</a>
             </li>
             <%} else {%>
             <li>
