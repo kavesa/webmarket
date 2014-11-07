@@ -82,7 +82,7 @@ public class IngresarReclamo extends HttpServlet {
             DataReclamo dr = new DataReclamo(fechaReclamo, reclamante, texto);
             try {
                 Factory.getInstance().getProductoController().ingresarReclamo(idProd, dr);
-                request.getSession().setAttribute("success", "Comentario ingresado con éxito.");
+                request.getSession().setAttribute("success", "Reclamo ingresado con éxito.");
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/InfoProducto?nocid=" + idProd);
                 dispatcher.forward(request, response);
             } catch (ProductoException ex) {
