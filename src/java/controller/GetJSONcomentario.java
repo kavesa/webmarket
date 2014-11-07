@@ -21,6 +21,7 @@ import org.json.simple.JSONObject;
  */
 @WebServlet(name = "GetJSONcomentario", urlPatterns = {"/GetJSONcomentario"})
 public class GetJSONcomentario extends HttpServlet {
+    private static final long serialVersionUID = 4838013483227747053L;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -30,6 +31,7 @@ public class GetJSONcomentario extends HttpServlet {
 
         try {
             String prodRef = request.getSession().getAttribute("ref").toString();
+            //String prodRef = "1";
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             DataProducto dprod = Factory.getInstance().getProductoController().buscarProductoPorRef(prodRef);
             //DataProducto dprod = Factory.getInstance().getProductoController().buscarProductoPorRef("7");
