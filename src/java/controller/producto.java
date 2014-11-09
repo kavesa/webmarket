@@ -84,7 +84,7 @@ public class producto extends HttpServlet {
                     dataCatProd.setNombre(dataCategoria.getNombre());
                     dataCatProd.setParent(dataCategoria.getParent());
                     dataCatProd.setContieneProductos(dataCategoria.isContieneProductos());
-                    
+
                     lDC.add(dataCatProd);
                 }
             }

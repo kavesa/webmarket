@@ -4,9 +4,8 @@
  */
 package controller;
 
-import direct.market.factory.Factory;
-import direct.market.datatype.DataComentario;
-import direct.market.exceptions.ProductoException;
+import controller.WSproducto.DataComentario;
+import controller.WSproducto.ProductoException_Exception;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
@@ -19,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.datatype.DatatypeConfigurationException;
 
 /**
  *
@@ -106,14 +106,22 @@ public class comentario extends HttpServlet {
             String user = request.getParameter("user"); //esta tirando un objeto para la base en lugar de string
 
             //DataComentario dc = new DataComentario(padre, "comentariode prueba", fecha);
-            DataComentario dc = new DataComentario(user, padre1, texto, fecha);
+            DataComentario dc = new DataComentario();
+            dc.setNickname(user);
+            dc.setParent(padre1);
+            dc.setComentario(texto);
+            try {
+                dc.setFechaComentario(controller.util.dateTOgregorian(fecha));
+            } catch (DatatypeConfigurationException ex) {
+                Logger.getLogger(comentario.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
             try {
-                Factory.getInstance().getProductoController().agregarComentario(idProd, dc);
+                agregarComentario(idProd, dc);
                 request.getSession().setAttribute("success", "Comentario ingresado con éxito.");
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/InfoProducto?nocid=" + idProd);
                 dispatcher.forward(request, response);
-            } catch (ProductoException ex) {
+            } catch (Exception ex) {
                 Logger.getLogger(comentario.class.getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -129,4 +137,10 @@ public class comentario extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private static void agregarComentario(java.lang.String arg0, controller.WSproducto.DataComentario arg1) throws ProductoException_Exception {
+        controller.WSproducto.ProductoWS_Service service = new controller.WSproducto.ProductoWS_Service();
+        controller.WSproducto.ProductoWS port = service.getProductoWSPort();
+        port.agregarComentario(arg0, arg1);
+    }
 }
