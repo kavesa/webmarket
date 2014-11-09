@@ -1,0 +1,284 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.2-hudson-740-. --><xs:schema xmlns:tns="http://service.market.direct/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://service.market.direct/">
+
+<xs:element name="ProductoException" type="tns:ProductoException" />
+
+<xs:element name="agregarComentario" type="tns:agregarComentario" />
+
+<xs:element name="agregarComentarioResponse" type="tns:agregarComentarioResponse" />
+
+<xs:element name="altaProducto" type="tns:altaProducto" />
+
+<xs:element name="altaProductoResponse" type="tns:altaProductoResponse" />
+
+<xs:element name="buscarProductoNombreSimilar" type="tns:buscarProductoNombreSimilar" />
+
+<xs:element name="buscarProductoNombreSimilarResponse" type="tns:buscarProductoNombreSimilarResponse" />
+
+<xs:element name="buscarProductoPorId" type="tns:buscarProductoPorId" />
+
+<xs:element name="buscarProductoPorIdResponse" type="tns:buscarProductoPorIdResponse" />
+
+<xs:element name="buscarProductoPorName" type="tns:buscarProductoPorName" />
+
+<xs:element name="buscarProductoPorNameResponse" type="tns:buscarProductoPorNameResponse" />
+
+<xs:element name="buscarProductoPorRef" type="tns:buscarProductoPorRef" />
+
+<xs:element name="buscarProductoPorRefResponse" type="tns:buscarProductoPorRefResponse" />
+
+<xs:element name="getProductListPorProveedor" type="tns:getProductListPorProveedor" />
+
+<xs:element name="getProductListPorProveedorResponse" type="tns:getProductListPorProveedorResponse" />
+
+<xs:element name="getReclamosPorProducto" type="tns:getReclamosPorProducto" />
+
+<xs:element name="getReclamosPorProductoResponse" type="tns:getReclamosPorProductoResponse" />
+
+<xs:element name="ingresarReclamo" type="tns:ingresarReclamo" />
+
+<xs:element name="ingresarReclamoResponse" type="tns:ingresarReclamoResponse" />
+
+<xs:element name="modificarProducto" type="tns:modificarProducto" />
+
+<xs:element name="modificarProductoConReferenciaModificada" type="tns:modificarProductoConReferenciaModificada" />
+
+<xs:element name="modificarProductoConReferenciaModificadaResponse" type="tns:modificarProductoConReferenciaModificadaResponse" />
+
+<xs:element name="modificarProductoResponse" type="tns:modificarProductoResponse" />
+
+<xs:complexType name="altaProducto">
+<xs:sequence>
+<xs:element name="arg0" type="tns:dataProducto" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dataProducto">
+<xs:sequence>
+<xs:element name="dataCategorias" type="tns:dataCategoria" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+<xs:element name="dataEspecificacion" type="tns:dataEspecificacionProducto" minOccurs="0" />
+<xs:element name="dataProveedor" type="tns:dataUsuario" minOccurs="0" />
+<xs:element name="habilitado" type="xs:boolean" />
+<xs:element name="listDataComentarios" type="tns:dataComentario" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+<xs:element name="listaDataReclamos" type="tns:dataReclamo" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+<xs:element name="nombre" type="xs:string" minOccurs="0" />
+<xs:element name="referencia" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dataCategoria">
+<xs:sequence>
+<xs:element name="contieneProductos" type="xs:boolean" />
+<xs:element name="dataProductos" type="tns:dataProducto" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+<xs:element name="id" type="xs:int" />
+<xs:element name="nombre" type="xs:string" minOccurs="0" />
+<xs:element name="parent" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dataEspecificacionProducto">
+<xs:sequence>
+<xs:element name="descripcion" type="xs:string" minOccurs="0" />
+<xs:element name="especificacion" type="xs:string" minOccurs="0" />
+<xs:element name="id" type="xs:int" />
+<xs:element name="imagenes" type="xs:base64Binary" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+<xs:element name="precio" type="xs:double" />
+<xs:element name="puntaje" type="tns:dataPuntajeProducto" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dataPuntajeProducto">
+<xs:sequence>
+<xs:element name="cliente" type="tns:dataUsuario" minOccurs="0" />
+<xs:element name="id" type="xs:int" />
+<xs:element name="puntaje" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dataUsuario">
+<xs:sequence>
+<xs:element name="apellido" type="xs:string" minOccurs="0" />
+<xs:element name="compania" type="xs:string" minOccurs="0" />
+<xs:element name="email" type="xs:string" minOccurs="0" />
+<xs:element name="fechaNacimiento" type="xs:dateTime" minOccurs="0" />
+<xs:element name="imagen" type="xs:base64Binary" minOccurs="0" />
+<xs:element name="listaCompras" type="tns:dataOC" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+<xs:element name="mailing" type="xs:boolean" />
+<xs:element name="nickname" type="xs:string" minOccurs="0" />
+<xs:element name="nombre" type="xs:string" minOccurs="0" />
+<xs:element name="password" type="xs:string" minOccurs="0" />
+<xs:element name="tipoUsu" type="xs:string" minOccurs="0" />
+<xs:element name="webLink" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dataOC">
+<xs:sequence>
+<xs:element name="estados" type="tns:dataEstadoOC" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+<xs:element name="fecha" type="xs:dateTime" minOccurs="0" />
+<xs:element name="habilitada" type="xs:boolean" />
+<xs:element name="lineas" type="tns:dataLineaOC" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+<xs:element name="numero" type="xs:int" />
+<xs:element name="precio_total" type="xs:double" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dataEstadoOC">
+<xs:sequence>
+<xs:element name="estado" type="xs:string" minOccurs="0" />
+<xs:element name="fecha" type="xs:dateTime" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dataLineaOC">
+<xs:sequence>
+<xs:element name="cantidad" type="xs:int" />
+<xs:element name="id" type="xs:long" minOccurs="0" />
+<xs:element name="producto" type="tns:dataProducto" minOccurs="0" />
+<xs:element name="totalLinea" type="xs:double" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dataComentario">
+<xs:sequence>
+<xs:element name="comentario" type="xs:string" minOccurs="0" />
+<xs:element name="fechaComentario" type="xs:dateTime" minOccurs="0" />
+<xs:element name="id" type="xs:int" />
+<xs:element name="nickname" type="xs:string" minOccurs="0" />
+<xs:element name="parent" type="xs:int" />
+<xs:element name="respuestas" type="tns:dataComentario" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dataReclamo">
+<xs:sequence>
+<xs:element name="fechaReclamo" type="xs:dateTime" minOccurs="0" />
+<xs:element name="nickCliente" type="xs:string" minOccurs="0" />
+<xs:element name="textoRec" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="altaProductoResponse">
+<xs:sequence />
+</xs:complexType>
+
+<xs:complexType name="ProductoException">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="agregarComentario">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0" />
+<xs:element name="arg1" type="tns:dataComentario" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="agregarComentarioResponse">
+<xs:sequence />
+</xs:complexType>
+
+<xs:complexType name="modificarProductoConReferenciaModificada">
+<xs:sequence>
+<xs:element name="arg0" type="tns:dataProducto" minOccurs="0" />
+<xs:element name="arg1" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="modificarProductoConReferenciaModificadaResponse">
+<xs:sequence />
+</xs:complexType>
+
+<xs:complexType name="ingresarReclamo">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0" />
+<xs:element name="arg1" type="tns:dataReclamo" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ingresarReclamoResponse">
+<xs:sequence />
+</xs:complexType>
+
+<xs:complexType name="buscarProductoPorRef">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="buscarProductoPorRefResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:dataProducto" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="modificarProducto">
+<xs:sequence>
+<xs:element name="arg0" type="tns:dataProducto" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="modificarProductoResponse">
+<xs:sequence />
+</xs:complexType>
+
+<xs:complexType name="buscarProductoNombreSimilar">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="buscarProductoNombreSimilarResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:dataProducto" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="buscarProductoPorId">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="buscarProductoPorIdResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:dataProducto" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="buscarProductoPorName">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="buscarProductoPorNameResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:dataProducto" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getReclamosPorProducto">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getReclamosPorProductoResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:dataReclamo" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getProductListPorProveedor">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getProductListPorProveedorResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:dataProducto" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.2-hudson-740-. --><xs:schema xmlns:tns="http://service.market.direct/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://service.market.direct/">
+
+<xs:element name="OCException" type="tns:OCException" />
+
+<xs:element name="altaOrdenCompra" type="tns:altaOrdenCompra" />
+
+<xs:element name="altaOrdenCompraResponse" type="tns:altaOrdenCompraResponse" />
+
+<xs:element name="cancelarOrdenCompra" type="tns:cancelarOrdenCompra" />
+
+<xs:element name="cancelarOrdenCompraResponse" type="tns:cancelarOrdenCompraResponse" />
+
+<xs:element name="getDataOC" type="tns:getDataOC" />
+
+<xs:element name="getDataOCResponse" type="tns:getDataOCResponse" />
+
+<xs:element name="getOrdenesCompra" type="tns:getOrdenesCompra" />
+
+<xs:element name="getOrdenesCompraResponse" type="tns:getOrdenesCompraResponse" />
+
+<xs:complexType name="altaOrdenCompra">
+<xs:sequence>
+<xs:element name="arg0" type="tns:dataOC" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dataOC">
+<xs:sequence>
+<xs:element name="estados" type="tns:dataEstadoOC" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+<xs:element name="fecha" type="xs:dateTime" minOccurs="0" />
+<xs:element name="habilitada" type="xs:boolean" />
+<xs:element name="lineas" type="tns:dataLineaOC" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+<xs:element name="numero" type="xs:int" />
+<xs:element name="precio_total" type="xs:double" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dataEstadoOC">
+<xs:sequence>
+<xs:element name="estado" type="xs:string" minOccurs="0" />
+<xs:element name="fecha" type="xs:dateTime" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dataLineaOC">
+<xs:sequence>
+<xs:element name="cantidad" type="xs:int" />
+<xs:element name="id" type="xs:long" minOccurs="0" />
+<xs:element name="producto" type="tns:dataProducto" minOccurs="0" />
+<xs:element name="totalLinea" type="xs:double" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dataProducto">
+<xs:sequence>
+<xs:element name="dataCategorias" type="tns:dataCategoria" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+<xs:element name="dataEspecificacion" type="tns:dataEspecificacionProducto" minOccurs="0" />
+<xs:element name="dataProveedor" type="tns:dataUsuario" minOccurs="0" />
+<xs:element name="habilitado" type="xs:boolean" />
+<xs:element name="listDataComentarios" type="tns:dataComentario" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+<xs:element name="listaDataReclamos" type="tns:dataReclamo" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+<xs:element name="nombre" type="xs:string" minOccurs="0" />
+<xs:element name="referencia" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dataCategoria">
+<xs:sequence>
+<xs:element name="contieneProductos" type="xs:boolean" />
+<xs:element name="dataProductos" type="tns:dataProducto" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+<xs:element name="id" type="xs:int" />
+<xs:element name="nombre" type="xs:string" minOccurs="0" />
+<xs:element name="parent" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dataEspecificacionProducto">
+<xs:sequence>
+<xs:element name="descripcion" type="xs:string" minOccurs="0" />
+<xs:element name="especificacion" type="xs:string" minOccurs="0" />
+<xs:element name="id" type="xs:int" />
+<xs:element name="imagenes" type="xs:base64Binary" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+<xs:element name="precio" type="xs:double" />
+<xs:element name="puntaje" type="tns:dataPuntajeProducto" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dataPuntajeProducto">
+<xs:sequence>
+<xs:element name="cliente" type="tns:dataUsuario" minOccurs="0" />
+<xs:element name="id" type="xs:int" />
+<xs:element name="puntaje" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dataUsuario">
+<xs:sequence>
+<xs:element name="apellido" type="xs:string" minOccurs="0" />
+<xs:element name="compania" type="xs:string" minOccurs="0" />
+<xs:element name="email" type="xs:string" minOccurs="0" />
+<xs:element name="fechaNacimiento" type="xs:dateTime" minOccurs="0" />
+<xs:element name="imagen" type="xs:base64Binary" minOccurs="0" />
+<xs:element name="listaCompras" type="tns:dataOC" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+<xs:element name="mailing" type="xs:boolean" />
+<xs:element name="nickname" type="xs:string" minOccurs="0" />
+<xs:element name="nombre" type="xs:string" minOccurs="0" />
+<xs:element name="password" type="xs:string" minOccurs="0" />
+<xs:element name="tipoUsu" type="xs:string" minOccurs="0" />
+<xs:element name="webLink" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dataComentario">
+<xs:sequence>
+<xs:element name="comentario" type="xs:string" minOccurs="0" />
+<xs:element name="fechaComentario" type="xs:dateTime" minOccurs="0" />
+<xs:element name="id" type="xs:int" />
+<xs:element name="nickname" type="xs:string" minOccurs="0" />
+<xs:element name="parent" type="xs:int" />
+<xs:element name="respuestas" type="tns:dataComentario" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dataReclamo">
+<xs:sequence>
+<xs:element name="fechaReclamo" type="xs:dateTime" minOccurs="0" />
+<xs:element name="nickCliente" type="xs:string" minOccurs="0" />
+<xs:element name="textoRec" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="altaOrdenCompraResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="OCException">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="cancelarOrdenCompra">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="cancelarOrdenCompraResponse">
+<xs:sequence />
+</xs:complexType>
+
+<xs:complexType name="getOrdenesCompra">
+<xs:sequence />
+</xs:complexType>
+
+<xs:complexType name="getOrdenesCompraResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:dataOC" minOccurs="0" maxOccurs="unbounded" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getDataOC">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getDataOCResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:dataOC" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

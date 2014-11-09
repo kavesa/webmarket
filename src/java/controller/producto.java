@@ -4,13 +4,19 @@
  */
 package controller;
 
-import direct.market.datatype.DataCategoria;
-import direct.market.datatype.DataEspecificacionProducto;
-import direct.market.datatype.DataProducto;
-import direct.market.datatype.DataUsuario;
-import direct.market.exceptions.CategoryException;
-import direct.market.exceptions.ProductoException;
-import direct.market.factory.Factory;
+//import direct.market.datatype.DataCategoria;
+//import direct.market.datatype.DataEspecificacionProducto;
+//import direct.market.datatype.DataProducto;
+//import direct.market.datatype.DataUsuario;
+//import direct.market.exceptions.CategoryException;
+//import direct.market.exceptions.ProductoException;
+//import direct.market.factory.Factory;
+import controller.WScategoria.CategoryException_Exception;
+import controller.WScategoria.DataCategoria;
+import controller.WSproducto.DataEspecificacionProducto;
+import controller.WSproducto.DataProducto;
+import controller.WSproducto.ProductoException_Exception;
+import controller.WSusuario.DataUsuario;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -46,7 +52,7 @@ public class producto extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, CategoryException, ProductoException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
@@ -71,8 +77,8 @@ public class producto extends HttpServlet {
             DataCategoria dataCategoria;
 
             for (String cat : catList) {
-                if (Factory.getInstance().getCategoriaController().getCategoriaPorNombre(cat).isContieneProductos()) {
-                    dataCategoria = Factory.getInstance().getCategoriaController().getCategoriaPorNombre(cat);
+                if (getCategoriaPorNombre(cat).isContieneProductos()) {
+                    dataCategoria = getCategoriaPorNombre(cat);
                     lDC.add(dataCategoria);
                 }
             }
@@ -82,10 +88,22 @@ public class producto extends HttpServlet {
             //Producto Proveedor
             //DataUsuario dataProv;
             String provNickname = request.getSession().getAttribute("usuario").toString();
-            DataUsuario dataProv = Factory.getInstance().getUsuarioController().getDataProveedor(provNickname);
+            DataUsuario dataProv = getDataProveedor(provNickname);
+            controller.WSproducto.DataUsuario dataProvProd = new controller.WSproducto.DataUsuario();
+            dataProvProd.setApellido(dataProv.getApellido());
+            dataProvProd.setCompania(dataProv.getCompania());
+            dataProvProd.setEmail(dataProv.getEmail());
+            dataProvProd.setFechaNacimiento(dataProv.getFechaNacimiento());
+            dataProvProd.setImagen(dataProv.getImagen());
+            dataProvProd.setMailing(dataProv.isMailing());
+            dataProvProd.setNickname(dataProv.getNickname());
+            dataProvProd.setNombre(dataProv.getNombre());
+            dataProvProd.setPassword(dataProv.getPassword());
+            dataProvProd.setTipoUsu(dataProv.getTipoUsu());
+            dataProvProd.setWebLink(dataProv.getWebLink());
             //dataProv.setNickname(provNickname);
             //dataProv.setNickname("Eddy");
-            dp.setDataProveedor(dataProv);
+            dp.setDataProveedor(dataProvProd);
 
 //Producto Especificacion
             DataEspecificacionProducto dataEsp = new DataEspecificacionProducto();
@@ -109,12 +127,11 @@ public class producto extends HttpServlet {
             if (foto3 != null && foto3.length > 0) {
                 imagenes.add(foto3);
             }
-if(imagenes.isEmpty())
-{
-    File foo = util.getFotoEstandar("defaultP.jpg");
+            if (imagenes.isEmpty()) {
+                File foo = util.getFotoEstandar("defaultP.jpg");
                 byte[] foto = util.imgToBytes(foo);
                 imagenes.add(foto);
-}
+            }
 //            out.println("<!DOCTYPE html>");
 //            out.println("<html>");
 //            out.println("<head>");
@@ -134,7 +151,7 @@ if(imagenes.isEmpty())
             dataEsp.setImagenes(imagenes);
 
             dp.setDataEspecificacion(dataEsp);
-            Factory.getInstance().getProductoController().altaProducto(dp);
+            altaProducto(dp);
 
 //            request.setAttribute("pCat", catList);
 //            request.setAttribute("datosProd", dp);
@@ -165,7 +182,7 @@ if(imagenes.isEmpty())
         String pagina = "";
         if (op.equals("create")) {
             if (!(request.getSession().getAttribute("usuario") == null)
-                    && Factory.getInstance().getUsuarioController().getDataProveedor(request.getSession().getAttribute("usuario").toString()) != null) {
+                    && getDataProveedor(request.getSession().getAttribute("usuario").toString()) != null) {
                 pagina = "/vistas/producto/altaprod.jsp";
             } else {
                 pagina = "/index.jsp";
@@ -189,9 +206,7 @@ if(imagenes.isEmpty())
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (CategoryException ex) {
-            Logger.getLogger(producto.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ProductoException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(producto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -205,4 +220,22 @@ if(imagenes.isEmpty())
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private static DataCategoria getCategoriaPorNombre(java.lang.String arg0) throws CategoryException_Exception {
+        controller.WScategoria.CategoriaWS_Service service = new controller.WScategoria.CategoriaWS_Service();
+        controller.WScategoria.CategoriaWS port = service.getCategoriaWSPort();
+        return port.getCategoriaPorNombre(arg0);
+    }
+
+    private static DataUsuario getDataProveedor(java.lang.String arg0) {
+        controller.WSusuario.UsuarioWS_Service service = new controller.WSusuario.UsuarioWS_Service();
+        controller.WSusuario.UsuarioWS port = service.getUsuarioWSPort();
+        return port.getDataProveedor(arg0);
+    }
+
+    private static void altaProducto(controller.WSproducto.DataProducto arg0) throws ProductoException_Exception {
+        controller.WSproducto.ProductoWS_Service service = new controller.WSproducto.ProductoWS_Service();
+        controller.WSproducto.ProductoWS port = service.getProductoWSPort();
+        port.altaProducto(arg0);
+    }
 }

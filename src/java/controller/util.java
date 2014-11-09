@@ -69,4 +69,10 @@ public class util {
         XMLGregorianCalendar fechaReturn = DatatypeFactory.newInstance().newXMLGregorianCalendar(gregory);
         return fechaReturn;
     }
+
+    static public Date gregorianTOdate(XMLGregorianCalendar fechaGregorian) throws DatatypeConfigurationException {
+        Date fechaDate = fechaGregorian.toGregorianCalendar().getTime();
+        return fechaDate;
+    }
+
 }

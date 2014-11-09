@@ -4,17 +4,14 @@
  */
 package controller;
 
-import controller.WSclient.UsuarioException_Exception;
+import controller.WSusuario.UsuarioException_Exception;
 import direct.market.enums.UsuarioType;
-import direct.market.exceptions.UsuarioException;
-import direct.market.factory.Factory;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -23,8 +20,6 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
  *
@@ -176,8 +171,8 @@ public class usuario extends HttpServlet {
     }
 
     private static void altaUsuario(java.lang.String arg0, java.lang.String arg1, java.lang.String arg2, java.lang.String arg3, javax.xml.datatype.XMLGregorianCalendar arg4, java.lang.String arg5, byte[] arg6, java.lang.String arg7, java.lang.String arg8, java.lang.String arg9, boolean arg10) throws UsuarioException_Exception {
-        controller.WSclient.UsuarioWS_Service service = new controller.WSclient.UsuarioWS_Service();
-        controller.WSclient.UsuarioWS port = service.getUsuarioWSPort();
+        controller.WSusuario.UsuarioWS_Service service = new controller.WSusuario.UsuarioWS_Service();
+        controller.WSusuario.UsuarioWS port = service.getUsuarioWSPort();
         port.altaUsuario(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
     }
 }

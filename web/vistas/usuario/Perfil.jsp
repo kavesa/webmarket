@@ -4,10 +4,15 @@
     Author     : nightmare
 --%>
 
+
+<%@page import="java.util.GregorianCalendar"%>
+<%@page import="javax.xml.datatype.XMLGregorianCalendar"%>
+<%@page import="javax.xml.datatype.DatatypeFactory"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="direct.market.datatype.DataProducto"%>
+<%@page import="controller.WSproducto.DataProducto"%>
 <%@page import="java.util.List"%>
-<%@page import="direct.market.datatype.DataUsuario"%>
+<%@page import="controller.WSusuario.DataUsuario"%>
+<%@page import="controller.util"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -58,7 +63,7 @@
                         <li class="list-group-item listItem">Nickname: <%= usu.getNickname()%></li>
                         <li class="list-group-item listItem">Nombre: <%= usu.getNombre()%></li>
                         <li class="list-group-item listItem">Apellido: <%= usu.getApellido()%></li>
-                        <li class="list-group-item listItem">Fecha de nacimiento: <%= sdf.format(usu.getFechaNacimiento())%></li>
+                        <li class="list-group-item listItem">Fecha de nacimiento: <%= sdf.format(controller.util.gregorianTOdate(usu.getFechaNacimiento()))%></li>
                         <li class="list-group-item listItem">eMail: <%= usu.getEmail()%></li>
                         <li class="list-group-item listItem">Tipo de usuario: <%= usu.getTipoUsu()%></li>
                             <% if (usu.getTipoUsu().equalsIgnoreCase("Proveedor")) {%>

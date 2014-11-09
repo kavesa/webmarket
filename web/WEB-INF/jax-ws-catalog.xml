@@ -2,4 +2,10 @@
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
     <system systemId="http://localhost:8080/WebDMServices/UsuarioWS?wsdl" uri="wsdl/localhost_8080/WebDMServices/UsuarioWS.wsdl"/>
     <system systemId="http://localhost:8080/WebDMServices/UsuarioWS?xsd=1" uri="wsdl/localhost_8080/WebDMServices/UsuarioWS.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/WebDMServices/OrdenCompraWS?wsdl" uri="wsdl/localhost_8080/WebDMServices/OrdenCompraWS.wsdl"/>
+    <system systemId="http://localhost:8080/WebDMServices/OrdenCompraWS?xsd=1" uri="wsdl/localhost_8080/WebDMServices/OrdenCompraWS.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/WebDMServices/CategoriaWS?wsdl" uri="wsdl/localhost_8080/WebDMServices/CategoriaWS.wsdl"/>
+    <system systemId="http://localhost:8080/WebDMServices/CategoriaWS?xsd=1" uri="wsdl/localhost_8080/WebDMServices/CategoriaWS.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/WebDMServices/ProductoWS?wsdl" uri="wsdl/localhost_8080/WebDMServices/ProductoWS.wsdl"/>
+    <system systemId="http://localhost:8080/WebDMServices/ProductoWS?xsd=1" uri="wsdl/localhost_8080/WebDMServices/ProductoWS.xsd_1.xsd"/>
 </catalog>
