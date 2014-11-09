@@ -7,8 +7,6 @@ package controller;
 import controller.WSproducto.DataProducto;
 import controller.WSusuario.DataUsuario;
 import controller.WSusuario.UsuarioException_Exception;
-//import direct.market.datatype.DataProducto;
-//import direct.market.datatype.DataUsuario;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
@@ -41,20 +39,13 @@ public class Perfil extends HttpServlet {
             String loUsNick=(String)sesion.getAttribute("usuario");
             DataUsuario du2;
             du2 = getDataProveedor(loUsNick);
-            //du2 = Factory.getInstance().getUsuarioController().getDataProveedor(loUsNick);
             if (du2 != null) {
-                //List<DataProducto> dpList = Factory.getInstance().getProductoController().getProductListPorProveedor(loUsNick);
                 List<DataProducto> dpList = getProductListPorProveedor(loUsNick);
                 request.setAttribute("listaPr", dpList);
             } else {
                 //du2 = Factory.getInstance().getUsuarioController().getDataCliente(loUsNick);
                 du2 = getDataCliente(loUsNick);
             }
-
-//            StringBuilder sb = new StringBuilder();
-//            sb.append("data:image/png;base64,");
-//            sb.append(StringUtils.newStringUtf8(Base64.encodeBase64(du2.getImagen(), false)));
-//            String contourChart = sb.toString();
             String ima64b = util.byteImgToBase64(du2.getImagen());
             request.setAttribute("img64", ima64b);
             

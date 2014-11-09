@@ -4,7 +4,6 @@
  */
 package controller;
 
-import direct.market.factory.Factory;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -86,9 +85,9 @@ public class Mailing extends HttpServlet {
 
             //Defino si el usuario apreto boton de ALTA o BAJA de mailing
             if (request.getParameter("botonsi") != null) { //ALTA de mailing
-                Factory.getInstance().getUsuarioController().cambiarMailing(nickuser, true);
+                cambiarMailing(nickuser, true);
             } else if (request.getParameter("botonno") != null) { //BAJA de mailing
-                Factory.getInstance().getUsuarioController().cambiarMailing(nickuser, false);
+                cambiarMailing(nickuser, false);
             }
 
             request.getSession().setAttribute("success", "Configuracion guardada.");
@@ -111,4 +110,10 @@ public class Mailing extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private static void cambiarMailing(java.lang.String arg0, boolean arg1) {
+        controller.WSusuario.UsuarioWS_Service service = new controller.WSusuario.UsuarioWS_Service();
+        controller.WSusuario.UsuarioWS port = service.getUsuarioWSPort();
+        port.cambiarMailing(arg0, arg1);
+    }
 }
