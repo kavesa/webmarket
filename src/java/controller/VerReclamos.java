@@ -4,9 +4,7 @@
  */
 package controller;
 
-import direct.market.datatype.DataUsuario;
-import direct.market.exceptions.UsuarioException;
-import direct.market.factory.Factory;
+import controller.WSusuario.DataUsuario;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,7 +40,7 @@ public class VerReclamos extends HttpServlet {
 
             if (nickname != null) {
                 DataUsuario dProv;
-                dProv = Factory.getInstance().getUsuarioController().getDataProveedor(nickname);
+                dProv = getDataProveedor(nickname);
 
                 if (dProv != null) {
                     request.getRequestDispatcher("/vistas/producto/VerReclamos.jsp").forward(request, response);
@@ -103,4 +101,10 @@ public class VerReclamos extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private static DataUsuario getDataProveedor(java.lang.String arg0) {
+        controller.WSusuario.UsuarioWS_Service service = new controller.WSusuario.UsuarioWS_Service();
+        controller.WSusuario.UsuarioWS port = service.getUsuarioWSPort();
+        return port.getDataProveedor(arg0);
+    }
 }

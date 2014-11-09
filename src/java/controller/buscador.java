@@ -4,11 +4,9 @@
  */
 package controller;
 
-import direct.market.datatype.DataProducto;
-import direct.market.exceptions.CategoryException;
-import direct.market.exceptions.ProductoException;
-import direct.market.exceptions.UsuarioException;
-import direct.market.factory.Factory;
+import controller.WScategoria.CategoryException_Exception;
+import controller.WSproducto.DataProducto;
+import controller.WSproducto.ProductoException_Exception;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -38,7 +36,7 @@ public class buscador extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ProductoException, CategoryException {
+            throws ServletException, IOException, ProductoException_Exception, CategoryException_Exception {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
@@ -48,12 +46,13 @@ public class buscador extends HttpServlet {
                 //request.getRequestDispatcher("/vistas/producto/ProductNavigation.jsp").forward(request, response);
                 //Poner algo para que avise en el form
             } else {
-                List<DataProducto> listResult = Factory.getInstance().getProductoController().buscarProductoNombreSimilar(stringBuscado);
+                List<DataProducto> listResult = buscarProductoNombreSimilar(stringBuscado);
 
-                List<DataProducto> catResult = Factory.getInstance().getCategoriaController().getProductosPorNombreCategoria(stringBuscado);
+                List<controller.WScategoria.DataProducto> catResult = getProductosPorNombreCategoria(stringBuscado);
                 //itero para no agregar un producto dos veces (que ya haya sido agregado por similitud)
+                
                 if (catResult != null && !catResult.isEmpty()) {
-                    for (DataProducto dp : catResult) {
+                    for (controller.WScategoria.DataProducto dp : catResult) {
                         boolean yaesta = false;
                         for (DataProducto result : listResult) {
                             if (dp.getNombre().equals(result.getNombre())) {
@@ -61,7 +60,13 @@ public class buscador extends HttpServlet {
                             }
                         }
                         if (!yaesta) {
-                            listResult.add(dp);
+                            DataProducto dpProd = new DataProducto();
+                            dpProd.setReferencia(dp.getReferencia());
+                            dpProd.setNombre(dp.getNombre());
+                            dpProd.getDataEspecificacion().setPrecio(dp.getDataEspecificacion().getPrecio());
+                            dpProd.getDataEspecificacion().setImagenes(dp.getDataEspecificacion().getImagenes());
+                                 
+                            listResult.add(dpProd);
                         }
                     }
                 }
@@ -81,7 +86,7 @@ public class buscador extends HttpServlet {
                 rd1.forward(request, response);
             }
 
-        } catch (CategoryException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(InfoProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -101,9 +106,9 @@ public class buscador extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (ProductoException ex) {
+        } catch (ProductoException_Exception ex) {
             Logger.getLogger(buscador.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (CategoryException ex) {
+        } catch (CategoryException_Exception ex) {
             Logger.getLogger(buscador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -122,9 +127,9 @@ public class buscador extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (ProductoException ex) {
+        } catch (ProductoException_Exception ex) {
             Logger.getLogger(buscador.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (CategoryException ex) {
+        } catch (CategoryException_Exception ex) {
             Logger.getLogger(buscador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -138,4 +143,16 @@ public class buscador extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private static java.util.List<controller.WSproducto.DataProducto> buscarProductoNombreSimilar(java.lang.String arg0) throws ProductoException_Exception {
+        controller.WSproducto.ProductoWS_Service service = new controller.WSproducto.ProductoWS_Service();
+        controller.WSproducto.ProductoWS port = service.getProductoWSPort();
+        return port.buscarProductoNombreSimilar(arg0);
+    }
+
+    private static java.util.List<controller.WScategoria.DataProducto> getProductosPorNombreCategoria(java.lang.String arg0) throws CategoryException_Exception {
+        controller.WScategoria.CategoriaWS_Service service = new controller.WScategoria.CategoriaWS_Service();
+        controller.WScategoria.CategoriaWS port = service.getCategoriaWSPort();
+        return port.getProductosPorNombreCategoria(arg0);
+    }
 }
