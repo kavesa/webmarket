@@ -73,13 +73,19 @@ public class producto extends HttpServlet {
             //String catTrim = catString.substring(1, catString.length()-1);
             List<String> catList = new ArrayList<String>(Arrays.asList(catString.split(",")));
 
-            List<DataCategoria> lDC = new ArrayList<DataCategoria>();
+            List<controller.WSproducto.DataCategoria> lDC = new ArrayList<controller.WSproducto.DataCategoria>();
             DataCategoria dataCategoria;
 
             for (String cat : catList) {
                 if (getCategoriaPorNombre(cat).isContieneProductos()) {
                     dataCategoria = getCategoriaPorNombre(cat);
-                    lDC.add(dataCategoria);
+                    controller.WSproducto.DataCategoria dataCatProd =  new controller.WSproducto.DataCategoria();
+                    dataCatProd.setId(dataCategoria.getId());
+                    dataCatProd.setNombre(dataCategoria.getNombre());
+                    dataCatProd.setParent(dataCategoria.getParent());
+                    dataCatProd.setContieneProductos(dataCategoria.isContieneProductos());
+                    
+                    lDC.add(dataCatProd);
                 }
             }
             dp.setDataCategorias(lDC);
@@ -132,21 +138,6 @@ public class producto extends HttpServlet {
                 byte[] foto = util.imgToBytes(foo);
                 imagenes.add(foto);
             }
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet altaprod</title>");
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Nombre: " + request.getParameter("NomProd") + "</h1>");
-//            out.println("<h1>Referencia: " + request.getParameter("RefProd") + "</h1>");
-//            out.println("<h1>Descripcion: " + request.getParameter("descprod") + "</h1>");
-//            out.println("<h1>Precio: " + request.getParameter("precprod") + "</h1>");
-//            out.println("<h1>Categorias: " + Arrays.toString(request.getParameterValues("catsprod")) + "</h1>");
-//            out.println("<h1>CatString: " + catString + "</h1>");
-//            out.println("<h1>Categoria1: " + catList.get(0).toString() + "</h1>");
-//            out.println("</body>");
-//            out.println("</html>");
 
             dataEsp.setImagenes(imagenes);
 
