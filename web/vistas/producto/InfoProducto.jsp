@@ -178,17 +178,20 @@
             <%if ((Boolean) request.getAttribute("usuarioCompro")) {%>
             <div class="row col-sm-11 col-centered">
                 <div style="margin-top: 1em; margin-bottom: 1em" class="col-sm-11 col-centered">
-                    <form role="form" id="formReclamo" action="<%=request.getContextPath()%>/IngresarReclamo" method="POST">
-                        <input name="numRefProd" type="text" value="<%=dProd.getReferencia()%>" hidden="true"/>
-                        <input name="user" type="text" value="<%=request.getSession().getAttribute("usuario")%>" hidden="true"/>
-                      
-                        <div class="form-group newcomment">
-                            <label for="Reclamo">Reclamo</label>
-                            <textarea class="form-control" name="reclamo" id="reclamo" placeholder="Ingrese reclamo."></textarea>
-                            <button type="submit" id="btnGuardar" class="btn btn-success">Ingresar Reclamo</button>
-                        </div>
-                        
-                    </form>
+                    <ul class="list-group" style="margin-bottom:0;">
+                        <li style="text-align: center"class="list-group-item listTitle"><strong>Reclamos</strong></li>
+                        <li class="list-group-item listItem">
+                            <form role="form" id="formReclamo" action="<%=request.getContextPath()%>/IngresarReclamo" method="POST">
+                                <input name="numRefProd" type="text" value="<%=dProd.getReferencia()%>" hidden="true"/>
+                                <input name="user" type="text" value="<%=request.getSession().getAttribute("usuario")%>" hidden="true"/>
+                                <div class="form-group newcomment">
+                                    <textarea class="form-control" name="reclamo" id="reclamo" placeholder="Ingrese reclamo."></textarea>
+                                    <button type="submit" id="btnGuardar" class="btn btn-danger">Ingresar Reclamo</button>
+                                </div>
+                            </form>
+                        </li>
+                    </ul>
+
                 </div>
             </div>
             <%}%>

@@ -101,9 +101,9 @@
                                 <a href="#" class="btn btn-warning fileinput-exists" data-dismiss="fileinput">Quitar</a>
                             </div>
                         </div>
-                        <div class="form-group checkbox" id="divMailing">
-                            <label for="nom-comp">Desea recibir spam sumamente interesante?</label>
-                            <input type="checkbox" class="form-control" name="mailing" id="mailing" checked>
+                        <div class="form-group" id="divMailing">
+                            <label for="mailing">Desea recibir spam sumamente interesante?</label>
+                            <input type="checkbox" class="" name="mailing" id="mailing" checked>
                         </div>
 
                         <button type="submit" id="btnGuardar" class="btn btn-success">Crear Usuario</button>

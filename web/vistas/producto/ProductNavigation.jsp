@@ -5,10 +5,7 @@
 --%>
 <%@page import="controller.util"%>
 <%@page import="java.util.List"%>
-<%@page import="direct.market.datatype.DataEspecificacionProducto"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="direct.market.datatype.DataProducto"%>
-<%@page import="direct.market.factory.Factory"%>
 <!DOCTYPE html>
 <html>
     <head>

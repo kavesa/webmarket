@@ -76,11 +76,12 @@
                             <input type="submit" name="btnMailingSI" value="SI" id="btnMailingSI" class="btn btn-success"/>
                             <input type="submit" name="btnMailingNO" value="NO" id="btnMailingNO" class="btn btn-danger"/>
                         </form>-->
-
-                        <form id="formMailing" action="<%=request.getContextPath()%>/Mailing" method="POST">
-                            <input type="submit" name="botonsi" value="Deseo recibir notificaciones" class="btn btn-success"/>
-                            <input type="submit" name="botonno" value="NO deseo recibir mas notificaciones" class="btn btn-danger"/>
-                        </form>
+                        <li class="list-group-item listItem">
+                            <form id="formMailing" action="<%=request.getContextPath()%>/Mailing" method="POST">
+                                <input type="submit" name="botonsi" value="Recibir notificaciones" class="btn btn-success"/>
+                                <input type="submit" name="botonno" value="NO recibir notificaciones" class="btn btn-danger"/>
+                            </form>
+                        </li>
 
                         <% }%>
 
