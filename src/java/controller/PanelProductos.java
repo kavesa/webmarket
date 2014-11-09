@@ -4,9 +4,8 @@
  */
 package controller;
 
-import direct.market.datatype.DataProducto;
-import direct.market.exceptions.CategoryException;
-import direct.market.factory.Factory;
+import controller.WScategoria.CategoryException_Exception;
+import controller.WSproducto.DataProducto;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
@@ -43,17 +42,17 @@ public class PanelProductos extends HttpServlet {
             String CatSelect =null;
             CatSelect = request.getParameter("b");
            // String pepe="Apple";
-            List<DataProducto> dpList = null;
+            List<controller.WScategoria.DataProducto> dpList = null;
             //(String)sesion.getAttribute("categoria");
             if (CatSelect==null){
                     //Traer los mas vendidos
-                dpList = Factory.getInstance().getCategoriaController().getProductosPorNombreCategoria("Apple");
+                dpList = getProductosPorNombreCategoria("Apple");
                 session.setAttribute("listaPr", dpList);
 //                dpList = null;
 //                session.setAttribute("prueba","No hay naranja en la categoria!!!");
             }
             else{
-                dpList = Factory.getInstance().getCategoriaController().getProductosPorNombreCategoria(CatSelect);
+                dpList = getProductosPorNombreCategoria(CatSelect);
                 session.setAttribute("listaPr", dpList);
 //                dpList=null;
 //                CatSelect = "Hay algo y es la categoria " + CatSelect ;
@@ -63,7 +62,7 @@ public class PanelProductos extends HttpServlet {
             //request.getRequestDispatcher("/vistas/producto/ProductNavigation.jsp");
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/vistas/producto/PanelProductos.jsp");
             dispatcher.forward(request, response);
-        } catch (CategoryException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(ProductNavigation.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -111,4 +110,10 @@ public class PanelProductos extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private static java.util.List<controller.WScategoria.DataProducto> getProductosPorNombreCategoria(java.lang.String arg0) throws CategoryException_Exception {
+        controller.WScategoria.CategoriaWS_Service service = new controller.WScategoria.CategoriaWS_Service();
+        controller.WScategoria.CategoriaWS port = service.getCategoriaWSPort();
+        return port.getProductosPorNombreCategoria(arg0);
+    }
 }

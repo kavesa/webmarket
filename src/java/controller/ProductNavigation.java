@@ -29,24 +29,7 @@ public class ProductNavigation extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        try {
-//            //HttpSession sesion=request.getSession();
-//           // sesion.setAttribute("categoria", "Apple");
-//            String CatSelect = request.getParameter("b");//(String)sesion.getAttribute("categoria");
-//            if (CatSelect+){
-//                    //Traer los mas vendidos
-//                List<DataProducto> dpList = Factory.getInstance().getCategoriaController().getProductosPorNombreCategoria("Apple");
-//                request.setAttribute("listaPr", dpList);
-//            }
-//            else{
-//                List<DataProducto> dpList = Factory.getInstance().getCategoriaController().getProductosPorNombreCategoria(CatSelect);
-//                request.setAttribute("listaPr", dpList);
-//                
-//            }
             request.getRequestDispatcher("/vistas/producto/ProductNavigation.jsp").forward(request, response);
-//        } catch (CategoryException ex) {
-//            Logger.getLogger(ProductNavigation.class.getName()).log(Level.SEVERE, null, ex);
-//        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -63,9 +46,6 @@ public class ProductNavigation extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-//        HttpSession sesion=request.getSession();
-//        sesion.setAttribute("categoria", "Apple");
-//        request.getRequestDispatcher("/vistas/producto/ProductNavigation.jsp").forward(request, response);
     }
 
     /**
