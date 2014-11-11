@@ -4,13 +4,12 @@
     Author     : nightmare
 --%>
 
-<%@page import="direct.market.datatype.DataCategoria"%>
+<%@page import="controller.WSproducto.DataEspecificacionProducto"%>
+<%@page import="controller.WSproducto.DataProducto"%>
+<%@page import="controller.WScategoria.DataCategoria"%>
 <%@page import="controller.util"%>
-<%@page import="direct.market.datatype.DataComentario"%>
 <%@page import="java.util.List"%>
-<%@page import="direct.market.datatype.DataEspecificacionProducto"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="direct.market.datatype.DataProducto"%>
 <!DOCTYPE html>
 <html>
     <head>
