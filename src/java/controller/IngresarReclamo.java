@@ -4,9 +4,12 @@
  */
 package controller;
 
-import direct.market.datatype.DataReclamo;
-import direct.market.exceptions.ProductoException;
-import direct.market.factory.Factory;
+//import direct.market.datatype.DataReclamo;
+//import direct.market.exceptions.ProductoException;
+//import direct.market.factory.Factory;
+import controller.WSproducto.DataReclamo;
+import controller.WSproducto.ProductoException;
+import controller.WSproducto.ProductoException_Exception;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
@@ -17,6 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.datatype.DatatypeConfigurationException;
 
 /**
  *
@@ -79,27 +83,45 @@ public class IngresarReclamo extends HttpServlet {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/InfoProducto?nocid=" + idProd);
             dispatcher.forward(request, response);
         } else {
-            DataReclamo dr = new DataReclamo(fechaReclamo, reclamante, texto);
+            DataReclamo dr = new DataReclamo();
             try {
-                Factory.getInstance().getProductoController().ingresarReclamo(idProd, dr);
+                dr.setFechaReclamo(util.dateTOgregorian(fechaReclamo));
+            } catch (DatatypeConfigurationException ex) {
+                Logger.getLogger(IngresarReclamo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            dr.setNickCliente(reclamante);
+            dr.setTextoRec(texto);
+            //DataReclamo dr = new DataReclamo(fechaReclamo, reclamante, texto);
+            try {
+                ingresarReclamo(idProd, dr);
                 request.getSession().setAttribute("success", "Reclamo ingresado con éxito.");
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/InfoProducto?nocid=" + idProd);
                 dispatcher.forward(request, response);
-            } catch (ProductoException ex) {
+                /*} catch (ProductoException ex) {
+                 Logger.getLogger(IngresarReclamo.class.getName()).log(Level.SEVERE, null, ex);
+                 } catch (ProductoException_Exception ex) {
+                 Logger.getLogger(IngresarReclamo.class.getName()).log(Level.SEVERE, null, ex);
+                 }*/
+            } catch (ProductoException_Exception ex) {
                 Logger.getLogger(IngresarReclamo.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
     }
-        /**
-         * Returns a short description of the servlet.
-         *
-         * @return a String containing servlet description
-         */
-        @Override
-        public String getServletInfo
-        
-            () {
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
         return "Short description";
-        }// </editor-fold>
+    }// </editor-fold>
+
+    private static void ingresarReclamo(java.lang.String arg0, controller.WSproducto.DataReclamo arg1) throws ProductoException_Exception {
+        controller.WSproducto.ProductoWS_Service service = new controller.WSproducto.ProductoWS_Service();
+        controller.WSproducto.ProductoWS port = service.getProductoWSPort();
+        port.ingresarReclamo(arg0, arg1);
     }
+}

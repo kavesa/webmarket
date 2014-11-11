@@ -1,8 +1,11 @@
 package controller;
 
-import direct.market.datatype.DataProducto;
-import direct.market.datatype.DataReclamo;
-import direct.market.factory.Factory;
+//import direct.market.datatype.DataProducto;
+//import direct.market.datatype.DataReclamo;
+//import direct.market.factory.Factory;
+import controller.WSproducto.DataProducto;
+import controller.WSproducto.DataReclamo;
+import controller.WSproducto.ProductoException_Exception;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -32,7 +35,7 @@ public class GetJSONreclamos extends HttpServlet {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             String provNick = request.getSession().getAttribute("usuario").toString();
-            List<DataProducto> ldp = Factory.getInstance().getProductoController().getProductListPorProveedor(provNick);
+            List<DataProducto> ldp = getProductListPorProveedor(provNick);
             JSONArray jsArrayReclamos = new JSONArray();
 
             for (DataProducto dp : ldp) {
@@ -42,7 +45,7 @@ public class GetJSONreclamos extends HttpServlet {
                 nodo.put("parent", "#");
                 jsArrayReclamos.add(nodo);
 
-                List<DataReclamo> reclamos = Factory.getInstance().getProductoController().getReclamosPorProducto(dp.getReferencia());
+                List<DataReclamo> reclamos = getReclamosPorProducto(dp.getReferencia());
 
                 if (!reclamos.isEmpty()) {
                     for (DataReclamo dr : reclamos) {
@@ -87,5 +90,17 @@ public class GetJSONreclamos extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
+    }
+
+    private static java.util.List<controller.WSproducto.DataProducto> getProductListPorProveedor(java.lang.String arg0) {
+        controller.WSproducto.ProductoWS_Service service = new controller.WSproducto.ProductoWS_Service();
+        controller.WSproducto.ProductoWS port = service.getProductoWSPort();
+        return port.getProductListPorProveedor(arg0);
+    }
+
+    private static java.util.List<controller.WSproducto.DataReclamo> getReclamosPorProducto(java.lang.String arg0) throws ProductoException_Exception {
+        controller.WSproducto.ProductoWS_Service service = new controller.WSproducto.ProductoWS_Service();
+        controller.WSproducto.ProductoWS port = service.getProductoWSPort();
+        return port.getReclamosPorProducto(arg0);
     }
 }

@@ -4,12 +4,17 @@
  */
 package controller;
 
-import direct.market.datatype.DataCategoria;
-import direct.market.datatype.DataProducto;
-import direct.market.datatype.DataUsuario;
-import direct.market.exceptions.CategoryException;
-import direct.market.exceptions.UsuarioException;
-import direct.market.factory.Factory;
+//import direct.market.datatype.DataCategoria;
+//import direct.market.datatype.DataProducto;
+//import direct.market.datatype.DataUsuario;
+//import direct.market.exceptions.CategoryException;
+//import direct.market.exceptions.UsuarioException;
+//import direct.market.factory.Factory;
+import controller.WScategoria.CategoryException_Exception;
+import controller.WSproducto.DataCategoria;
+import controller.WSproducto.DataProducto;
+import controller.WSproducto.DataUsuario;
+import controller.WSusuario.UsuarioException_Exception;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -38,15 +43,15 @@ public class InfoProducto extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, UsuarioException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         try {
 
             HttpSession sesion = request.getSession();
             String refProd = request.getParameter("nocid");
-            DataProducto prod = Factory.getInstance().getProductoController().buscarProductoPorRef(refProd);
+            DataProducto prod = buscarProductoPorRef(refProd);
             String nickname = (String) sesion.getAttribute("usuario");
-            List<DataCategoria> catList = new ArrayList<DataCategoria>();
+            List<controller.WScategoria.DataCategoria> catList = new ArrayList<controller.WScategoria.DataCategoria>();
 
 //        boolean invitado = true;
 //        Enumeration<String> attNames = sesion.getAttributeNames();
@@ -56,8 +61,8 @@ public class InfoProducto extends HttpServlet {
             boolean usuarioCompro = false;
             if (nickname != null) {
                 String loUsNick = (String) sesion.getAttribute("usuario");
-                DataUsuario du2;
-                du2 = Factory.getInstance().getUsuarioController().getDataProveedor(loUsNick);
+                controller.WSusuario.DataUsuario du2;
+                du2 = getDataProveedor(loUsNick);
 
                 if (du2 != null) {
                     request.setAttribute("tipoU", "n");
@@ -65,20 +70,18 @@ public class InfoProducto extends HttpServlet {
                     request.setAttribute("tipoU", "y");
                 }
 
-                usuarioCompro = Factory.getInstance().getUsuarioController().usuarioComproProducto(nickname, refProd);
+                usuarioCompro = usuarioComproProducto(nickname, refProd);
 
             } else {
                 request.setAttribute("tipoU", "n");
             }
             request.setAttribute("usuarioCompro", usuarioCompro);
-            catList = Factory.getInstance().getCategoriaController().getCategoriasDeProducto(prod.getReferencia());
+            catList = getCategoriasDeProducto(prod.getReferencia());
 
             request.setAttribute("pCat", catList);
             request.setAttribute("datosProd", prod);
             request.getRequestDispatcher("/vistas/producto/InfoProducto.jsp").forward(request, response);
-        } catch (CategoryException ex) {
-            Logger.getLogger(InfoProducto.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UsuarioException uex) {
+        } catch (Exception uex) {
             Logger.getLogger(InfoProducto.class.getName()).log(Level.SEVERE, null, uex);
         }
 
@@ -99,7 +102,7 @@ public class InfoProducto extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (UsuarioException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(InfoProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -118,7 +121,7 @@ public class InfoProducto extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (UsuarioException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(InfoProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -132,4 +135,28 @@ public class InfoProducto extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private static DataProducto buscarProductoPorRef(java.lang.String arg0) {
+        controller.WSproducto.ProductoWS_Service service = new controller.WSproducto.ProductoWS_Service();
+        controller.WSproducto.ProductoWS port = service.getProductoWSPort();
+        return port.buscarProductoPorRef(arg0);
+    }
+
+    private static controller.WSusuario.DataUsuario getDataProveedor(java.lang.String arg0) {
+        controller.WSusuario.UsuarioWS_Service service = new controller.WSusuario.UsuarioWS_Service();
+        controller.WSusuario.UsuarioWS port = service.getUsuarioWSPort();
+        return port.getDataProveedor(arg0);
+    }
+
+    private static boolean usuarioComproProducto(java.lang.String arg0, java.lang.String arg1) throws UsuarioException_Exception {
+        controller.WSusuario.UsuarioWS_Service service = new controller.WSusuario.UsuarioWS_Service();
+        controller.WSusuario.UsuarioWS port = service.getUsuarioWSPort();
+        return port.usuarioComproProducto(arg0, arg1);
+    }
+
+    private static java.util.List<controller.WScategoria.DataCategoria> getCategoriasDeProducto(java.lang.String arg0) throws CategoryException_Exception {
+        controller.WScategoria.CategoriaWS_Service service = new controller.WScategoria.CategoriaWS_Service();
+        controller.WScategoria.CategoriaWS port = service.getCategoriaWSPort();
+        return port.getCategoriasDeProducto(arg0);
+    }
 }
