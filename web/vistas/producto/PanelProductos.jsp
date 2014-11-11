@@ -1,4 +1,3 @@
-<%@page import="controller.WScategoria.DataProducto"%>
 <%@page import="controller.util"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -16,15 +15,16 @@
     <body>
         <div id="productos" class="row">
             <%
-                List<DataProducto> dpList = (List<DataProducto>) session.getAttribute("listaPr");
+                List<controller.WScategoria.DataProducto> dpList = (List<controller.WScategoria.DataProducto>) session.getAttribute("listaPr");
                 if (dpList != null) {
                     int tam = dpList.size();
                     if (tam > 0) {
-                        for (DataProducto dp : dpList) {
+                        for (controller.WScategoria.DataProducto dp : dpList) {
                             List<byte[]> imagenesbyte = dp.getDataEspecificacion().getImagenes();
                             String imagen;
                             byte[] imagenbyte = imagenesbyte.get(0);
                             imagen = util.byteImgToBase64(imagenbyte);
+                            
             %>
 
             <div class="col-sm-5 col-md-2" style="margin: 1em">

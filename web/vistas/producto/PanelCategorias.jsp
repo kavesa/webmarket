@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="../../static/bootstrap/css/bootstrap.min.css" />
     </head>
     <body>
-        <div id="treecat" class="treeDiv"">
+        <div id="treecat" class="treeDiv">
         </div>
         
         <div id="seleccionados">

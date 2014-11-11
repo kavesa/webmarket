@@ -5,7 +5,6 @@
 package controller;
 
 import controller.WScategoria.CategoryException_Exception;
-import controller.WSproducto.DataProducto;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
