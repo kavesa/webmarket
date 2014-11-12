@@ -4,8 +4,9 @@
  */
 package controller;
 
-import direct.market.datatype.DataOC;
-import direct.market.factory.Factory;
+//import direct.market.datatype.DataOC;
+//import direct.market.factory.Factory;
+import controller.WSordenCompra.DataOC;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -34,7 +35,7 @@ public class InfoCompra extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException{
         try {
             String noCompra = request.getParameter("nocid");
-            DataOC doc = Factory.getInstance().getOrdenCompraController().getDataOC(noCompra);
+            DataOC doc = getDataOC(noCompra);
             request.setAttribute("datosComp", doc);
             request.getRequestDispatcher("/vistas/usuario/InfoCompra.jsp").forward(request, response);
         } catch (IOException ex) {
@@ -82,4 +83,10 @@ public class InfoCompra extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private static DataOC getDataOC(java.lang.String arg0) {
+        controller.WSordenCompra.OrdenCompraWS_Service service = new controller.WSordenCompra.OrdenCompraWS_Service();
+        controller.WSordenCompra.OrdenCompraWS port = service.getOrdenCompraWSPort();
+        return port.getDataOC(arg0);
+    }
 }

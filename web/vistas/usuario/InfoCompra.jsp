@@ -4,11 +4,12 @@
     Author     : nightmare
 --%>
 
+
+
+<%@page import="controller.WSordenCompra.DataEstadoOC"%>
+<%@page import="controller.WSordenCompra.DataLineaOC"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="direct.market.datatype.DataEstadoOC"%>
-<%@page import="java.util.List"%>
-<%@page import="direct.market.datatype.DataLineaOC"%>
-<%@page import="direct.market.datatype.DataOC"%>
+<%@page import="controller.WSordenCompra.DataOC"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,6 +24,7 @@
         <%@include file="../../WEB-INF/jspf/top.jspf" %>
 
         <% DataOC doc = (DataOC) request.getAttribute("datosComp");
+        
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");%>
         <div class="col-sm-9 col-centered">
         <div class="row">
@@ -50,7 +52,7 @@
                             <td></td>
                             <td></td>
                             <td>Total:</td>
-                            <td><%=Double.valueOf(doc.getPrecio_total()).toString()%></td>
+                            <td><%=Double.valueOf(doc.getPrecioTotal()).toString()%></td>
                         </tr>
                     </tbody>
                 </table>
@@ -69,7 +71,7 @@
                         <% for (DataEstadoOC deo : doc.getEstados()) {%>
                         <tr class="listItem">
                             <td><%=deo.getEstado()%></td>
-                            <td><%=sdf.format(deo.getFecha().getTime())%></td>
+                            <td><%=sdf.format(controller.util.gregorianTOdate(deo.getFecha()))%></td>
                         </tr>
                         <%}%>
                     </tbody>
