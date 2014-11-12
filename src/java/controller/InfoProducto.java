@@ -4,12 +4,6 @@
  */
 package controller;
 
-//import direct.market.datatype.DataCategoria;
-//import direct.market.datatype.DataProducto;
-//import direct.market.datatype.DataUsuario;
-//import direct.market.exceptions.CategoryException;
-//import direct.market.exceptions.UsuarioException;
-//import direct.market.factory.Factory;
 import controller.WScategoria.CategoryException_Exception;
 import controller.WSproducto.DataCategoria;
 import controller.WSproducto.DataProducto;

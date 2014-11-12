@@ -4,9 +4,6 @@
  */
 package controller;
 
-//import direct.market.datatype.DataReclamo;
-//import direct.market.exceptions.ProductoException;
-//import direct.market.factory.Factory;
 import controller.WSproducto.DataReclamo;
 import controller.WSproducto.ProductoException;
 import controller.WSproducto.ProductoException_Exception;
