@@ -46,7 +46,10 @@ public class GetJSONcomentario extends HttpServlet {
                     if (dcomlist.get(i).getParent() == 0) {
                         jSONObject.put("id", dcomlist.get(i).getId());
                         jSONObject.put("parent", "#");
-                        jSONObject.put("text", "<div class=\"comment-node\"><strong>" + dcomlist.get(i).getNickname() + " dijo el " + sdf.format(dcomlist.get(i).getFechaComentario()) + ": </strong><br/>" + dcomlist.get(i).getComentario() + "</div>");
+                        jSONObject.put("text", "<div class=\"comment-node\"><strong>" + 
+                                dcomlist.get(i).getNickname() + 
+                                " dijo el " + sdf.format(dcomlist.get(i).getFechaComentario()) + 
+                                ": </strong><br/>" + dcomlist.get(i).getComentario() + "</div>");
                         //jSONObject.put("fecha", sdf.format(dcomlist.get(i).getFechaComentario()));
                         //jSONObject.put("nick", dcomlist.get(i).getNickname());
 

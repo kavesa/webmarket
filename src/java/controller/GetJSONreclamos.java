@@ -1,8 +1,5 @@
 package controller;
 
-//import direct.market.datatype.DataProducto;
-//import direct.market.datatype.DataReclamo;
-//import direct.market.factory.Factory;
 import controller.WSproducto.DataProducto;
 import controller.WSproducto.DataReclamo;
 import controller.WSproducto.ProductoException_Exception;
@@ -24,6 +21,7 @@ import org.json.simple.JSONObject;
  */
 @WebServlet(name = "GetJSONreclamos", urlPatterns = {"/GetJSONreclamos"})
 public class GetJSONreclamos extends HttpServlet {
+
     private static final long serialVersionUID = 9003070782545675578L;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -35,13 +33,16 @@ public class GetJSONreclamos extends HttpServlet {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             String provNick = request.getSession().getAttribute("usuario").toString();
+            //String provNick = "tim1";
             List<DataProducto> ldp = getProductListPorProveedor(provNick);
             JSONArray jsArrayReclamos = new JSONArray();
+            int reclamoId = 1;
 
             for (DataProducto dp : ldp) {
                 JSONObject nodo = new JSONObject();
                 nodo.put("id", dp.getReferencia());
-                nodo.put("text", "<div class=\"comment-node producto-reclamo\"><strong>" + "Producto: " + dp.getNombre()+ "</strong><br/></div>");
+                nodo.put("text", "<div class=\"comment-node producto-reclamo\"><strong>" + 
+                        "Producto: " + dp.getNombre() + "</strong><br/></div>");
                 nodo.put("parent", "#");
                 jsArrayReclamos.add(nodo);
 
@@ -50,22 +51,26 @@ public class GetJSONreclamos extends HttpServlet {
                 if (!reclamos.isEmpty()) {
                     for (DataReclamo dr : reclamos) {
                         JSONObject nodoR = new JSONObject();
-                        nodoR.put("id", "reclamo"+dr.getId());
-                        nodoR.put("text", "<div class=\"comment-node\"><strong>" + dr.getNickCliente() + " dijo el " + sdf.format(dr.getFechaReclamo()) + ": </strong><br/>" + dr.getTextoRec() + "</div>");
+                        nodoR.put("id", "reclamo" + reclamoId);
+                        nodoR.put("text", "<div class=\"comment-node\"><strong>" + 
+                                dr.getNickCliente() + 
+                                " dijo el " + 
+                                sdf.format(controller.util.gregorianTOdate(dr.getFechaReclamo())) + 
+                                ": </strong><br/>" + dr.getTextoRec() + "</div>");
                         //nodoR.put("text", dr.getNickCliente() + " dijo el " + sdf.format(dr.getFechaReclamo()) + ": <br/>" + dr.getTextoRec());
                         nodoR.put("parent", dp.getReferencia());
                         jsArrayReclamos.add(nodoR);
-
+                        reclamoId++;
                     }
                 } else {
                     JSONObject sinReclamos = new JSONObject();
-                    sinReclamos.put("id", dp.getReferencia()+"sinReclamos");
+                    sinReclamos.put("id", dp.getReferencia() + "sinReclamos");
                     sinReclamos.put("text", "<div class=\"comment-node\">" + "Este producto no tiene reclamos." + "</div>");
                     sinReclamos.put("parent", dp.getReferencia());
                     jsArrayReclamos.add(sinReclamos);
                 }
+                reclamoId++;
             }
-
             out.print(jsArrayReclamos.toJSONString().toString());
 
         } catch (Exception e) {
