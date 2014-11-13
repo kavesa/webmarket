@@ -5,7 +5,7 @@
 package controller;
 
 import controller.WSusuario.UsuarioException_Exception;
-import direct.market.enums.UsuarioType;
+//import direct.market.enums.UsuarioType;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -121,10 +121,12 @@ public class usuario extends HttpServlet {
             }
             String tipo;
             if (tipoForm.equals("Cliente")) {
-                tipo = UsuarioType.CLIENTE.name();
+                //tipo = UsuarioType.CLIENTE.name();
+                tipo = "CLIENTE";
                 mailing = request.getParameter("mailing").equals("true");
             } else {
-                tipo = UsuarioType.PROVEEDOR.name();
+                //tipo = UsuarioType.PROVEEDOR.name();
+                tipo = "PROVEEDOR";
                 nomCompForm = request.getParameter("nom-comp");
                 urlForm = request.getParameter("url");
             }

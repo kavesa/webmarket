@@ -4,7 +4,7 @@
  */
 package controller;
 
-import direct.market.factory.Factory;
+//import direct.market.factory.Factory;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -81,11 +81,11 @@ public class cheqUserAjax extends HttpServlet {
         usermail=request.getParameter("usermail");
         boolean resp;
         if (op.equals("nickname")) {
-            resp = Factory.getInstance().getUsuarioController().existeCliente(usermail);
+            resp = existeCliente(usermail);
             PrintWriter out = response.getWriter();
             out.print(op+"+"+resp);
         } else if (op.equals("mail")){
-            resp = Factory.getInstance().getUsuarioController().existeEmail(usermail);
+            resp = existeEmail(usermail);
             PrintWriter out = response.getWriter();
            // out.print(op+",");
             out.print(op+"+"+resp);
@@ -101,4 +101,16 @@ public class cheqUserAjax extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private static boolean existeCliente(java.lang.String arg0) {
+        controller.WSusuario.UsuarioWS_Service service = new controller.WSusuario.UsuarioWS_Service();
+        controller.WSusuario.UsuarioWS port = service.getUsuarioWSPort();
+        return port.existeCliente(arg0);
+    }
+
+    private static boolean existeEmail(java.lang.String arg0) {
+        controller.WSusuario.UsuarioWS_Service service = new controller.WSusuario.UsuarioWS_Service();
+        controller.WSusuario.UsuarioWS port = service.getUsuarioWSPort();
+        return port.existeEmail(arg0);
+    }
 }

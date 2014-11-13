@@ -4,8 +4,11 @@
  */
 package controller;
 
-import direct.market.exceptions.ProductoException;
-import direct.market.factory.Factory;
+//import direct.market.exceptions.ProductoException;
+//import direct.market.factory.Factory;
+import controller.WSproducto.DataProducto;
+import controller.WSproducto.ProductoException;
+import controller.WSproducto.ProductoException_Exception;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -88,8 +91,8 @@ public class cheqProdAjax extends HttpServlet {
         boolean resp = false;
         if (op.equals("NomProd")) {
             try {
-                resp = (Factory.getInstance().getProductoController().buscarProductoPorName(nomRef) != null);
-            } catch (ProductoException ex) {
+                resp = (buscarProductoPorName(nomRef) != null);
+            } catch (ProductoException_Exception ex) {
                 Logger.getLogger(cheqProdAjax.class.getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -97,7 +100,7 @@ public class cheqProdAjax extends HttpServlet {
             out.print(jSONObject);
             //out.print(op+"+"+resp);
         } else if (op.equals("RefProd")) {
-            resp = (Factory.getInstance().getProductoController().buscarProductoPorRef(nomRef) != null);
+            resp = (buscarProductoPorRef(nomRef) != null);
            // PrintWriter out = response.getWriter();
             // out.print(op+",");
             //out.print(op + "+" + resp);
@@ -115,4 +118,16 @@ public class cheqProdAjax extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private static DataProducto buscarProductoPorName(java.lang.String arg0) throws ProductoException_Exception {
+        controller.WSproducto.ProductoWS_Service service = new controller.WSproducto.ProductoWS_Service();
+        controller.WSproducto.ProductoWS port = service.getProductoWSPort();
+        return port.buscarProductoPorName(arg0);
+    }
+
+    private static DataProducto buscarProductoPorRef(java.lang.String arg0) {
+        controller.WSproducto.ProductoWS_Service service = new controller.WSproducto.ProductoWS_Service();
+        controller.WSproducto.ProductoWS port = service.getProductoWSPort();
+        return port.buscarProductoPorRef(arg0);
+    }
 }

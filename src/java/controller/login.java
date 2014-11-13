@@ -4,9 +4,12 @@
  */
 package controller;
 
-import direct.market.datatype.DataUsuario;
-import direct.market.exceptions.UsuarioException;
-import direct.market.factory.Factory;
+//import direct.market.datatype.DataUsuario;
+//import direct.market.exceptions.UsuarioException;
+//import direct.market.factory.Factory;
+import controller.WSusuario.DataUsuario;
+import controller.WSusuario.UsuarioException;
+import controller.WSusuario.UsuarioException_Exception;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -94,13 +97,17 @@ public class login extends HttpServlet {
         pass = request.getParameter("passLogin");
         if (sesion.getAttribute("usuario") == null) {
             try {
-                DataUsuario us = Factory.getInstance().getUsuarioController().login(usu, pass);
+                DataUsuario us = login(usu, pass);
                 sesion.setAttribute("usuario", us.getNickname());
                 request.getSession().setAttribute("tipoUsuario", us.getTipoUsu());
                 //request.getSession().setAttribute("success", "Usuario Logueado Correctamente.");
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
                 dispatcher.forward(request, response);
-            } catch (UsuarioException ex) {
+            } catch (UsuarioException_Exception ex) {
+                request.getSession().setAttribute("error", ex.getMessage());
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+                dispatcher.forward(request, response);
+            } catch (Exception ex) {
                 request.getSession().setAttribute("error", ex.getMessage());
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
                 dispatcher.forward(request, response);
@@ -120,4 +127,10 @@ public class login extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private static controller.WSusuario.DataUsuario login(java.lang.String arg0, java.lang.String arg1) throws UsuarioException_Exception {
+        controller.WSusuario.UsuarioWS_Service service = new controller.WSusuario.UsuarioWS_Service();
+        controller.WSusuario.UsuarioWS port = service.getUsuarioWSPort();
+        return port.login(arg0, arg1);
+    }
 }
