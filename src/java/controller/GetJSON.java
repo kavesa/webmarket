@@ -1,7 +1,9 @@
 package controller;
 
-import direct.market.datatype.DataCategoria;
-import direct.market.factory.Factory;
+//import direct.market.datatype.DataCategoria;
+//import direct.market.factory.Factory;
+import controller.WScategoria.CategoryException_Exception;
+import controller.WScategoria.DataCategoria;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -28,7 +30,7 @@ public class GetJSON extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             List<DataCategoria> categorias = new ArrayList<DataCategoria>();
-            categorias = Factory.getInstance().getCategoriaController().getCategorias();
+            categorias = getCategorias();
             //dejar solo datos que importan: nombre, padre, id;
 
             JSONArray jSONArray = new JSONArray();
@@ -103,5 +105,11 @@ public class GetJSON extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
+    }
+
+    private static java.util.List<controller.WScategoria.DataCategoria> getCategorias() throws CategoryException_Exception {
+        controller.WScategoria.CategoriaWS_Service service = new controller.WScategoria.CategoriaWS_Service();
+        controller.WScategoria.CategoriaWS port = service.getCategoriaWSPort();
+        return port.getCategorias();
     }
 }

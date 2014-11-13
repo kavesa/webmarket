@@ -5,10 +5,12 @@
  */
 package controller;
 
-import direct.market.datatype.DataEspecificacionProducto;
-import direct.market.datatype.DataLineaOC;
-import direct.market.datatype.DataProducto;
-import direct.market.factory.Factory;
+//import direct.market.datatype.DataEspecificacionProducto;
+//import direct.market.datatype.DataLineaOC;
+//import direct.market.datatype.DataProducto;
+//import direct.market.factory.Factory;
+import controller.WSordenCompra.DataLineaOC;
+import controller.WSproducto.DataProducto;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -94,15 +96,24 @@ public class AgregarItemCarritoServlet extends HttpServlet {
         }
         DataLineaOC dataLinea = new DataLineaOC();
         String refProd = request.getParameter("nocid");
-        DataProducto prod = Factory.getInstance().getProductoController().buscarProductoPorRef(refProd);
-        DataEspecificacionProducto esp = prod.getDataEspecificacion();
-        esp.setDescripcion(esp.getDescripcion());
-        esp.setPrecio(esp.getPrecio());
-        esp.setId(esp.getId());
-        prod.setDataEspecificacion(esp);
-        prod.setReferencia(prod.getReferencia());
+        DataProducto prod = buscarProductoPorRef(refProd);
+        
+        controller.WSordenCompra.DataProducto prodOC = new controller.WSordenCompra.DataProducto();
+        controller.WSordenCompra.DataEspecificacionProducto depOC = new controller.WSordenCompra.DataEspecificacionProducto();
+        prodOC.setNombre(prod.getNombre());
+        prodOC.setReferencia(prod.getReferencia());
+        depOC.setDescripcion(prod.getDataEspecificacion().getDescripcion());
+        depOC.setPrecio(prod.getDataEspecificacion().getPrecio());
+        depOC.setId(prod.getDataEspecificacion().getId());
+        prodOC.setDataEspecificacion(depOC);
+//        DataEspecificacionProducto esp = prod.getDataEspecificacion();
+//        esp.setDescripcion(esp.getDescripcion());
+//        esp.setPrecio(esp.getPrecio());
+//        esp.setId(esp.getId());
+//        prod.setDataEspecificacion(esp);
+//        prod.setReferencia(prod.getReferencia());
         dataLinea.setCantidad(Integer.parseInt(request.getParameter("cant")));
-        dataLinea.setProducto(prod);
+        dataLinea.setProducto(prodOC);
         lineas.add(dataLinea);
         sesion.setAttribute("lineasOrden", lineas);
         request.setAttribute("flag", "1");
@@ -120,4 +131,10 @@ public class AgregarItemCarritoServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private static DataProducto buscarProductoPorRef(java.lang.String arg0) {
+        controller.WSproducto.ProductoWS_Service service = new controller.WSproducto.ProductoWS_Service();
+        controller.WSproducto.ProductoWS port = service.getProductoWSPort();
+        return port.buscarProductoPorRef(arg0);
+    }
 }

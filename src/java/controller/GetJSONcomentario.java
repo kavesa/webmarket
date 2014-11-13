@@ -1,8 +1,10 @@
 package controller;
 
-import direct.market.datatype.DataComentario;
-import direct.market.datatype.DataProducto;
-import direct.market.factory.Factory;
+//import direct.market.datatype.DataComentario;
+//import direct.market.datatype.DataProducto;
+//import direct.market.factory.Factory;
+import controller.WSproducto.DataComentario;
+import controller.WSproducto.DataProducto;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -33,7 +35,7 @@ public class GetJSONcomentario extends HttpServlet {
             String prodRef = request.getSession().getAttribute("ref").toString();
             //String prodRef = "1";
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            DataProducto dprod = Factory.getInstance().getProductoController().buscarProductoPorRef(prodRef);
+            DataProducto dprod = buscarProductoPorRef(prodRef);
             //DataProducto dprod = Factory.getInstance().getProductoController().buscarProductoPorRef("7");
             List<DataComentario> dcomlist = dprod.getListDataComentarios();
 
@@ -132,5 +134,11 @@ public class GetJSONcomentario extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
+    }
+
+    private static DataProducto buscarProductoPorRef(java.lang.String arg0) {
+        controller.WSproducto.ProductoWS_Service service = new controller.WSproducto.ProductoWS_Service();
+        controller.WSproducto.ProductoWS port = service.getProductoWSPort();
+        return port.buscarProductoPorRef(arg0);
     }
 }

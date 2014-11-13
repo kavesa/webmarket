@@ -5,12 +5,17 @@
  */
 package controller;
 
-import direct.market.datatype.DataLineaOC;
-import direct.market.datatype.DataOC;
-import direct.market.datatype.DataUsuario;
-import direct.market.exceptions.OCException;
-import direct.market.exceptions.UsuarioException;
-import direct.market.factory.Factory;
+//import direct.market.datatype.DataLineaOC;
+//import direct.market.datatype.DataOC;
+//import direct.market.datatype.DataUsuario;
+//import direct.market.exceptions.OCException;
+//import direct.market.exceptions.UsuarioException;
+//import direct.market.factory.Factory;
+import controller.WSordenCompra.DataLineaOC;
+import controller.WSordenCompra.DataOC;
+import controller.WSordenCompra.OCException_Exception;
+import controller.WSusuario.DataUsuario;
+import controller.WSusuario.UsuarioException_Exception;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -95,20 +100,20 @@ public class GenerarOrdenCompraServlet extends HttpServlet {
         String usuario = (String) sesion.getAttribute("usuario");
         if (lineas != null && !lineas.isEmpty()) {
             try {
-                DataUsuario dataUsuario = Factory.getInstance().getUsuarioController().getDataCliente(usuario);
+                DataUsuario dataUsuario = getDataCliente(usuario);
                 DataOC ordenCompra = new DataOC();
                 ordenCompra.setLineas(lineas);
                 int numeroOrden;
-                numeroOrden = Factory.getInstance().getOrdenCompraController().altaOrdenCompra(ordenCompra);
-                Factory.getInstance().getUsuarioController().modificarCliente(dataUsuario, numeroOrden);
+                numeroOrden = altaOrdenCompra(ordenCompra);
+                modificarCliente(dataUsuario, numeroOrden);
                 sesion.setAttribute("lineasOrden", new ArrayList<DataLineaOC>());
                 request.getSession().setAttribute("success", "Gracias por su compra. Orden de compra Nro "+numeroOrden);
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/vistas/carrito/carrito.jsp");
                 dispatcher.forward(request, response);
 
-            } catch (UsuarioException ex) {
+            } catch (UsuarioException_Exception ex) {
                 Logger.getLogger(GenerarOrdenCompraServlet.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (OCException ex) {
+            } catch (OCException_Exception ex) {
                 Logger.getLogger(GenerarOrdenCompraServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -124,4 +129,22 @@ public class GenerarOrdenCompraServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private static DataUsuario getDataCliente(java.lang.String arg0) throws UsuarioException_Exception {
+        controller.WSusuario.UsuarioWS_Service service = new controller.WSusuario.UsuarioWS_Service();
+        controller.WSusuario.UsuarioWS port = service.getUsuarioWSPort();
+        return port.getDataCliente(arg0);
+    }
+
+    private static int altaOrdenCompra(controller.WSordenCompra.DataOC arg0) throws OCException_Exception {
+        controller.WSordenCompra.OrdenCompraWS_Service service = new controller.WSordenCompra.OrdenCompraWS_Service();
+        controller.WSordenCompra.OrdenCompraWS port = service.getOrdenCompraWSPort();
+        return port.altaOrdenCompra(arg0);
+    }
+
+    private static void modificarCliente(controller.WSusuario.DataUsuario arg0, int arg1) {
+        controller.WSusuario.UsuarioWS_Service service = new controller.WSusuario.UsuarioWS_Service();
+        controller.WSusuario.UsuarioWS port = service.getUsuarioWSPort();
+        port.modificarCliente(arg0, arg1);
+    }
 }
