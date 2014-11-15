@@ -69,7 +69,8 @@
             </li>
             <%} else {%>
             <li>
-                <a class="fa fa-shopping-cart navbar-brand"  title="Ver Carrito" href="<%= request.getContextPath()%>/verCarrito" id="vercar"> </a>
+                <a class="fa fa-shopping-cart navbar-brand"  title="Ver Carrito" href="<%= request.getContextPath()%>/verCarrito" id="vercar">
+                    (<%= (sesion.getAttribute("totalCarrito") == null)?"0":sesion.getAttribute("totalCarrito")%>)</a>
             </li>
             <%}%>
             <li>
