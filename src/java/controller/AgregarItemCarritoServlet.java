@@ -55,6 +55,8 @@ public class AgregarItemCarritoServlet extends HttpServlet {
             out.println("<h1>Servlet AddToShoppingCart at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
+
+
         } finally {
             out.close();
         }
@@ -89,15 +91,18 @@ public class AgregarItemCarritoServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession sesion = request.getSession();
         List<DataLineaOC> lineas = (ArrayList<DataLineaOC>) sesion.getAttribute("lineasOrden");
-
+        int totalItemsCarrito;
         if (lineas == null) {
             lineas = new ArrayList<DataLineaOC>();
+             totalItemsCarrito = 0;
             //Falta crear datalineaoc
+        } else {
+            totalItemsCarrito = Integer.parseInt(sesion.getAttribute("totalCarrito").toString());
         }
         DataLineaOC dataLinea = new DataLineaOC();
         String refProd = request.getParameter("nocid");
         DataProducto prod = buscarProductoPorRef(refProd);
-        
+
         controller.WSordenCompra.DataProducto prodOC = new controller.WSordenCompra.DataProducto();
         controller.WSordenCompra.DataEspecificacionProducto depOC = new controller.WSordenCompra.DataEspecificacionProducto();
         prodOC.setNombre(prod.getNombre());
@@ -112,13 +117,15 @@ public class AgregarItemCarritoServlet extends HttpServlet {
 //        esp.setId(esp.getId());
 //        prod.setDataEspecificacion(esp);
 //        prod.setReferencia(prod.getReferencia());
+        totalItemsCarrito += Integer.parseInt(request.getParameter("cant"));
         dataLinea.setCantidad(Integer.parseInt(request.getParameter("cant")));
         dataLinea.setProducto(prodOC);
         lineas.add(dataLinea);
         sesion.setAttribute("lineasOrden", lineas);
+        sesion.setAttribute("totalCarrito", totalItemsCarrito);
         request.setAttribute("flag", "1");
-        
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/vistas/carrito/carrito.jsp");
+
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/InfoProducto?nocid=" + refProd);
         dispatcher.forward(request, response);
     }
 

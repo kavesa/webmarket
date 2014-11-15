@@ -32,8 +32,8 @@ public class GetJSONcomentario extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         try {
-            String prodRef = request.getSession().getAttribute("ref").toString();
-            //String prodRef = "1";
+            //String prodRef = request.getSession().getAttribute("ref").toString();
+            String prodRef = "1";
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             DataProducto dprod = buscarProductoPorRef(prodRef);
             //DataProducto dprod = Factory.getInstance().getProductoController().buscarProductoPorRef("7");
@@ -50,7 +50,7 @@ public class GetJSONcomentario extends HttpServlet {
                         jSONObject.put("parent", "#");
                         jSONObject.put("text", "<div class=\"comment-node\"><strong>" + 
                                 dcomlist.get(i).getNickname() + 
-                                " dijo el " + sdf.format(dcomlist.get(i).getFechaComentario()) + 
+                                " dijo el " + sdf.format(controller.util.gregorianTOdate(dcomlist.get(i).getFechaComentario())) + 
                                 ": </strong><br/>" + dcomlist.get(i).getComentario() + "</div>");
                         //jSONObject.put("fecha", sdf.format(dcomlist.get(i).getFechaComentario()));
                         //jSONObject.put("nick", dcomlist.get(i).getNickname());
@@ -59,7 +59,10 @@ public class GetJSONcomentario extends HttpServlet {
 
                         jSONObject.put("id", dcomlist.get(i).getId());
                         jSONObject.put("parent", dcomlist.get(i).getParent());
-                        jSONObject.put("text", "<div class=\"comment-node\"><strong>" + dcomlist.get(i).getNickname() + " respondio el " + sdf.format(dcomlist.get(i).getFechaComentario()) + ": </strong><br/>" + dcomlist.get(i).getComentario() + "</div>");
+                        jSONObject.put("text", "<div class=\"comment-node\"><strong>" + 
+                                dcomlist.get(i).getNickname() + " respondio el " + 
+                                sdf.format(controller.util.gregorianTOdate(dcomlist.get(i).getFechaComentario())) + 
+                                ": </strong><br/>" + dcomlist.get(i).getComentario() + "</div>");
                         //jSONObject.put("fecha", sdf.format(dcomlist.get(i).getFechaComentario()));
                         //jSONObject.put("nick", dcomlist.get(i).getNickname());
 

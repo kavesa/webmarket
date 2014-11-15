@@ -19,6 +19,7 @@ import controller.WSusuario.UsuarioException_Exception;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,6 +30,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.datatype.DatatypeConfigurationException;
 
 /**
  *
@@ -103,6 +105,7 @@ public class GenerarOrdenCompraServlet extends HttpServlet {
                 DataUsuario dataUsuario = getDataCliente(usuario);
                 DataOC ordenCompra = new DataOC();
                 ordenCompra.setLineas(lineas);
+                ordenCompra.setFecha(controller.util.dateTOgregorian(new Date()));
                 int numeroOrden;
                 numeroOrden = altaOrdenCompra(ordenCompra);
                 modificarCliente(dataUsuario, numeroOrden);
@@ -114,6 +117,8 @@ public class GenerarOrdenCompraServlet extends HttpServlet {
             } catch (UsuarioException_Exception ex) {
                 Logger.getLogger(GenerarOrdenCompraServlet.class.getName()).log(Level.SEVERE, null, ex);
             } catch (OCException_Exception ex) {
+                Logger.getLogger(GenerarOrdenCompraServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (DatatypeConfigurationException ex) {
                 Logger.getLogger(GenerarOrdenCompraServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }

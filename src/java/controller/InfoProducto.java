@@ -63,7 +63,6 @@ public class InfoProducto extends HttpServlet {
                 } else {
                     request.setAttribute("tipoU", "y");
                 }
-
                 usuarioCompro = usuarioComproProducto(nickname, refProd);
 
             } else {

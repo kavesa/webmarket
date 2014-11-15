@@ -59,6 +59,7 @@ public class buscador extends HttpServlet {
                                 yaesta = true;
                             }
                         }
+                        
                         if (!yaesta) {
                             DataProducto dpProd = new DataProducto();
                             dpProd.setReferencia(dp.getReferencia());

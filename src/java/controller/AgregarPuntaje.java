@@ -4,23 +4,25 @@
  */
 package controller;
 
-//import direct.market.datatype.DataOC;
-//import direct.market.factory.Factory;
-import controller.WSordenCompra.DataOC;
+import controller.WSproducto.DataProducto;
+import controller.WSproducto.ProductoException_Exception;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author nightmare
+ * @author kavesa
  */
-public class InfoCompra extends HttpServlet {
+@WebServlet(name = "AgregarPuntaje", urlPatterns = {"/AgregarPuntaje"})
+public class AgregarPuntaje extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -32,21 +34,23 @@ public class InfoCompra extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, ProductoException_Exception {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
         try {
-            String noCompra = request.getParameter("nocid");
-            DataOC doc = getDataOC(noCompra);
-            
-            if (doc.getEstados().size() == 2 && doc.getEstados().get(1).getEstado().equals("Orden Preparada")) {
-                request.setAttribute("ocPreparada", "SI");
-            } else {
-                request.setAttribute("ocPreparada", "NO");
-            }
+            String idProd = request.getParameter("numRefProd");
+            String nickname = request.getParameter("user");
+            int puntos = Integer.parseInt(request.getParameter("puntos"));
 
-            request.setAttribute("datosComp", doc);
-            request.getRequestDispatcher("/vistas/usuario/InfoCompra.jsp").forward(request, response);
-        } catch (IOException ex) {
-            Logger.getLogger(InfoCompra.class.getName()).log(Level.SEVERE, null, ex);
+            agregarPuntaje(idProd, nickname, puntos);
+
+            request.getSession().setAttribute("success", "Puntaje ingresado con éxito.");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/InfoProducto?nocid=" + idProd);
+            dispatcher.forward(request, response);
+
+        } finally {
+            out.close();
         }
     }
 
@@ -63,7 +67,11 @@ public class InfoCompra extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ProductoException_Exception ex) {
+            Logger.getLogger(AgregarPuntaje.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -78,7 +86,11 @@ public class InfoCompra extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ProductoException_Exception ex) {
+            Logger.getLogger(AgregarPuntaje.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -91,9 +103,10 @@ public class InfoCompra extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private static DataOC getDataOC(java.lang.String arg0) {
-        controller.WSordenCompra.OrdenCompraWS_Service service = new controller.WSordenCompra.OrdenCompraWS_Service();
-        controller.WSordenCompra.OrdenCompraWS port = service.getOrdenCompraWSPort();
-        return port.getDataOC(arg0);
+    private static void agregarPuntaje(java.lang.String arg0, java.lang.String arg1, int arg2) throws ProductoException_Exception {
+        controller.WSproducto.ProductoWS_Service service = new controller.WSproducto.ProductoWS_Service();
+        controller.WSproducto.ProductoWS port = service.getProductoWSPort();
+        port.agregarPuntaje(arg0, arg1, arg2);
     }
+
 }
