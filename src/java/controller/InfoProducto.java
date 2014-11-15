@@ -7,6 +7,7 @@ package controller;
 import controller.WScategoria.CategoryException_Exception;
 import controller.WSproducto.DataCategoria;
 import controller.WSproducto.DataProducto;
+import controller.WSproducto.DataPuntajeProducto;
 import controller.WSproducto.DataUsuario;
 import controller.WSusuario.UsuarioException_Exception;
 import java.io.IOException;
@@ -53,6 +54,7 @@ public class InfoProducto extends HttpServlet {
 //            if(attNames.nextElement() == "usuario")
 //        }
             boolean usuarioCompro = false;
+            boolean usuarioPuntuo = false;
             if (nickname != null) {
                 String loUsNick = (String) sesion.getAttribute("usuario");
                 controller.WSusuario.DataUsuario du2;
@@ -65,9 +67,18 @@ public class InfoProducto extends HttpServlet {
                 }
                 usuarioCompro = usuarioComproProducto(nickname, refProd);
 
+                List<DataPuntajeProducto> ldpunt = prod.getDataEspecificacion().getPuntaje();
+                for (DataPuntajeProducto dpunt : ldpunt) {
+                    if (dpunt.getCliente().getNickname().toLowerCase().equals("loUsNick".toLowerCase())) {
+                        usuarioPuntuo = true;
+                    }
+                }
+
             } else {
                 request.setAttribute("tipoU", "n");
             }
+
+            request.setAttribute("usuarioPuntuo", usuarioPuntuo);
             request.setAttribute("usuarioCompro", usuarioCompro);
             catList = getCategoriasDeProducto(prod.getReferencia());
 

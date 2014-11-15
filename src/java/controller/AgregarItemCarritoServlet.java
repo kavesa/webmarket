@@ -90,9 +90,9 @@ public class AgregarItemCarritoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sesion = request.getSession();
-        List<DataLineaOC> lineas = (ArrayList<DataLineaOC>) sesion.getAttribute("lineasOrden");
+    List<DataLineaOC> lineas = (ArrayList<DataLineaOC>) sesion.getAttribute("lineasOrden");
         int totalItemsCarrito;
-        if (lineas == null) {
+        if (lineas == null || lineas.isEmpty()) {
             lineas = new ArrayList<DataLineaOC>();
              totalItemsCarrito = 0;
             //Falta crear datalineaoc

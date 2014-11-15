@@ -108,5 +108,4 @@ public class AgregarPuntaje extends HttpServlet {
         controller.WSproducto.ProductoWS port = service.getProductoWSPort();
         port.agregarPuntaje(arg0, arg1, arg2);
     }
-
 }
