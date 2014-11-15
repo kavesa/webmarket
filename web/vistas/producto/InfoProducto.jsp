@@ -116,31 +116,12 @@
                 </div>
             </div>
 
-            <!-- Agregar Puntaje                        -->
-            <div style="margin-bottom: 1em" class="row col-sm-11 col-centered">
-                <form role="form" id="formPuntaje" action="<%=request.getContextPath()%>/AgregarPuntaje" method="POST">
-                    <input name="numRefProd" type="text" value="<%=dProd.getReferencia()%>" hidden="true"/>
-                    <input name="user" type="text" value="<%=request.getSession().getAttribute("usuario")%>" hidden="true"/>
-                    <input id="input-puntaje" name="puntos" type="number" class="rating" min=1 max=5 step=1 data-size="sm" data-rtl="false">
-                    <button type="submit" id="btnAgregarPuntaje" class="btn btn-primary">Guardar Puntaje</button>
-                </form>
-            </div>
-
             <!-- Mostrar Puntaje Actual                        -->
             <div style="margin-bottom: 1em" class="row col-sm-11 col-centered">
-                    <input name="numRefProd" type="text" value="<%=dProd.getReferencia()%>" hidden="true"/>
-                    <input name="user" type="text" value="<%=request.getSession().getAttribute("usuario")%>" hidden="true"/>
-                    <input id="ver-puntaje" name="puntos" type="number" class="rating" min=1 max=5 step=1 data-size="sm" data-rtl="false">
+                <input name="numRefProd" type="text" value="<%=dProd.getReferencia()%>" hidden="true"/>
+                <input name="user" type="text" value="<%=request.getSession().getAttribute("usuario")%>" hidden="true"/>
+                <input id="ver-puntaje" name="puntos" type="number" class="rating" min=1 max=5 step=1 data-size="sm" data-rtl="false">
             </div>
-
-
-
-
-
-
-
-
-
 
 
             <div class="row col-sm-11 col-centered">
@@ -174,8 +155,18 @@
                 </div>
             </div>
 
-
-
+            <%if (!((Boolean) request.getAttribute("usuarioPuntuo"))) {%>
+            <!-- Agregar Puntaje                        -->
+            <div style="margin-bottom: 1em" class="row col-sm-11 col-centered">
+                <form role="form" id="formPuntaje" action="<%=request.getContextPath()%>/AgregarPuntaje" method="POST">
+                    <input name="numRefProd" type="text" value="<%=dProd.getReferencia()%>" hidden="true"/>
+                    <input name="user" type="text" value="<%=request.getSession().getAttribute("usuario")%>" hidden="true"/>
+                    <input id="input-puntaje" name="puntos" type="number" class="rating" min=1 max=5 step=1 data-size="sm" data-rtl="false">
+                    <button type="submit" id="btnAgregarPuntaje" class="btn btn-primary">Guardar Puntaje</button>
+                </form>
+            </div>
+            <%}%>
+            
             <div class="row col-sm-11 col-centered">
                 <div style="margin-top: 1em; margin-bottom: 1em" class="col-sm-11 col-centered">
                     <form role="form" id="formComentario" action="<%=request.getContextPath()%>/comentario" method="POST">
