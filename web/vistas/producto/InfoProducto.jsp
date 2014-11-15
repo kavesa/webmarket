@@ -29,8 +29,11 @@
         <title><%=dProd.getNombre()%> | Informacion de Producto</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <link rel="stylesheet" href="../../static/jstree/themes/default/style.css" />
         <%@include file="../../WEB-INF/jspf/jscss.jspf" %>
+        <link href="../../static/rating/css/star-rating.min.css" media="all" rel="stylesheet" type="text/css" />
+        <script src="../../static/rating/js/star-rating.min.js" type="text/javascript"></script>
     </head>
     <body>
         <%@include file="../../WEB-INF/jspf/top.jspf" %>
@@ -112,6 +115,33 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Agregar Puntaje                        -->
+            <div style="margin-bottom: 1em" class="row col-sm-11 col-centered">
+                <form role="form" id="formPuntaje" action="<%=request.getContextPath()%>/AgregarPuntaje" method="POST">
+                    <input name="numRefProd" type="text" value="<%=dProd.getReferencia()%>" hidden="true"/>
+                    <input name="user" type="text" value="<%=request.getSession().getAttribute("usuario")%>" hidden="true"/>
+                    <input id="input-puntaje" name="puntos" type="number" class="rating" min=1 max=5 step=1 data-size="sm" data-rtl="false">
+                    <button type="submit" id="btnAgregarPuntaje" class="btn btn-primary">Guardar Puntaje</button>
+                </form>
+            </div>
+
+            <!-- Mostrar Puntaje Actual                        -->
+            <div style="margin-bottom: 1em" class="row col-sm-11 col-centered">
+                    <input name="numRefProd" type="text" value="<%=dProd.getReferencia()%>" hidden="true"/>
+                    <input name="user" type="text" value="<%=request.getSession().getAttribute("usuario")%>" hidden="true"/>
+                    <input id="ver-puntaje" name="puntos" type="number" class="rating" min=1 max=5 step=1 data-size="sm" data-rtl="false">
+            </div>
+
+
+
+
+
+
+
+
+
+
 
             <div class="row col-sm-11 col-centered">
                 <div style="margin-top: 1em" class="col-sm-11 col-centered">
@@ -196,7 +226,7 @@
             <%}%>
             <!--////////////////////////////////-->
 
-            <script src="../../static/bootstrap/js/vendor/jquery-1.11.0.min.js"></script>
+            <!--            <script src="../../static/bootstrap/js/vendor/jquery-1.11.0.min.js"></script>-->
             <script src="../../static/jstree/jstree.js"></script>
 
             <script>
