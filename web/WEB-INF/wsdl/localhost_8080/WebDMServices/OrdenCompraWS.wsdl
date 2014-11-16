@@ -13,12 +13,6 @@
 <message name="OCException">
 <part name="fault" element="tns:OCException" />
 </message>
-<message name="getDataOC">
-<part name="parameters" element="tns:getDataOC" />
-</message>
-<message name="getDataOCResponse">
-<part name="parameters" element="tns:getDataOCResponse" />
-</message>
 <message name="cancelarOrdenCompra">
 <part name="parameters" element="tns:cancelarOrdenCompra" />
 </message>
@@ -31,15 +25,41 @@
 <message name="getOrdenesCompraResponse">
 <part name="parameters" element="tns:getOrdenesCompraResponse" />
 </message>
+<message name="getDataOC">
+<part name="parameters" element="tns:getDataOC" />
+</message>
+<message name="getDataOCResponse">
+<part name="parameters" element="tns:getDataOCResponse" />
+</message>
+<message name="getLineasOC">
+<part name="parameters" element="tns:getLineasOC" />
+</message>
+<message name="getLineasOCResponse">
+<part name="parameters" element="tns:getLineasOCResponse" />
+</message>
+<message name="cancelarOC">
+<part name="parameters" element="tns:cancelarOC" />
+</message>
+<message name="cancelarOCResponse">
+<part name="parameters" element="tns:cancelarOCResponse" />
+</message>
+<message name="ordenPreparada">
+<part name="parameters" element="tns:ordenPreparada" />
+</message>
+<message name="ordenPreparadaResponse">
+<part name="parameters" element="tns:ordenPreparadaResponse" />
+</message>
+<message name="ordenConfirmada">
+<part name="parameters" element="tns:ordenConfirmada" />
+</message>
+<message name="ordenConfirmadaResponse">
+<part name="parameters" element="tns:ordenConfirmadaResponse" />
+</message>
 <portType name="OrdenCompraWS">
 <operation name="altaOrdenCompra">
 <input wsam:Action="http://service.market.direct/OrdenCompraWS/altaOrdenCompraRequest" message="tns:altaOrdenCompra" />
 <output wsam:Action="http://service.market.direct/OrdenCompraWS/altaOrdenCompraResponse" message="tns:altaOrdenCompraResponse" />
 <fault message="tns:OCException" name="OCException" wsam:Action="http://service.market.direct/OrdenCompraWS/altaOrdenCompra/Fault/OCException" />
-</operation>
-<operation name="getDataOC">
-<input wsam:Action="http://service.market.direct/OrdenCompraWS/getDataOCRequest" message="tns:getDataOC" />
-<output wsam:Action="http://service.market.direct/OrdenCompraWS/getDataOCResponse" message="tns:getDataOCResponse" />
 </operation>
 <operation name="cancelarOrdenCompra">
 <input wsam:Action="http://service.market.direct/OrdenCompraWS/cancelarOrdenCompraRequest" message="tns:cancelarOrdenCompra" />
@@ -49,6 +69,26 @@
 <operation name="getOrdenesCompra">
 <input wsam:Action="http://service.market.direct/OrdenCompraWS/getOrdenesCompraRequest" message="tns:getOrdenesCompra" />
 <output wsam:Action="http://service.market.direct/OrdenCompraWS/getOrdenesCompraResponse" message="tns:getOrdenesCompraResponse" />
+</operation>
+<operation name="getDataOC">
+<input wsam:Action="http://service.market.direct/OrdenCompraWS/getDataOCRequest" message="tns:getDataOC" />
+<output wsam:Action="http://service.market.direct/OrdenCompraWS/getDataOCResponse" message="tns:getDataOCResponse" />
+</operation>
+<operation name="getLineasOC">
+<input wsam:Action="http://service.market.direct/OrdenCompraWS/getLineasOCRequest" message="tns:getLineasOC" />
+<output wsam:Action="http://service.market.direct/OrdenCompraWS/getLineasOCResponse" message="tns:getLineasOCResponse" />
+</operation>
+<operation name="cancelarOC">
+<input wsam:Action="http://service.market.direct/OrdenCompraWS/cancelarOCRequest" message="tns:cancelarOC" />
+<output wsam:Action="http://service.market.direct/OrdenCompraWS/cancelarOCResponse" message="tns:cancelarOCResponse" />
+</operation>
+<operation name="ordenPreparada">
+<input wsam:Action="http://service.market.direct/OrdenCompraWS/ordenPreparadaRequest" message="tns:ordenPreparada" />
+<output wsam:Action="http://service.market.direct/OrdenCompraWS/ordenPreparadaResponse" message="tns:ordenPreparadaResponse" />
+</operation>
+<operation name="ordenConfirmada">
+<input wsam:Action="http://service.market.direct/OrdenCompraWS/ordenConfirmadaRequest" message="tns:ordenConfirmada" />
+<output wsam:Action="http://service.market.direct/OrdenCompraWS/ordenConfirmadaResponse" message="tns:ordenConfirmadaResponse" />
 </operation>
 </portType>
 <binding name="OrdenCompraWSPortBinding" type="tns:OrdenCompraWS">
@@ -65,15 +105,6 @@
 <soap:fault name="OCException" use="literal" />
 </fault>
 </operation>
-<operation name="getDataOC">
-<soap:operation soapAction="" />
-<input>
-<soap:body use="literal" />
-</input>
-<output>
-<soap:body use="literal" />
-</output>
-</operation>
 <operation name="cancelarOrdenCompra">
 <soap:operation soapAction="" />
 <input>
@@ -87,6 +118,51 @@
 </fault>
 </operation>
 <operation name="getOrdenesCompra">
+<soap:operation soapAction="" />
+<input>
+<soap:body use="literal" />
+</input>
+<output>
+<soap:body use="literal" />
+</output>
+</operation>
+<operation name="getDataOC">
+<soap:operation soapAction="" />
+<input>
+<soap:body use="literal" />
+</input>
+<output>
+<soap:body use="literal" />
+</output>
+</operation>
+<operation name="getLineasOC">
+<soap:operation soapAction="" />
+<input>
+<soap:body use="literal" />
+</input>
+<output>
+<soap:body use="literal" />
+</output>
+</operation>
+<operation name="cancelarOC">
+<soap:operation soapAction="" />
+<input>
+<soap:body use="literal" />
+</input>
+<output>
+<soap:body use="literal" />
+</output>
+</operation>
+<operation name="ordenPreparada">
+<soap:operation soapAction="" />
+<input>
+<soap:body use="literal" />
+</input>
+<output>
+<soap:body use="literal" />
+</output>
+</operation>
+<operation name="ordenConfirmada">
 <soap:operation soapAction="" />
 <input>
 <soap:body use="literal" />

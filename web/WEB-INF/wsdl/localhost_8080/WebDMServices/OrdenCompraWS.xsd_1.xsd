@@ -6,17 +6,57 @@
 
 <xs:element name="altaOrdenCompraResponse" type="tns:altaOrdenCompraResponse" />
 
+<xs:element name="cancelarOC" type="tns:cancelarOC" />
+
+<xs:element name="cancelarOCResponse" type="tns:cancelarOCResponse" />
+
 <xs:element name="cancelarOrdenCompra" type="tns:cancelarOrdenCompra" />
 
 <xs:element name="cancelarOrdenCompraResponse" type="tns:cancelarOrdenCompraResponse" />
+
+<xs:element name="categoria" type="tns:dataCategoria" />
 
 <xs:element name="getDataOC" type="tns:getDataOC" />
 
 <xs:element name="getDataOCResponse" type="tns:getDataOCResponse" />
 
+<xs:element name="getLineasOC" type="tns:getLineasOC" />
+
+<xs:element name="getLineasOCResponse" type="tns:getLineasOCResponse" />
+
 <xs:element name="getOrdenesCompra" type="tns:getOrdenesCompra" />
 
 <xs:element name="getOrdenesCompraResponse" type="tns:getOrdenesCompraResponse" />
+
+<xs:element name="ordenConfirmada" type="tns:ordenConfirmada" />
+
+<xs:element name="ordenConfirmadaResponse" type="tns:ordenConfirmadaResponse" />
+
+<xs:element name="ordenPreparada" type="tns:ordenPreparada" />
+
+<xs:element name="ordenPreparadaResponse" type="tns:ordenPreparadaResponse" />
+
+<xs:element name="reclamo" type="tns:dataReclamo" />
+
+<xs:complexType name="ordenConfirmada">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ordenConfirmadaResponse">
+<xs:sequence />
+</xs:complexType>
+
+<xs:complexType name="cancelarOC">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="cancelarOCResponse">
+<xs:sequence />
+</xs:complexType>
 
 <xs:complexType name="altaOrdenCompra">
 <xs:sequence>
@@ -87,7 +127,7 @@
 
 <xs:complexType name="dataPuntajeProducto">
 <xs:sequence>
-<xs:element name="cliente" type="tns:dataUsuario" minOccurs="0" />
+<xs:element name="cliente" type="xs:string" minOccurs="0" />
 <xs:element name="id" type="xs:int" />
 <xs:element name="puntaje" type="xs:int" />
 </xs:sequence>
@@ -124,6 +164,7 @@
 <xs:complexType name="dataReclamo">
 <xs:sequence>
 <xs:element name="fechaReclamo" type="xs:dateTime" minOccurs="0" />
+<xs:element name="id" type="xs:int" />
 <xs:element name="nickCliente" type="xs:string" minOccurs="0" />
 <xs:element name="textoRec" type="xs:string" minOccurs="0" />
 </xs:sequence>
@@ -151,6 +192,18 @@
 <xs:sequence />
 </xs:complexType>
 
+<xs:complexType name="getDataOC">
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getDataOCResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:dataOC" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="getOrdenesCompra">
 <xs:sequence />
 </xs:complexType>
@@ -161,15 +214,25 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="getDataOC">
+<xs:complexType name="ordenPreparada">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ordenPreparadaResponse">
+<xs:sequence />
+</xs:complexType>
+
+<xs:complexType name="getLineasOC">
 <xs:sequence>
 <xs:element name="arg0" type="xs:string" minOccurs="0" />
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="getDataOCResponse">
+<xs:complexType name="getLineasOCResponse">
 <xs:sequence>
-<xs:element name="return" type="tns:dataOC" minOccurs="0" />
+<xs:element name="return" type="tns:dataLineaOC" minOccurs="0" maxOccurs="unbounded" />
 </xs:sequence>
 </xs:complexType>
 </xs:schema>
