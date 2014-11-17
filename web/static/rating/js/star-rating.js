@@ -11,7 +11,7 @@
 (function ($) {
     var DEFAULT_MIN = 0;
     var DEFAULT_MAX = 5;
-    var DEFAULT_STEP = 0.5;
+    var DEFAULT_STEP = 1;
 
     var isTouchCapable = 'ontouchstart' in window || (window.DocumentTouch && document instanceof window.DocumentTouch);
     
@@ -469,15 +469,15 @@
         defaultCaption: '{rating} estrellas',
         starCaptions: {
             0.5: '0,5 estrellas',
-            1: '1 estrella',
+            1: 'Malo',
             1.5: '1.5 estrellas',
-            2: '2 estrellas',
+            2: 'Mediocre',
             2.5: '2.5 estrellas',
-            3: '3 estrellas',
+            3: 'Bueno',
             3.5: '3.5 estrellas',
-            4: '4 estrellas',
+            4: 'Muy Bueno',
             4.5: '4.5 estrellas',
-            5: '5 estrellas'
+            5: 'Excelente'
         },
         starCaptionClasses: {
             0.5: 'label label-danger',
