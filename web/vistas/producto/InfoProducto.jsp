@@ -120,10 +120,21 @@
             <div style="margin-bottom: 1em" class="row col-sm-11 col-centered">
                 <input name="numRefProd" type="text" value="<%=dProd.getReferencia()%>" hidden="true"/>
                 <input name="user" type="text" value="<%=request.getSession().getAttribute("usuario")%>" hidden="true"/>
-                <input id="ver-puntaje" name="puntos" type="text" class="rating" min=1 max=5 step=1 data-size="sm" data-rtl="false" data-readonly="true" value="2.7" data-show-clear="false" data-show-caption="false">
+                <input id="ratingOculto" name="ratingOculto" type="text" value="<%=request.getAttribute("ratingDM")%>" hidden="true"/>
+                <input id="ver-puntaje" name="puntos" type="text" class="rating" 
+                       min=1 max=5 step=1 
+                       data-size="sm" data-rtl="false" data-readonly="true" data-show-clear="false" 
+                       data-show-caption="false">
             </div>
 
+                <script>
+                    $(document).ready(function(){
+                        var ratingUpd = $("#ratingOculto").val();
+                        $("#ver-puntaje").rating("update", ratingUpd);
+                    });
+                </script>
 
+                
             <div class="row col-sm-11 col-centered">
                 <div style="margin-top: 1em" class="col-sm-11 col-centered">
                     <ul class="list-group">
@@ -156,7 +167,7 @@
             </div>
 
 
-            <%if (!((Boolean) request.getAttribute("usuarioPuntuo"))) {%>
+            <%if (((Boolean) request.getAttribute("usuarioCompro")) && !((Boolean) request.getAttribute("usuarioPuntuo"))) {%>
             <!-- Agregar Puntaje                        -->
             <div class="row col-sm-11 col-centered">
                 <div style="margin-bottom: 1em" class="row col-sm-11 col-centered">
