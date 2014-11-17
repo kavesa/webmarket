@@ -409,3 +409,31 @@ p.footer-right img {
 #divMailing {
     text-align: right;
 }
+.rating-container {
+    padding-top: 8px;
+    min-height: 30px;
+}
+.rating-sm {
+    background: #FFF;
+    border-radius: 6px;
+    font-size: 2.5em;
+    margin: 20px auto 0 37%;
+    padding: 0 15px 15px;
+    width: 50%;
+}
+.rating-disabled {
+    margin: 20px auto 0;
+    padding: 15px;
+    text-align: center;
+}
+.rating-disabled .rating-stars:before {
+    color: #ffa500;
+}
+.rating-stars {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+#btnAgregarPuntaje {
+    display: block;
+    margin: 0 auto;
+}
