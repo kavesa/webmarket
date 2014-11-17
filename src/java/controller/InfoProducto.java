@@ -95,7 +95,7 @@ public class InfoProducto extends HttpServlet {
                 for (DataPuntajeProducto dpunt : ldpunt) {
                     puntajeInt += dpunt.getPuntaje();
                 }
-                puntajeDM = String.valueOf(puntajeInt / ldpunt.size());
+                puntajeDM = String.valueOf( (float)puntajeInt/ldpunt.size());
             }
 
             request.setAttribute("ratingDM", puntajeDM);

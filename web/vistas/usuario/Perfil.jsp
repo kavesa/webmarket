@@ -71,15 +71,13 @@
                         <li class="list-group-item listItem">Direccion web: <%= usu.getWebLink()%></li>
                             <% } else {%>
                         <li class="list-group-item listItem">Notificaciones: <%= usu.isMailing() ? "SI" : "NO"%></li>
-<!--                        <form role="form" id="formMailing" action="<%=request.getContextPath()%>/Mailing" method="POST" enctype="text/plain">
-                            <input type="hidden" class="form-control" name="nickform" id="nickform" value="<%= usu.getNickname()%>"/>
-                            <input type="submit" name="btnMailingSI" value="SI" id="btnMailingSI" class="btn btn-success"/>
-                            <input type="submit" name="btnMailingNO" value="NO" id="btnMailingNO" class="btn btn-danger"/>
-                        </form>-->
                         <li class="list-group-item listItem">
                             <form id="formMailing" action="<%=request.getContextPath()%>/Mailing" method="POST">
+                                <% if (!usu.isMailing()) {%>
                                 <input type="submit" name="botonsi" value="Recibir notificaciones" class="btn btn-success"/>
+                                <% } else {%>
                                 <input type="submit" name="botonno" value="NO recibir notificaciones" class="btn btn-danger"/>
+                                <% }%>
                             </form>
                         </li>
 
