@@ -4,7 +4,7 @@
  */
 package controller;
 
-import controller.WSproducto.DataProducto;
+import controller.WSproducto.DataPuntajeProducto;
 import controller.WSproducto.ProductoException_Exception;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -42,10 +42,14 @@ public class AgregarPuntaje extends HttpServlet {
             String idProd = request.getParameter("numRefProd");
             String nickname = request.getParameter("user");
             int puntos = Integer.parseInt(request.getParameter("puntos"));
+            
+            DataPuntajeProducto dpp = new DataPuntajeProducto();
+            dpp.setNickname(nickname);
+            dpp.setPuntaje(puntos);
+            
+            agregarPuntajeDataPuntajeProducto(dpp, idProd);
 
-            agregarPuntaje(idProd, nickname, puntos);
-
-            request.getSession().setAttribute("success", "Puntaje ingresado con éxito.");
+            request.getSession().setAttribute("success", "Puntaje agregado con éxito.");
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/InfoProducto?nocid=" + idProd);
             dispatcher.forward(request, response);
 
@@ -103,9 +107,10 @@ public class AgregarPuntaje extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private static void agregarPuntaje(java.lang.String arg0, java.lang.String arg1, int arg2) throws ProductoException_Exception {
+    private static void agregarPuntajeDataPuntajeProducto(controller.WSproducto.DataPuntajeProducto arg0, java.lang.String arg1) throws ProductoException_Exception {
         controller.WSproducto.ProductoWS_Service service = new controller.WSproducto.ProductoWS_Service();
         controller.WSproducto.ProductoWS port = service.getProductoWSPort();
-        port.agregarPuntaje(arg0, arg1, arg2);
+        port.agregarPuntajeDataPuntajeProducto(arg0, arg1);
     }
+
 }

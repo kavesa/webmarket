@@ -55,6 +55,8 @@ public class InfoProducto extends HttpServlet {
 //        }
             boolean usuarioCompro = false;
             boolean usuarioPuntuo = false;
+            List<DataPuntajeProducto> ldpunt = prod.getDataEspecificacion().getPuntaje();
+
             if (nickname != null) {
                 String loUsNick = (String) sesion.getAttribute("usuario");
                 controller.WSusuario.DataUsuario du2;
@@ -67,10 +69,12 @@ public class InfoProducto extends HttpServlet {
                 }
                 usuarioCompro = usuarioComproProducto(nickname, refProd);
 
-                List<DataPuntajeProducto> ldpunt = prod.getDataEspecificacion().getPuntaje();
-                for (DataPuntajeProducto dpunt : ldpunt) {
-                    if (dpunt.getCliente().getNickname().toLowerCase().equals("loUsNick".toLowerCase())) {
-                        usuarioPuntuo = true;
+                //List<DataPuntajeProducto> ldpunt = prod.getDataEspecificacion().getPuntaje();
+                if (ldpunt != null && !ldpunt.isEmpty()) {
+                    for (DataPuntajeProducto dpunt : ldpunt) {
+                        if (!usuarioPuntuo && dpunt.getNickname().toLowerCase().equals(loUsNick.toLowerCase())) {
+                            usuarioPuntuo = true;
+                        }
                     }
                 }
 
@@ -84,6 +88,17 @@ public class InfoProducto extends HttpServlet {
 
             request.setAttribute("pCat", catList);
             request.setAttribute("datosProd", prod);
+
+            String puntajeDM = "0";
+            int puntajeInt = 0;
+            if (ldpunt != null && !ldpunt.isEmpty()) {
+                for (DataPuntajeProducto dpunt : ldpunt) {
+                    puntajeInt += dpunt.getPuntaje();
+                }
+                puntajeDM = String.valueOf(puntajeInt / ldpunt.size());
+            }
+
+            request.setAttribute("ratingDM", puntajeDM);
             request.getRequestDispatcher("/vistas/producto/InfoProducto.jsp").forward(request, response);
         } catch (Exception uex) {
             Logger.getLogger(InfoProducto.class.getName()).log(Level.SEVERE, null, uex);
