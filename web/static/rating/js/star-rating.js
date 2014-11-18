@@ -466,7 +466,7 @@
         size: 'md',
         showClear: true,
         showCaption: true,
-        defaultCaption: '{rating} estrellas',
+        defaultCaption: '{rating} Puntos',
         starCaptions: {
             0.5: '0,5 estrellas',
             1: 'Malo',

@@ -422,9 +422,10 @@ p.footer-right img {
     width: 50%;
 }
 .rating-disabled {
-    margin: 20px auto 0;
+    margin: 0 auto;
     padding: 15px;
     text-align: center;
+    width: 100%;
 }
 .rating-disabled .rating-stars:before {
     color: #ffa500;
@@ -436,4 +437,18 @@ p.footer-right img {
 #btnAgregarPuntaje {
     display: block;
     margin: 0 auto;
+}
+#puntaje-disabled {
+    background: #FFF;
+    border-radius: 6px;
+    margin: 20px auto 0;
+    width: 50%;
+}
+#puntaje-disabled p {
+    color: #044c93;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 0;
+    padding: 10px 0 0;
+    text-align: center;
 }
