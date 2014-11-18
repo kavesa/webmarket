@@ -32,8 +32,8 @@ public class GetJSONcomentario extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         try {
-            //String prodRef = request.getSession().getAttribute("ref").toString();
-            String prodRef = "1";
+            String prodRef = request.getSession().getAttribute("ref").toString();
+            //String prodRef = "1";
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             DataProducto dprod = buscarProductoPorRef(prodRef);
             //DataProducto dprod = Factory.getInstance().getProductoController().buscarProductoPorRef("7");
