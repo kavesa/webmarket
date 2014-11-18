@@ -90,14 +90,17 @@ public class InfoProducto extends HttpServlet {
             request.setAttribute("datosProd", prod);
 
             String puntajeDM = "0";
+            String totalVotos = "0";
             int puntajeInt = 0;
             if (ldpunt != null && !ldpunt.isEmpty()) {
                 for (DataPuntajeProducto dpunt : ldpunt) {
                     puntajeInt += dpunt.getPuntaje();
                 }
-                puntajeDM = String.valueOf( (float)puntajeInt/ldpunt.size());
+                puntajeDM = String.valueOf(Math.round(((float)puntajeInt/ldpunt.size())*100)/100.0);
+                totalVotos = String.valueOf(ldpunt.size());
             }
 
+            request.setAttribute("totalVotos", totalVotos);
             request.setAttribute("ratingDM", puntajeDM);
             request.getRequestDispatcher("/vistas/producto/InfoProducto.jsp").forward(request, response);
         } catch (Exception uex) {
