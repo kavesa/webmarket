@@ -11,6 +11,8 @@ import controller.WSproducto.DataPuntajeProducto;
 import controller.WSproducto.DataUsuario;
 import controller.WSusuario.UsuarioException_Exception;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -158,26 +160,30 @@ public class InfoProducto extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private static DataProducto buscarProductoPorRef(java.lang.String arg0) {
-        controller.WSproducto.ProductoWS_Service service = new controller.WSproducto.ProductoWS_Service();
+    private static DataProducto buscarProductoPorRef(java.lang.String arg0) throws MalformedURLException {
+        controller.WSproducto.ProductoWS_Service service = 
+                new controller.WSproducto.ProductoWS_Service(new URL(Configuracion.getProperty("wsdlProducto")));
         controller.WSproducto.ProductoWS port = service.getProductoWSPort();
         return port.buscarProductoPorRef(arg0);
     }
 
-    private static controller.WSusuario.DataUsuario getDataProveedor(java.lang.String arg0) {
-        controller.WSusuario.UsuarioWS_Service service = new controller.WSusuario.UsuarioWS_Service();
+    private static controller.WSusuario.DataUsuario getDataProveedor(java.lang.String arg0) throws MalformedURLException {
+        controller.WSusuario.UsuarioWS_Service service = 
+                new controller.WSusuario.UsuarioWS_Service(new URL(Configuracion.getProperty("wsdlUsuario")));
         controller.WSusuario.UsuarioWS port = service.getUsuarioWSPort();
         return port.getDataProveedor(arg0);
     }
 
-    private static boolean usuarioComproProducto(java.lang.String arg0, java.lang.String arg1) throws UsuarioException_Exception {
-        controller.WSusuario.UsuarioWS_Service service = new controller.WSusuario.UsuarioWS_Service();
+    private static boolean usuarioComproProducto(java.lang.String arg0, java.lang.String arg1) throws UsuarioException_Exception, MalformedURLException {
+        controller.WSusuario.UsuarioWS_Service service = 
+                new controller.WSusuario.UsuarioWS_Service(new URL(Configuracion.getProperty("wsdlUsuario")));
         controller.WSusuario.UsuarioWS port = service.getUsuarioWSPort();
         return port.usuarioComproProducto(arg0, arg1);
     }
 
-    private static java.util.List<controller.WScategoria.DataCategoria> getCategoriasDeProducto(java.lang.String arg0) throws CategoryException_Exception {
-        controller.WScategoria.CategoriaWS_Service service = new controller.WScategoria.CategoriaWS_Service();
+    private static java.util.List<controller.WScategoria.DataCategoria> getCategoriasDeProducto(java.lang.String arg0) throws CategoryException_Exception, MalformedURLException {
+        controller.WScategoria.CategoriaWS_Service service = 
+                new controller.WScategoria.CategoriaWS_Service(new URL(Configuracion.getProperty("wsdlCategoria")));
         controller.WScategoria.CategoriaWS port = service.getCategoriaWSPort();
         return port.getCategoriasDeProducto(arg0);
     }

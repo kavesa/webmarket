@@ -6,6 +6,8 @@ import controller.WScategoria.CategoryException_Exception;
 import controller.WScategoria.DataCategoria;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -107,8 +109,8 @@ public class GetJSON extends HttpServlet {
         return "Short description";
     }
 
-    private static java.util.List<controller.WScategoria.DataCategoria> getCategorias() throws CategoryException_Exception {
-        controller.WScategoria.CategoriaWS_Service service = new controller.WScategoria.CategoriaWS_Service();
+    private static java.util.List<controller.WScategoria.DataCategoria> getCategorias() throws CategoryException_Exception, MalformedURLException {
+        controller.WScategoria.CategoriaWS_Service service = new controller.WScategoria.CategoriaWS_Service(new URL(Configuracion.getProperty("wsdlCategoria")));
         controller.WScategoria.CategoriaWS port = service.getCategoriaWSPort();
         return port.getCategorias();
     }

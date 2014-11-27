@@ -20,6 +20,8 @@ import controller.WSusuario.DataUsuario;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -212,20 +214,20 @@ public class producto extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private static DataCategoria getCategoriaPorNombre(java.lang.String arg0) throws CategoryException_Exception {
-        controller.WScategoria.CategoriaWS_Service service = new controller.WScategoria.CategoriaWS_Service();
+    private static DataCategoria getCategoriaPorNombre(java.lang.String arg0) throws CategoryException_Exception, MalformedURLException {
+        controller.WScategoria.CategoriaWS_Service service = new controller.WScategoria.CategoriaWS_Service(new URL(Configuracion.getProperty("wsdlCategoria")));
         controller.WScategoria.CategoriaWS port = service.getCategoriaWSPort();
         return port.getCategoriaPorNombre(arg0);
     }
 
-    private static DataUsuario getDataProveedor(java.lang.String arg0) {
-        controller.WSusuario.UsuarioWS_Service service = new controller.WSusuario.UsuarioWS_Service();
+    private static DataUsuario getDataProveedor(java.lang.String arg0) throws MalformedURLException {
+        controller.WSusuario.UsuarioWS_Service service = new controller.WSusuario.UsuarioWS_Service(new URL(Configuracion.getProperty("wsdlUsuario")));
         controller.WSusuario.UsuarioWS port = service.getUsuarioWSPort();
         return port.getDataProveedor(arg0);
     }
 
-    private static void altaProducto(controller.WSproducto.DataProducto arg0) throws ProductoException_Exception {
-        controller.WSproducto.ProductoWS_Service service = new controller.WSproducto.ProductoWS_Service();
+    private static void altaProducto(controller.WSproducto.DataProducto arg0) throws ProductoException_Exception, MalformedURLException {
+        controller.WSproducto.ProductoWS_Service service = new controller.WSproducto.ProductoWS_Service(new URL(Configuracion.getProperty("wsdlProducto")));
         controller.WSproducto.ProductoWS port = service.getProductoWSPort();
         port.altaProducto(arg0);
     }

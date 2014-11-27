@@ -8,6 +8,8 @@ import controller.WSproducto.DataProducto;
 import controller.WSusuario.DataUsuario;
 import controller.WSusuario.UsuarioException_Exception;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -105,20 +107,20 @@ public class Perfil extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private static controller.WSusuario.DataUsuario getDataProveedor(java.lang.String arg0) {
-        controller.WSusuario.UsuarioWS_Service service = new controller.WSusuario.UsuarioWS_Service();
+    private static controller.WSusuario.DataUsuario getDataProveedor(java.lang.String arg0) throws MalformedURLException {
+        controller.WSusuario.UsuarioWS_Service service = new controller.WSusuario.UsuarioWS_Service(new URL(Configuracion.getProperty("wsdlUsuario")));
         controller.WSusuario.UsuarioWS port = service.getUsuarioWSPort();
         return port.getDataProveedor(arg0);
     }
 
-    private static java.util.List<controller.WSproducto.DataProducto> getProductListPorProveedor(java.lang.String arg0) {
-        controller.WSproducto.ProductoWS_Service service = new controller.WSproducto.ProductoWS_Service();
+    private static java.util.List<controller.WSproducto.DataProducto> getProductListPorProveedor(java.lang.String arg0) throws MalformedURLException {
+        controller.WSproducto.ProductoWS_Service service = new controller.WSproducto.ProductoWS_Service(new URL(Configuracion.getProperty("wsdlProducto")));
         controller.WSproducto.ProductoWS port = service.getProductoWSPort();
         return port.getProductListPorProveedor(arg0);
     }
 
-    private static controller.WSusuario.DataUsuario getDataCliente(java.lang.String arg0) throws UsuarioException_Exception {
-        controller.WSusuario.UsuarioWS_Service service = new controller.WSusuario.UsuarioWS_Service();
+    private static controller.WSusuario.DataUsuario getDataCliente(java.lang.String arg0) throws UsuarioException_Exception, MalformedURLException {
+        controller.WSusuario.UsuarioWS_Service service = new controller.WSusuario.UsuarioWS_Service(new URL(Configuracion.getProperty("wsdlUsuario")));
         controller.WSusuario.UsuarioWS port = service.getUsuarioWSPort();
         return port.getDataCliente(arg0);
     }

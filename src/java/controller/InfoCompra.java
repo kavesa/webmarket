@@ -9,6 +9,8 @@ package controller;
 import controller.WSordenCompra.DataOC;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -91,8 +93,8 @@ public class InfoCompra extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private static DataOC getDataOC(java.lang.String arg0) {
-        controller.WSordenCompra.OrdenCompraWS_Service service = new controller.WSordenCompra.OrdenCompraWS_Service();
+    private static DataOC getDataOC(java.lang.String arg0) throws MalformedURLException {
+        controller.WSordenCompra.OrdenCompraWS_Service service = new controller.WSordenCompra.OrdenCompraWS_Service(new URL(Configuracion.getProperty("wsdlOC")));
         controller.WSordenCompra.OrdenCompraWS port = service.getOrdenCompraWSPort();
         return port.getDataOC(arg0);
     }

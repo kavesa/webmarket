@@ -6,6 +6,8 @@ package controller;
 
 import controller.WSusuario.DataUsuario;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -102,8 +104,8 @@ public class VerReclamos extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private static DataUsuario getDataProveedor(java.lang.String arg0) {
-        controller.WSusuario.UsuarioWS_Service service = new controller.WSusuario.UsuarioWS_Service();
+    private static DataUsuario getDataProveedor(java.lang.String arg0) throws MalformedURLException {
+        controller.WSusuario.UsuarioWS_Service service = new controller.WSusuario.UsuarioWS_Service(new URL(Configuracion.getProperty("wsdlUsuario")));
         controller.WSusuario.UsuarioWS port = service.getUsuarioWSPort();
         return port.getDataProveedor(arg0);
     }

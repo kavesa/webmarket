@@ -7,6 +7,8 @@ package controller;
 //import direct.market.factory.Factory;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -102,14 +104,14 @@ public class cheqUserAjax extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private static boolean existeCliente(java.lang.String arg0) {
-        controller.WSusuario.UsuarioWS_Service service = new controller.WSusuario.UsuarioWS_Service();
+    private static boolean existeCliente(java.lang.String arg0) throws MalformedURLException {
+        controller.WSusuario.UsuarioWS_Service service = new controller.WSusuario.UsuarioWS_Service(new URL(Configuracion.getProperty("wsdlUsuario")));
         controller.WSusuario.UsuarioWS port = service.getUsuarioWSPort();
         return port.existeCliente(arg0);
     }
 
-    private static boolean existeEmail(java.lang.String arg0) {
-        controller.WSusuario.UsuarioWS_Service service = new controller.WSusuario.UsuarioWS_Service();
+    private static boolean existeEmail(java.lang.String arg0) throws MalformedURLException {
+        controller.WSusuario.UsuarioWS_Service service = new controller.WSusuario.UsuarioWS_Service(new URL(Configuracion.getProperty("wsdlUsuario")));
         controller.WSusuario.UsuarioWS port = service.getUsuarioWSPort();
         return port.existeEmail(arg0);
     }

@@ -8,6 +8,8 @@ import controller.WSproducto.DataPuntajeProducto;
 import controller.WSproducto.ProductoException_Exception;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -107,8 +109,8 @@ public class AgregarPuntaje extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private static void agregarPuntajeDataPuntajeProducto(controller.WSproducto.DataPuntajeProducto arg0, java.lang.String arg1) throws ProductoException_Exception {
-        controller.WSproducto.ProductoWS_Service service = new controller.WSproducto.ProductoWS_Service();
+    private static void agregarPuntajeDataPuntajeProducto(controller.WSproducto.DataPuntajeProducto arg0, java.lang.String arg1) throws ProductoException_Exception, MalformedURLException {
+        controller.WSproducto.ProductoWS_Service service = new controller.WSproducto.ProductoWS_Service(new URL(Configuracion.getProperty("wsdlProducto")));
         controller.WSproducto.ProductoWS port = service.getProductoWSPort();
         port.agregarPuntajeDataPuntajeProducto(arg0, arg1);
     }

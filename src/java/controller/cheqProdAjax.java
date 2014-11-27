@@ -11,6 +11,8 @@ import controller.WSproducto.ProductoException;
 import controller.WSproducto.ProductoException_Exception;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -119,14 +121,14 @@ public class cheqProdAjax extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private static DataProducto buscarProductoPorName(java.lang.String arg0) throws ProductoException_Exception {
-        controller.WSproducto.ProductoWS_Service service = new controller.WSproducto.ProductoWS_Service();
+    private static DataProducto buscarProductoPorName(java.lang.String arg0) throws ProductoException_Exception, MalformedURLException {
+        controller.WSproducto.ProductoWS_Service service = new controller.WSproducto.ProductoWS_Service(new URL(Configuracion.getProperty("wsdlProducto")));
         controller.WSproducto.ProductoWS port = service.getProductoWSPort();
         return port.buscarProductoPorName(arg0);
     }
 
-    private static DataProducto buscarProductoPorRef(java.lang.String arg0) {
-        controller.WSproducto.ProductoWS_Service service = new controller.WSproducto.ProductoWS_Service();
+    private static DataProducto buscarProductoPorRef(java.lang.String arg0) throws MalformedURLException {
+        controller.WSproducto.ProductoWS_Service service = new controller.WSproducto.ProductoWS_Service(new URL(Configuracion.getProperty("wsdlProducto")));
         controller.WSproducto.ProductoWS port = service.getProductoWSPort();
         return port.buscarProductoPorRef(arg0);
     }

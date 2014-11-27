@@ -6,6 +6,8 @@ package controller;
 
 import controller.WScategoria.CategoryException_Exception;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -110,8 +112,8 @@ public class PanelProductos extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private static java.util.List<controller.WScategoria.DataProducto> getProductosPorNombreCategoria(java.lang.String arg0) throws CategoryException_Exception {
-        controller.WScategoria.CategoriaWS_Service service = new controller.WScategoria.CategoriaWS_Service();
+    private static java.util.List<controller.WScategoria.DataProducto> getProductosPorNombreCategoria(java.lang.String arg0) throws CategoryException_Exception, MalformedURLException {
+        controller.WScategoria.CategoriaWS_Service service = new controller.WScategoria.CategoriaWS_Service(new URL(Configuracion.getProperty("wsdlCategoria")));
         controller.WScategoria.CategoriaWS port = service.getCategoriaWSPort();
         return port.getProductosPorNombreCategoria(arg0);
     }

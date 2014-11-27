@@ -6,6 +6,8 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -111,8 +113,8 @@ public class Mailing extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private static void cambiarMailing(java.lang.String arg0, boolean arg1) {
-        controller.WSusuario.UsuarioWS_Service service = new controller.WSusuario.UsuarioWS_Service();
+    private static void cambiarMailing(java.lang.String arg0, boolean arg1) throws MalformedURLException {
+        controller.WSusuario.UsuarioWS_Service service = new controller.WSusuario.UsuarioWS_Service(new URL(Configuracion.getProperty("wsdlUsuario")));
         controller.WSusuario.UsuarioWS port = service.getUsuarioWSPort();
         port.cambiarMailing(arg0, arg1);
     }

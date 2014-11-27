@@ -9,6 +9,8 @@ import controller.WSusuario.UsuarioException_Exception;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -172,8 +174,8 @@ public class usuario extends HttpServlet {
         }
     }
 
-    private static void altaUsuario(java.lang.String arg0, java.lang.String arg1, java.lang.String arg2, java.lang.String arg3, javax.xml.datatype.XMLGregorianCalendar arg4, java.lang.String arg5, byte[] arg6, java.lang.String arg7, java.lang.String arg8, java.lang.String arg9, boolean arg10) throws UsuarioException_Exception {
-        controller.WSusuario.UsuarioWS_Service service = new controller.WSusuario.UsuarioWS_Service();
+    private static void altaUsuario(java.lang.String arg0, java.lang.String arg1, java.lang.String arg2, java.lang.String arg3, javax.xml.datatype.XMLGregorianCalendar arg4, java.lang.String arg5, byte[] arg6, java.lang.String arg7, java.lang.String arg8, java.lang.String arg9, boolean arg10) throws UsuarioException_Exception, MalformedURLException {
+        controller.WSusuario.UsuarioWS_Service service = new controller.WSusuario.UsuarioWS_Service(new URL(Configuracion.getProperty("wsdlUsuario")));
         controller.WSusuario.UsuarioWS port = service.getUsuarioWSPort();
         port.altaUsuario(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
     }

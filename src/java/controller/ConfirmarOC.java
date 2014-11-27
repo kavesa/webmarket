@@ -6,6 +6,8 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -89,8 +91,8 @@ public class ConfirmarOC extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private static void ordenConfirmada(int arg0) {
-        controller.WSordenCompra.OrdenCompraWS_Service service = new controller.WSordenCompra.OrdenCompraWS_Service();
+    private static void ordenConfirmada(int arg0) throws MalformedURLException {
+        controller.WSordenCompra.OrdenCompraWS_Service service = new controller.WSordenCompra.OrdenCompraWS_Service(new URL(Configuracion.getProperty("wsdlOC")));
         controller.WSordenCompra.OrdenCompraWS port = service.getOrdenCompraWSPort();
         port.ordenConfirmada(arg0);
     }

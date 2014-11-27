@@ -18,6 +18,8 @@ import controller.WSusuario.DataUsuario;
 import controller.WSusuario.UsuarioException_Exception;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -136,20 +138,20 @@ public class GenerarOrdenCompraServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private static DataUsuario getDataCliente(java.lang.String arg0) throws UsuarioException_Exception {
-        controller.WSusuario.UsuarioWS_Service service = new controller.WSusuario.UsuarioWS_Service();
+    private static DataUsuario getDataCliente(java.lang.String arg0) throws UsuarioException_Exception, MalformedURLException {
+        controller.WSusuario.UsuarioWS_Service service = new controller.WSusuario.UsuarioWS_Service(new URL(Configuracion.getProperty("wsdlUsuario")));
         controller.WSusuario.UsuarioWS port = service.getUsuarioWSPort();
         return port.getDataCliente(arg0);
     }
 
-    private static int altaOrdenCompra(controller.WSordenCompra.DataOC arg0) throws OCException_Exception {
-        controller.WSordenCompra.OrdenCompraWS_Service service = new controller.WSordenCompra.OrdenCompraWS_Service();
+    private static int altaOrdenCompra(controller.WSordenCompra.DataOC arg0) throws OCException_Exception, MalformedURLException {
+        controller.WSordenCompra.OrdenCompraWS_Service service = new controller.WSordenCompra.OrdenCompraWS_Service(new URL(Configuracion.getProperty("wsdlOC")));
         controller.WSordenCompra.OrdenCompraWS port = service.getOrdenCompraWSPort();
         return port.altaOrdenCompra(arg0);
     }
 
-    private static void modificarCliente(controller.WSusuario.DataUsuario arg0, int arg1) {
-        controller.WSusuario.UsuarioWS_Service service = new controller.WSusuario.UsuarioWS_Service();
+    private static void modificarCliente(controller.WSusuario.DataUsuario arg0, int arg1) throws MalformedURLException {
+        controller.WSusuario.UsuarioWS_Service service = new controller.WSusuario.UsuarioWS_Service(new URL(Configuracion.getProperty("wsdlUsuario")));
         controller.WSusuario.UsuarioWS port = service.getUsuarioWSPort();
         port.modificarCliente(arg0, arg1);
     }

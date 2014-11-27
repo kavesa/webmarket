@@ -9,6 +9,8 @@ import controller.WSproducto.ProductoException;
 import controller.WSproducto.ProductoException_Exception;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -116,8 +118,8 @@ public class IngresarReclamo extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private static void ingresarReclamo(java.lang.String arg0, controller.WSproducto.DataReclamo arg1) throws ProductoException_Exception {
-        controller.WSproducto.ProductoWS_Service service = new controller.WSproducto.ProductoWS_Service();
+    private static void ingresarReclamo(java.lang.String arg0, controller.WSproducto.DataReclamo arg1) throws ProductoException_Exception, MalformedURLException {
+        controller.WSproducto.ProductoWS_Service service = new controller.WSproducto.ProductoWS_Service(new URL(Configuracion.getProperty("wsdlProducto")));
         controller.WSproducto.ProductoWS port = service.getProductoWSPort();
         port.ingresarReclamo(arg0, arg1);
     }

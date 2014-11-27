@@ -7,6 +7,8 @@ import controller.WSproducto.DataComentario;
 import controller.WSproducto.DataProducto;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -139,8 +141,8 @@ public class GetJSONcomentario extends HttpServlet {
         return "Short description";
     }
 
-    private static DataProducto buscarProductoPorRef(java.lang.String arg0) {
-        controller.WSproducto.ProductoWS_Service service = new controller.WSproducto.ProductoWS_Service();
+    private static DataProducto buscarProductoPorRef(java.lang.String arg0) throws MalformedURLException {
+        controller.WSproducto.ProductoWS_Service service = new controller.WSproducto.ProductoWS_Service(new URL(Configuracion.getProperty("wsdlProducto")));
         controller.WSproducto.ProductoWS port = service.getProductoWSPort();
         return port.buscarProductoPorRef(arg0);
     }

@@ -8,6 +8,8 @@ import controller.WSproducto.DataComentario;
 import controller.WSproducto.ProductoException_Exception;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -138,8 +140,8 @@ public class comentario extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private static void agregarComentario(java.lang.String arg0, controller.WSproducto.DataComentario arg1) throws ProductoException_Exception {
-        controller.WSproducto.ProductoWS_Service service = new controller.WSproducto.ProductoWS_Service();
+    private static void agregarComentario(java.lang.String arg0, controller.WSproducto.DataComentario arg1) throws ProductoException_Exception, MalformedURLException {
+        controller.WSproducto.ProductoWS_Service service = new controller.WSproducto.ProductoWS_Service(new URL(Configuracion.getProperty("wsdlProducto")));
         controller.WSproducto.ProductoWS port = service.getProductoWSPort();
         port.agregarComentario(arg0, arg1);
     }

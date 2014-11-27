@@ -9,6 +9,8 @@ import controller.WSproducto.DataProducto;
 import controller.WSproducto.ProductoException_Exception;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -145,14 +147,14 @@ public class buscador extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private static java.util.List<controller.WSproducto.DataProducto> buscarProductoNombreSimilar(java.lang.String arg0) throws ProductoException_Exception {
-        controller.WSproducto.ProductoWS_Service service = new controller.WSproducto.ProductoWS_Service();
+    private static java.util.List<controller.WSproducto.DataProducto> buscarProductoNombreSimilar(java.lang.String arg0) throws ProductoException_Exception, MalformedURLException {
+        controller.WSproducto.ProductoWS_Service service = new controller.WSproducto.ProductoWS_Service(new URL(Configuracion.getProperty("wsdlProducto")));
         controller.WSproducto.ProductoWS port = service.getProductoWSPort();
         return port.buscarProductoNombreSimilar(arg0);
     }
 
-    private static java.util.List<controller.WScategoria.DataProducto> getProductosPorNombreCategoria(java.lang.String arg0) throws CategoryException_Exception {
-        controller.WScategoria.CategoriaWS_Service service = new controller.WScategoria.CategoriaWS_Service();
+    private static java.util.List<controller.WScategoria.DataProducto> getProductosPorNombreCategoria(java.lang.String arg0) throws CategoryException_Exception, MalformedURLException {
+        controller.WScategoria.CategoriaWS_Service service = new controller.WScategoria.CategoriaWS_Service(new URL(Configuracion.getProperty("wsdlCategoria")));
         controller.WScategoria.CategoriaWS port = service.getCategoriaWSPort();
         return port.getProductosPorNombreCategoria(arg0);
     }

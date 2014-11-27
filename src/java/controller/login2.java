@@ -11,6 +11,8 @@ import controller.WSusuario.DataUsuario;
 import controller.WSusuario.UsuarioException_Exception;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -125,8 +127,8 @@ public class login2 extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private static controller.WSusuario.DataUsuario login(java.lang.String arg0, java.lang.String arg1) throws UsuarioException_Exception {
-        controller.WSusuario.UsuarioWS_Service service = new controller.WSusuario.UsuarioWS_Service();
+    private static controller.WSusuario.DataUsuario login(java.lang.String arg0, java.lang.String arg1) throws UsuarioException_Exception, MalformedURLException {
+        controller.WSusuario.UsuarioWS_Service service = new controller.WSusuario.UsuarioWS_Service(new URL(Configuracion.getProperty("wsdlUsuario")));
         controller.WSusuario.UsuarioWS port = service.getUsuarioWSPort();
         return port.login(arg0, arg1);
     }
