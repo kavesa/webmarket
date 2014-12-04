@@ -69,12 +69,14 @@ public class login2 extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String op = request.getParameter("op");
+        //String op = request.getParameter("op");
         //String action = (request.getPathInfo() != null ? request.getPathInfo() : "");
         HttpSession sesion = request.getSession();
-        if (op.equals("out")) {
-            sesion.invalidate();
-            response.sendRedirect("index.jsp");
+        if (sesion != null && sesion.getAttribute("usuario") != null) {
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Perfil");
+            dispatcher.forward(request, response);
+        } else {
+            response.sendRedirect("login2.jsp");
         }
     }
 
@@ -91,7 +93,7 @@ public class login2 extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sesion = request.getSession();
-        String usu, pass; 
+        String usu, pass;
         usu = request.getParameter("nickLogin");
         pass = request.getParameter("passLogin");
         if (sesion.getAttribute("usuario") == null) {
